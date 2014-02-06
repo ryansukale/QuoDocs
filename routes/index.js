@@ -1,9 +1,5 @@
-
-/*
- * GET home page.
- */
-
-exports.index = function(req, res){
-  //res.render('index', { title: 'Express' });
-	res.send("index changed");
-};
+module.exports = function(app) {
+    app.get('/', function(req, res) {
+				res.send("respond with a resource");
+    });
+}

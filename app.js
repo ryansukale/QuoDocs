@@ -4,12 +4,11 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
-var http = require('http');
-var path = require('path');
-
-var app = express();
+//routes = require('./routes'),
+fs = require('fs'),
+http = require('http'),
+path = require('path'),
+app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -28,8 +27,17 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+//I first considered using the advice from for setting up routes
+//dailyjs.com/2012/01/26/effective-node-modules/
+//Then I thought, the last answer to this question was way more cooler.
+//http://stackoverflow.com/questions/9027648/proper-way-to-organize-myapp-routes
+app.settings.routePath='./routes/';
+console.log('Loading routes from: ' + app.settings.routePath);
+fs.readdirSync(app.settings.routePath).forEach(function(file) {
+		var route = app.settings.routePath + file.substr(0, file.indexOf('.'));
+		console.log('Adding route:' + route);
+		require(route)(app);
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
