@@ -4,11 +4,14 @@
  */
 
 var express = require('express');
-//routes = require('./routes'),
-fs = require('fs'),
+
+//Global variables : Since they are not declared using the var keyword
+config = require('./config'),
 http = require('http'),
 path = require('path'),
-app = express();
+app = express(),
+routes = require('./routes'), //http://dailyjs.com/2012/01/26/effective-node-modules/
+rootDir = __dirname;
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -27,17 +30,13 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-//I first considered using the advice from for setting up routes
-//dailyjs.com/2012/01/26/effective-node-modules/
-//Then I thought, the last answer to this question was way more cooler.
-//http://stackoverflow.com/questions/9027648/proper-way-to-organize-myapp-routes
-app.settings.routePath='./routes/';
-console.log('Loading routes from: ' + app.settings.routePath);
-fs.readdirSync(app.settings.routePath).forEach(function(file) {
-		var route = app.settings.routePath + file.substr(0, file.indexOf('.'));
-		console.log('Adding route:' + route);
-		require(route)(app);
-});
+//This allows you to require files relative to the root
+//http://stackoverflow.com/questions/10860244/how-to-make-the-require-in-node-js-to-be-always-relative-to-the-root-folder-of-t
+requireFromRoot = (function(root) {
+    return function(resource) {
+        return require(root+"/"+resource);
+    }
+})(__dirname);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

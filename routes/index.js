@@ -1,5 +1,3 @@
-module.exports = function(app) {
-    app.get('/', function(req, res) {
-				res.send("respond with a resource");
-    });
-}
+require('./main');
+require('./users');
+require('./stream');
