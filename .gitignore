@@ -20,3 +20,5 @@ node_modules
 *.png
 *.jpeg
 *.gif
+
+/ignore
