@@ -4,10 +4,10 @@ module.exports=(function (){
 			"username":"username",
 			"password":"password"
 		},
-		"stream" : {
-			"baseDir" : "streams",
+		"uploads" : {
+			"base" : "uploads",
 			"type" : {
-				"audioDir" : "audio"
+				"audio" : "audio"
 			}
 		}
 	};
