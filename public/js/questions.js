@@ -8,24 +8,27 @@ $(function(){
 	rtcOptions = {
    'buffer-size': 16384,
 	};
+	
+	
 
-	$('.btn-start-rec').on('click',function(event){
+	$('.recording-control').on('click',function(event){
 		var $this = $(this);
 		var $target = $(event.target);
 		
-		navigator.getUserMedia({audio: true}, function(mediaStream) {
+		if($this.hasClass('btn-start-rec')){
+		
+			navigator.getUserMedia({audio: true}, function(mediaStream) {
+
+				window.recordRTC = RecordRTC(mediaStream,rtcOptions);
+				recordRTC.startRecording();
+				
+				$this.text('Stop');
+
+			});
 			
-			 window.recordRTC = RecordRTC(mediaStream,rtcOptions);
-			 recordRTC.startRecording();
-		});
-
-	});
-
-	$('.btn-stop-rec').on('click',function(event){
-		var $this = $(this);
-		var $target = $(event.target);
-		
-		recordRTC.stopRecording(function(audioURL) {
+		}else{
+			
+			recordRTC.stopRecording(function(audioURL) {
 			//window.open(audioURL);
 			console.log(audioURL);
 			//recordRTC.save();
@@ -33,14 +36,18 @@ $(function(){
 			var formData = new FormData();
 			formData.append('recording', recordRTC.getBlob());
 
-			xhr('./uploads/', formData, function (response) {
-					console.log(response);
+				xhr('./uploads/', formData, function (response) {
+						console.log(response);
+						$this.text('Start');
+				});
+				
 			});
 			
-		});
+		}
 		
-	});
+		$this.toggleClass('btn-start-rec btn-stop-rec');
 
+	});
 	
 	function xhr(url, data, callback) {
 		var request = new XMLHttpRequest();
