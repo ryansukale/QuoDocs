@@ -39,6 +39,8 @@ $(function(){
 				xhr('./uploads/', formData, function (response) {
 						console.log(response);
 						$this.text('Start');
+						
+						$this.siblings('.rec-link').removeClass('hidden').attr('href',audioURL);
 				});
 				
 			});
