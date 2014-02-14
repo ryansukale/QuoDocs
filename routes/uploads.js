@@ -19,17 +19,19 @@ app.post('/uploads/',function(req,res){
 		console.dir(audioUploadDir);
 		
 		fs.readFile(files.recording[0].path, function (err, data) {
+		
 			var newPath = [audioUploadDir,(256*Math.random())].join(path.sep);
 			fs.writeFile(newPath, data, function (err) {
-				res.send("Done!");
+				
+				fs.unlink(files.recording[0].path, function (err) {
+					if (err) throw err;
+					console.log('successfully deleted ' + files.recording[0].path);
+				});
+				
+				res.send("Uploaded!");
+				
 			});
 		});
-		
-		//res.writeHead(200, {'content-type': 'text/plain'});
-		//res.write('received fields:\n\n '+util.inspect(fields));
-		//res.write('audioUploadDir '+audioUploadDir);
-		//res.write('\n\n');
-		//res.end('received files:\n\n '+util.inspect(files));
 		
 	});
 	
