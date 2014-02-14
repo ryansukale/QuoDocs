@@ -1,6 +1,7 @@
 var multiparty = require('multiparty'),
 util = require('util'),
-fs = require('fs');
+fs = require('fs'),
+fileExtension = '.wav';
 
 app.post('/uploads/',function(req,res){
 	
@@ -20,7 +21,7 @@ app.post('/uploads/',function(req,res){
 		
 		fs.readFile(files.recording[0].path, function (err, data) {
 		
-			var newPath = [audioUploadDir,(256*Math.random())].join(path.sep);
+			var newPath = [audioUploadDir,Math.floor((256*Math.random()))].join(path.sep)+fileExtension;
 			fs.writeFile(newPath, data, function (err) {
 				
 				fs.unlink(files.recording[0].path, function (err) {
@@ -28,7 +29,7 @@ app.post('/uploads/',function(req,res){
 					console.log('successfully deleted ' + files.recording[0].path);
 				});
 				
-				res.send("Uploaded!");
+				res.send('Uploaded');
 				
 			});
 		});
