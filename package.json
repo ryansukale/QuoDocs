@@ -11,7 +11,9 @@
 		"backbone":"*",
 		"recordrtc":"*",
 		"formidable":"*",
-		"multiparty":"*"
+		"multiparty":"*",
+		"github":"*",
+		"octonode":"*"
   },
 	"devDependencies":{
 		"nodemon":"*"

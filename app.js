@@ -13,6 +13,9 @@ app = express(),
 routes = require('./routes'), //http://dailyjs.com/2012/01/26/effective-node-modules/
 rootDir = __dirname;
 
+CLIENT_ID = process.env.CLIENT_ID;
+CLIENT_SECRET = process.env.CLIENT_SECRET;
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
