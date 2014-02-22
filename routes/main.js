@@ -3,7 +3,7 @@ var github = require('octonode'),
 	url = require('url'),
   qs = require('querystring');
 
-var githubOauthURL = github.auth.config({id: process.env.CLIENT_ID,secret: process.env.CLIENT_SECRET}).login(['user:email']);
+var githubOauthURL = github.auth.config({id: env.CLIENT_ID,secret: env.CLIENT_SECRET}).login(['user:email']);
 	
 var authUrls = {
 	'GITHUB': githubOauthURL
@@ -22,15 +22,20 @@ app.get('/oauthcallback', function(req, res) {
       res.end('Liar Liar, Pants on fire!');
     } else {
       github.auth.login(values.code, function (err, token) {
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end('Your Token : ' + token);
+        //res.writeHead(200, {'Content-Type': 'text/plain'});
+        //res.end('Your Token : ' + token);
+				
+				var client = github.client(token);
+				
+				
       });
     }
 		
 		//First get the accesstoken by posting code you get from the response
 		
-		//var client = github.client('someaccesstoken');
+		
 		//res.send("respond with a resource");
+		
 });
 
 
