@@ -1,57 +1,47 @@
 //var GitHubApi = require("github");
-var github = require('octonode');
-//Project Home!
-//app.get('/', function(req, res) {
-//		res.send("respond with a resource");
-//});
+var github = require('octonode'),
+	url = require('url'),
+  qs = require('querystring');
 
+var githubOauthURL = github.auth.config({id: process.env.CLIENT_ID,secret: process.env.CLIENT_SECRET}).login(['user:email']);
+	
+var authUrls = {
+	'GITHUB': githubOauthURL
+};
+
+var state = authUrls['GITHUB'].match(/&state=([0-9a-z]{32})/i);//process.env.GITHUBSTATE;
 
 //OAUTH Callback URL
 app.get('/oauthcallback', function(req, res) {
-		
-		console.log(res);
+
+		var uri = url.parse(req.url);
+		var values = qs.parse(uri.query);
+   
+    if (!state || state[1] != values.state) {
+      res.writeHead(403, {'Content-Type': 'text/plain'});
+      res.end('Liar Liar, Pants on fire!');
+    } else {
+      github.auth.login(values.code, function (err, token) {
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('Your Token : ' + token);
+      });
+    }
 		
 		//First get the accesstoken by posting code you get from the response
 		
 		//var client = github.client('someaccesstoken');
-		res.send("respond with a resource");
+		//res.send("respond with a resource");
 });
 
 
 //OAUTH Callback URL
 app.get('/oauth/:service', function(req, res) {
 
-	var responseObj={};
-	
-	if(req.params.service==='GITHUB'){
-		console.log('here!');
-		responseObj.CLIENT_ID = process.env.CLIENT_ID || 0;
-	}
-	
-	res.json(responseObj);
-	
+	var requestAuthURL = authUrls[req.params.service];
+	res.writeHead(301, {'Content-Type': 'text/plain', 'Location': requestAuthURL})
+	res.end('Redirecting to ' + requestAuthURL);
+		
 });
-
-
-//app.get('/githubapitest', function(req, res) {
-//
-//	var github = new GitHubApi({
-//		// required
-//		version: "3.0.0",
-//		// optional
-//		debug: true,
-//		protocol: "https",
-//		host: "quodocs.com",
-//		pathPrefix: "/api/v3", // for some GHEs
-//		timeout: 5000
-//	});
-//	github.user.getFollowingFromUser({
-//		user: "mikedeboer"
-//	}, function(err, data) {
-//		res.json(data);
-//	});
-//	
-//});
 
 app.get('/githubapitest', function(req, res) {
 
