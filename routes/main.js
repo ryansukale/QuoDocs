@@ -14,6 +14,8 @@ var state = authUrls['GITHUB'].match(/&state=([0-9a-z]{32})/i);//process.env.GIT
 //OAUTH Callback URL
 app.get('/oauthcallback', function(req, res) {
 
+		console.log('req.session'+req.session);
+
 		var uri = url.parse(req.url);
 		var values = qs.parse(uri.query);
    
@@ -26,6 +28,12 @@ app.get('/oauthcallback', function(req, res) {
         //res.end('Your Token : ' + token);
 				
 				var client = github.client(token);
+				req.session.gitclient = client;
+				
+				client.get('/user', {}, function (err, status, body, headers) {
+					//res.send(body);
+					res.redirect('/home.html');
+				});
 				
 				
       });
