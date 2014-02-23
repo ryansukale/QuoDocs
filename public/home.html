@@ -22,7 +22,6 @@
 		
 	<style>
 			body {
-					padding-top: 60px;
 					padding-bottom: 40px;
 			}
 	</style>
@@ -32,10 +31,68 @@
 	<!--[if lt IE 7]>
 			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
-
+	<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="../" class="navbar-brand">QuoDocs</a>
+			</div>
+			<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="../getting-started">My Projects</a>
+					</li>
+					<li class="active">
+						<a href="../css">i</a>
+					</li>
+					<li>
+						<form role="form" action="/search">
+							<div class="form-group">
+								<input type="search" class="form-control" id="search" placeholder="Search	">
+							</div>
+						</form>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="http://expo.getbootstrap.com" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Community links', 'Expo']);">Profile</a></li>
+					<li><a href="http://blog.getbootstrap.com" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Community links', 'Blog']);">Sign Out</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+		
   <div class="container">
-		Home! Woo Hooo!
-  </div> 
+		
+		<div class="row">
+			<div class="col-md-3">
+				<div class="repo-search">
+					<input type="text" class="repo-list-filter form-control" />
+				</div>
+				<div class="repo-list">
+					<ul class="list-unstyled">
+						
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-9">
+				
+				<div class="question-actions">
+					
+				</div>
+				
+				<div class="questions-container">
+					
+				</div>
+				
+			</div>
+		</div>
+		
+  </div>
 	<!-- /container -->
 
 </body>
@@ -52,7 +109,20 @@
 	<script src="js/frameworks/backbone.js"></script>
 
 	<!-- Script specific to this page -->
-	<script src="js/dashboard.js"></script>
-	<link rel="stylesheet" href="css/dashboard.css">
+	<script src="js/home.js"></script>
+	<link rel="stylesheet" href="css/home.css">
+	
+	<script type="text/template" id="_tmplRepoLI">
+		<li class="repo-details">
+			<a href="repo<%=id%>">			
+				<div class="inb">
+					<%=full_name%>
+				</div>
+				<div class="inb forkStatus">
+					<%=fork%>
+				</div>
+			</a>
+		</li>
+	</script>
 	
 </html>

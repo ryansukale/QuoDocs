@@ -1,3 +1,5 @@
 require('./main');
 require('./users');
 require('./uploads');
+require('./oauth');
+require('./githubApi');
