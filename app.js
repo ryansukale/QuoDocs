@@ -6,13 +6,13 @@
 var express = require('express');
 
 //Global variables : Since they are not declared using the var keyword
+rootDir = __dirname,
 config = require('./config'),
 http = require('http'),
 path = require('path'),
 app = express(),
 env = require('./env'),
-//http://dailyjs.com/2012/01/26/effective-node-modules/
-rootDir = __dirname;
+db = require('./database');
 
 //CLIENT_ID = process.env.CLIENT_ID;
 //CLIENT_SECRET = process.env.CLIENT_SECRET;
@@ -51,5 +51,5 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-
+//http://dailyjs.com/2012/01/26/effective-node-modules/
 routes = require('./routes');

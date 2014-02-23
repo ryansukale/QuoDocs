@@ -13,7 +13,8 @@
 		"formidable":"*",
 		"multiparty":"*",
 		"github":"*",
-		"octonode":"*"
+		"octonode":"*",
+		"mysql":"*"
   },
 	"devDependencies":{
 		"nodemon":"*"

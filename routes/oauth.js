@@ -23,7 +23,9 @@ app.get('/oauth/:service', function(req, res) {
 //OAUTH Callback URL
 app.get('/oauthcallback', function(req, res) {
 
-		console.log('req.session'+req.session);
+		console.log('inside oauthcallback');
+		
+		//console.log('req.session'+req.session);
 
 		var uri = url.parse(req.url);
 		var values = qs.parse(uri.query);
@@ -33,18 +35,27 @@ app.get('/oauthcallback', function(req, res) {
       res.end('Liar Liar, Pants on fire!');
     } else {
       github.auth.login(values.code, function (err, token) {
-        //res.writeHead(200, {'Content-Type': 'text/plain'});
-        //res.end('Your Token : ' + token);
-				
+        
 				var client = github.client(token);
 				req.session.gitToken = token;
 				
+				console.log('user has logged in!');
+				
 				client.get('/user', {}, function (err, status, body, headers) {
-					//res.send(client.me());
 					res.redirect('/home.html');
 					req.session.userInfo = body;
+					
+					//TODO https://github.com/felixge/node-mysql
+					//pool.getConnection(function(err, connection) {
+					// Use the connection
+					//connection.query( 'SELECT something FROM sometable', function(err, rows) {
+					//	// And done with the connection.
+					//	connection.release();
+          //
+					//	// Don't use the connection here, it has been returned to the pool.
+					//});
+					
 				});
-				
 				
       });
     }
