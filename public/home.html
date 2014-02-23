@@ -82,7 +82,7 @@
 			<div class="col-md-9">
 				
 				<div class="question-actions">
-					
+					Showing All Conversations in Projects I Own
 				</div>
 				
 				<div class="questions-container">
@@ -114,12 +114,36 @@
 	
 	<script type="text/template" id="_tmplRepoLI">
 		<li class="repo-details">
-			<a href="repo<%=id%>">			
+			<a href="#" class="repo_<%=id%>">
 				<div class="inb">
-					<%=full_name%>
+					<%=name%>
 				</div>
 				<div class="inb forkStatus">
 					<%=fork%>
+				</div>
+			</a>
+		</li>
+	</script>
+	
+	<script type="text/template" id="_tmplQuestion">
+		<li class="question-details">
+			<a href="question<%=id%>">			
+				<div class="">
+					<div class="inb question-title">
+						Question Title Question Title Question Title Question Title
+					</div>
+					<div class="inb pull-right">
+						projectName
+					</div>
+				</div>
+				<div class="tags">
+					<ul>
+						<%_.each(tags, function(tagDetails, index, tags){%>
+							
+							<li class="tag"><%=tagDetails.tagName%></li>
+							
+						<%});%>
+					</ul>
 				</div>
 			</a>
 		</li>

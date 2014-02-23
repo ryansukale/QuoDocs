@@ -51,13 +51,20 @@ app.get('/oauthcallback', function(req, res) {
 		
 });
 
-app.get('/testAPI', function(req, res) {
+//A generic test method that delegates to the GITHUB api
+//to get data for an authenticated user based upon the URL's passed
+app.get('/testAPI/*', function(req, res) {
 
 	var token = req.session.gitToken,
 	userInfo = req.session.userInfo,
 	client = github.client(token);
 	
-	var requestURL = '/user/repos';
+	var uri = url.parse(req.url);
+	
+	var requestURL = "/"+uri.path.split('/').slice(2).join('/');//'/user/repos';
+	if(!requestURL || requestURL.length===0){
+		requestURL = '/user/repos';
+	}
 	var requestParams = {};
 
 	client.get(requestURL, requestParams, function (err, status, body, headers) {

@@ -1,0 +1,101 @@
+drop table if exists user;
+create table user(
+	id int(32),
+	user_name varchar(100),
+	points int(10)
+);
+
+-- All the repos for a user
+drop table if exists repos;
+create table repos(
+	user_id int(32),
+	repo_id int(32),
+	fork tinyint(1),
+	repo_name int(100)
+);
+
+drop table if exists topic;
+create table topic(
+	id int(32),
+	repo_id int(32),
+	main_text varchar(100),
+	main_description varchar(6000),
+	up_count int(5),
+	down_count int(5),
+	owner_id int(10),
+	is_anwered tinyint(1),
+	answer_count int(5),
+	posted_on datetime,
+	view_count int(10)
+);
+
+drop table if exists response;
+create table response(
+	id int(128),
+	topic_id int(32),
+	response_type_id int(32),
+	up_count int(5),
+	down_count int(5)
+);
+
+drop table if exists user_vote;
+create table user_vote(
+	id int(32),
+	user_id int(32),
+	vote_type_id int(32),
+	item_id int(32)
+);
+
+-- Static table - a vote can be for a question/answer/comment, just like SO
+drop table if exists vote_type;
+create table vote_type(
+	id int(32),
+	type_name varchar(100),
+	type_description varchar(500)
+);
+
+
+drop table if exists tag;
+create table tag(
+	id int(32),
+	user_id int(32),
+	tag_text varchar(30),
+	type_id int(32),
+	item_id int(32),
+	item_type varchar(20)
+);
+
+-- It can either be some text or a persons id
+drop table if exists tag_types;
+create table tag_types(
+	id int(32),
+	type_name varchar(50),
+	description varchar(500)
+);
+
+-- The id doubles up as the fileName
+drop table if exists audio_details;
+create table audio_details(
+	id int(64),
+	user_id int(32),
+	question_id int(32),
+	answer_id int(32)
+);
+
+-- The id doubles up as the svg FileName
+drop table if exists visual_details;
+create table visual_details(
+	id int(32),
+	user_id int(32),
+	question_id int(32),
+	answer_id int(32),
+	edit_count int(5)
+);
+
+-- Answer types can be audio/visual/text
+drop table if exists answer_types;
+create table answer_types(
+	id int(32),
+	type_name varchar(50),
+	type_description varchar(500)
+);
