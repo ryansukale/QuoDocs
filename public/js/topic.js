@@ -9,7 +9,8 @@ $(function(){
 	};
 	
 	var tmpl = {
-		topic : _.template($('#_tmplTopic').html())
+		topic : _.template($('#_tmplTopic').html()),
+		textResponse : _.template($('#_tmplTextResponse').html())
 	}
 	
 	function getParameterByName(name) {
@@ -30,14 +31,18 @@ $(function(){
 				console.log(data);
 				
 				$('.topic-details .topic').html(tmpl.topic(data.topicInfo));
-				//var htmlElems = [];
-				//_.each(data, function(element, index, list){
-				//	
-				//	htmlElems.push(tmpl.repoLI(element));
-				//});
-				//
-				//
-				//$('.repo-list ul').append(htmlElems.join(''));
+				
+				var responsesArray = [];
+				
+				_.each(data.responseInfo, function(responseDtls, index, list){
+					
+					if(responseDtls.type==="text"){
+						responsesArray.push(tmpl.textResponse(responseDtls));
+					}
+					
+				});
+				
+				$('.response-details .other-responses').append(responsesArray.join());
 				
 			});
 	

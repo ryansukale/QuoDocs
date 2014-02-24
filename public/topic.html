@@ -40,13 +40,13 @@
 	
 		<div class="row">
 			
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="topic-meta"></div>
 				<div class="project-members"></div>
 				<div class="related-questions"></div>
 			</div>
 			
-			<div class="col-md-9">
+			<div class="col-md-10">
 				
 				<div class="topic-details">
 					<div class="status">
@@ -69,7 +69,10 @@
 					
 					<div class="clearfix mt-10">
 						<div class="action-prompts pull-left">
-							<div class="btn btn-primary btn btn-primary btn-start-rec">Record Audio</div>
+							<div class="btn btn-primary btn btn-primary btn-start-rec">
+								<div class="record-prompt">Record Audio</div>
+								
+							</div>
 							<div class="btn btn-primary">Draw Flowchart</div>
 							<div class="btn btn-primary">Write</div>
 						</div>
@@ -81,6 +84,17 @@
 				</div>
 				
 				<div class="response-details">
+				
+					<div class="img-response">
+						<div class="hidden">
+							<span>Do you think a diagram would help?</span>
+							<span class="btn-btn-default">Draw One</span>
+						</div>
+					</div>
+					
+					<div class="other-responses">
+						
+					</div>
 					
 				</div>
 				
@@ -138,6 +152,30 @@
 					
 				<%});%>
 			</ul>
+	</script>
+	
+	<script type="text/template" id="_tmplTextResponse">
+			
+			<div class="response">
+			
+				<div class="stats hidden">
+					<span><%=response_details.up_count%></span><span> + </span>
+					<span><%=response_details.down_count%></span><span> - </span>
+				</div>
+			
+				<div class="response-text">
+					<%=response_details.response_text%>
+				</div>
+				
+				<ul class="tags list-unstyled list-inline">
+					<%_.each(response_details.tags, function(tagName, index, tags){%>
+						
+						<li class="tag"><%=tagName%></li>
+						
+					<%});%>
+				</ul>
+			</div>
+			
 	</script>
 	
 </html>
