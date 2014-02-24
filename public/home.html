@@ -82,7 +82,14 @@
 			<div class="col-md-9">
 				
 				<div class="question-actions">
-					Showing All Conversations in Projects I Own
+					<div class="status inb">
+						Showing All Conversations in Projects I Own
+					</div>
+					
+					<a class="btn btn-default inb pull-right new-topic" href="./topic.html">
+						+ New Topic
+					</a>
+					
 				</div>
 				
 				<div class="convo-list">
@@ -164,35 +171,12 @@
 		</li>
 	</script>
 	
-	<!-- <script type="text/template" id="_tmplQuestion">
-		<li class="conversation-details">
-			<a href="conversation_<%=id%>">			
-				<div class="">
-					<div class="inb conversation-title">
-						<%=main_text%>
-					</div>
-					<div class="inb pull-right">
-						<%=name%>
-					</div>
-				</div>
-				<div class="tags">
-					<ul>
-						<%_.each(tags, function(tagDetails, index, tags){%>
-							
-							<li class="tag"><%=tagDetails.tagName%></li>
-							
-						<%});%>
-					</ul>
-				</div>
-			</a>
-		</li>
-	</script> -->
 	
 	<script type="text/template" id="_tmplConvoLI">
 		<li class="convo-details clearfix">
 			<div class="convo-main">
 				<div class="inb conversation-title">
-					<a href="topic/<%=id%>">	<%=main_text%></a>
+					<a href="topic.html?id=<%=id%>">	<%=main_text%></a>
 				</div>
 				<div class="inb pull-right">
 					<%=name%>

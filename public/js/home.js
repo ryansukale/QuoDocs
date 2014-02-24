@@ -1,7 +1,7 @@
 $(function(){
 
 	var urls = {
-		allRepos : '/repos',
+		allRepos : '/projects',
 		parentRepos : '/getParentRepos',
 		topics : '/topics'
 	};

@@ -19,13 +19,13 @@
 		"isGithub":true,
 		"topics":0,
 		"fork":true,
-		"parent":[
+		"parent":{
 			"id":300,
 			"name":"flappyBird",
 			"fork":false,
 			"isGithub":true,
 			"topics":3
-		]
+		}
   },
   {
     "id": 4,
@@ -33,13 +33,13 @@
 		"isGithub":true,
 		"topics":3,
 		"fork":true,
-		"parent":[
+		"parent":{
 			"id":400,
 			"name":"jQuery",
 			"isGithub":true,
 			"topics":120,
 			"fork":false
-		]
+		}
   },
   {
     "id": 5,
@@ -47,13 +47,13 @@
 		"isGithub":true,
 		"topics":0,
 		"fork":true,
-		"parent":[
+		"parent":{
 			"id":500,
 			"name":"bootstrap",
 			"isGithub":true,
 			"topics":57,
 			"fork":false
-		]
+		}
   },
   {
     "id":6,

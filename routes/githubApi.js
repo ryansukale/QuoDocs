@@ -3,14 +3,16 @@ var github = require('octonode'),
 	fs = require('fs'),
 	_ = require('underscore');
 	
-app.get('/repos', function(req, res) {
+app.get('/projects', function(req, res) {
 	
 	var uri = url.parse(req.url);
 	
 	if(uri.hostname===null){
 		console.log('local invocation');
 		
-		var file = rootDir + '/data/static/repos.json';
+		var userId = env.DEMOUSERID;
+		var file = [rootDir,'data',userId,'projects.json'].join(path.sep);
+		
 		fs.readFile(file, 'utf8', function (err, data) {
 			if (err) {
 				console.log('Error: ' + err);
