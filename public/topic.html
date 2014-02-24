@@ -69,13 +69,29 @@
 					
 					<div class="clearfix mt-10">
 						<div class="action-prompts pull-left">
-							<div class="btn btn-primary btn btn-primary btn-start-rec">
-								<div class="record-prompt">Record Audio</div>
+							<div class="btn btn-primary record-prompt">Record Audio</div>
+							<div class="btn btn-primary draw-options">Draw Flowchart</div>
+							<div class="btn btn-primary write-options">Write</div>
+							<div class="rec-panel clearfix hidden">
+										
+								<div class="controls pull-left">
+										<div class="rec-status hidden">
+										</div>
+										<div class="rec-control btn btn-primary btn-start-rec">
+											Start Recording
+										</div>
+										<div class="rec-details">
+											<a href="" target="_blank" class="rec-link hidden">Listen</a>
+										</div>
+								</div>
+								
+								<div class="rec-metadata pull-right">
+									<textarea name="rec-tags" id="" cols="100" rows="3" placeholder="Example #tag1 #tag2 @username"></textarea>
+								</div>
 								
 							</div>
-							<div class="btn btn-primary">Draw Flowchart</div>
-							<div class="btn btn-primary">Write</div>
 						</div>
+						
 						<div class="message">
 							Be the first to answer - 10 pts
 						</div>
