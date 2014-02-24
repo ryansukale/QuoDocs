@@ -3,7 +3,7 @@ var github = require('octonode'),
 	fs = require('fs'),
 	_ = require('underscore');
 	
-app.get('/getRepos', function(req, res) {
+app.get('/repos', function(req, res) {
 	
 	var uri = url.parse(req.url);
 	
@@ -52,5 +52,29 @@ app.post('/getParentRepos', function(req, res) {
 	client.get(requestURL, requestParams, function (err, status, body, headers) {
 		res.send(body);
 	});
+	
+});
+
+app.get('/repos/:repoId/contributors', function(req, res) {
+	
+	var uri = url.parse(req.url);
+	
+	if(uri.hostname===null){
+		console.log('local invocation');
+		
+		var file = [rootDir,'data/static/contributors',req.params.repoId+'.json'].join(path.sep);
+		fs.readFile(file, 'utf8', function (err, data) {
+			if (err) {
+				console.log('Error: ' + err);
+				return {};
+			}
+			repos = JSON.parse(data);
+			res.json(repos);
+		});
+		
+	}
+	else{
+		
+	}
 	
 });

@@ -40,7 +40,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="../" class="navbar-brand">QuoDocs</a>
+				<a href="./home.html" class="navbar-brand">QuoDocs</a>
 			</div>
 			<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 				<ul class="nav navbar-nav">
@@ -70,7 +70,7 @@
 		
 		<div class="row">
 			<div class="col-md-3">
-				<div class="repo-search">
+				<div class="repo-search pb-10">
 					<input type="text" class="repo-list-filter form-control" />
 				</div>
 				<div class="repo-list">
@@ -85,8 +85,47 @@
 					Showing All Conversations in Projects I Own
 				</div>
 				
-				<div class="questions-container">
-					
+				<div class="convo-list">
+					<ul class="list-unstyled">
+						<!-- <li class="convo-details clearfix">
+								<div class="convo-main">
+									<div class="inb conversation-title">
+										<a href="./topic/?id=1">Question Title</a>
+									</div>
+									<div class="inb pull-right">
+										Project Name
+									</div>
+								</div>
+								<div class="convo-tags">
+									<ul class="list-unstyled">
+										<li class="tag pull-left">tagName</li>
+										<li class="tag pull-left">@tagName</li>
+										<li class="tag pull-left">tagName</li>
+										<li class="tag pull-left">@tagName</li>
+									</ul>
+								</div>
+						</li>
+						
+						<li class="convo-details clearfix">
+								<div class="convo-main">
+									<div class="inb conversation-title">
+										<a href="./topic/?id=1">Question Title</a>
+									</div>
+									<div class="inb pull-right">
+										Project Name
+									</div>
+								</div>
+								<div class="convo-tags">
+									<ul class="list-unstyled">
+										<li class="tag pull-left">tagName</li>
+										<li class="tag pull-left">@tagName</li>
+										<li class="tag pull-left">tagName</li>
+										<li class="tag pull-left">@tagName</li>
+									</ul>
+								</div>
+						</li>
+						 -->
+					</ul>
 				</div>
 				
 			</div>
@@ -125,15 +164,15 @@
 		</li>
 	</script>
 	
-	<script type="text/template" id="_tmplQuestion">
-		<li class="question-details">
-			<a href="question<%=id%>">			
+	<!-- <script type="text/template" id="_tmplQuestion">
+		<li class="conversation-details">
+			<a href="conversation_<%=id%>">			
 				<div class="">
-					<div class="inb question-title">
-						Question Title Question Title Question Title Question Title
+					<div class="inb conversation-title">
+						<%=main_text%>
 					</div>
 					<div class="inb pull-right">
-						projectName
+						<%=name%>
 					</div>
 				</div>
 				<div class="tags">
@@ -147,6 +186,30 @@
 				</div>
 			</a>
 		</li>
+	</script> -->
+	
+	<script type="text/template" id="_tmplConvoLI">
+		<li class="convo-details clearfix">
+			<div class="convo-main">
+				<div class="inb conversation-title">
+					<a href="topic/<%=id%>">	<%=main_text%></a>
+				</div>
+				<div class="inb pull-right">
+					<%=name%>
+				</div>
+			</div>
+			<div class="convo-tags">
+				<ul class="list-unstyled">
+					
+					<%_.each(tags, function(tag, index, tags){%>
+						
+						<li class="tag pull-left"><%=tag%></li>
+						
+					<%});%>
+					
+				</ul>
+			</div>
+	</li>
 	</script>
 	
 </html>
