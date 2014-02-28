@@ -90,7 +90,7 @@ $(function(){
 							console.log(response);
 							$this.text('Start');
 							
-							$this.siblings('.rec-link').removeClass('hidden').attr('href',audioURL);
+							$this.siblings('.rec-details').removeClass('hidden').find('.rec-link').attr('href',audioURL);
 					});
 					
 				});

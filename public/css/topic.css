@@ -21,3 +21,11 @@
 	border-bottom:1px solid #dadada;
 	padding:10px 0px;
 }
+
+.controls {
+	width: 170px;
+}
+
+.rec-panel {
+    width: 800px;
+}
