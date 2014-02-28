@@ -114,10 +114,14 @@ $(function(){
 								console.log(response);
 								$this.text('Done');
 								
-								$this.parents('.rec-panel').find('.rec-details').removeClass('hidden').find('.rec-link').attr('href',audioURL);
+								var $parentRecPanel = $this.parents('.rec-panel');
+								
+								$parentRecPanel.find('.rec-details').removeClass('hidden').find('.rec-link').attr('href',audioURL);
 								//$this.toggleClass('start-rec stop-rec');
 								$this.removeClass('start-rec stop-rec rec-control btn btn-primary');
 								$this.addClass('alert alert-info');
+								
+								$parentRecPanel.find('.final-actions').removeClass('hidden');
 								
 						});
 						
