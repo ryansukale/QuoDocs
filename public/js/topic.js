@@ -50,16 +50,28 @@ $(function(){
 		
 	}
 	
-	function bindRecordControls(){
-	
-		$('.rec-panel').on('click',function(event){
+	function bindActionable(selector){
+		
+		$(selector).on('click',function(event){
 			var $this = $(this);
 			var $target = $(event.target);
 			
-			
+			//Check if the action is from the recording panel
+			if($target.parents('.rec-panel').length>0){
+				
+				if($target.hasClass('submit')){
+					console.log('Yahoo!');
+				}
+				
+			}
 			
 		});
 		
+	}
+	
+	function bindRecordControls(){
+	
+		bindActionable('.actionable');
 	
 		$('.record-prompt').on('click',function(event){
 			var $this = $(this);
