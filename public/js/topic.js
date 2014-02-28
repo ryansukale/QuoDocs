@@ -8,6 +8,10 @@ $(function(){
    'buffer-size': 16384,
 	};
 	
+	var countdownTime = 5000, // Max duration for audio recording
+	intervalTime = 1000, // Max duration for audio recording
+	intervalId  = '';
+	
 	var tmpl = {
 		topic : _.template($('#_tmplTopic').html()),
 		textResponse : _.template($('#_tmplTextResponse').html())
@@ -86,6 +90,8 @@ $(function(){
 			var $this = $(this);
 			var $target = $(event.target);
 			
+			var $parentRecPanel = $this.parents('.rec-panel');
+			
 			if($this.hasClass('start-rec')){
 			
 				navigator.getUserMedia({audio: true}, function(mediaStream) {
@@ -95,6 +101,27 @@ $(function(){
 					
 					$this.text('Stop');
 					$this.toggleClass('start-rec stop-rec');
+					
+					var $countdown = $parentRecPanel.find('.countdown');
+					$countdown.html(countdownTime/1000);
+
+					intervalId = setInterval(function(){
+						
+						console.log(+($countdown.html()));
+						var countdownValue = +($countdown.html());
+						
+						countdownValue=countdownValue-1;
+						console.log($countdown);
+						$countdown.html(countdownValue);
+						
+						if(countdownValue==0){
+							$parentRecPanel.find('.stop-rec').click();
+							clearInterval(intervalId);
+						}
+						
+						//console.log('timedout');
+						
+					},intervalTime);
 
 				});
 				
@@ -102,6 +129,8 @@ $(function(){
 				
 				if($this.hasClass('stop-rec')){
 				
+					clearInterval(intervalId);
+					
 					recordRTC.stopRecording(function(audioURL) {
 					//window.open(audioURL);
 					console.log(audioURL);

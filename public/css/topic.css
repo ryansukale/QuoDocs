@@ -31,6 +31,16 @@
 }
 
 .rec-panel .alert{
-	padding: 5px 20px;
+	padding: 6px 20px;
 	margin-bottom: auto;
+}
+
+.countdown {
+	padding: 0px;
+	font-size: 25px;
+	width: 90px;
+	text-align: center;
+	color: #a0a0a0;
+	background-color: #eaeaea;
+	border-radius: 5px;
 }
