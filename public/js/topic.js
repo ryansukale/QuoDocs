@@ -2,11 +2,16 @@ $(function(){
 	
 	var urls={
 		uploads:'./uploads/',
-		topics:'topics'
+		topics:'topics',
+		recordings:'recordings'
 	},
 	rtcOptions = {
    'buffer-size': 16384,
 	};
+	
+	var itemId='',
+	recordingId='',
+	itemType='';
 	
 	var countdownTime = 5000, // Max duration for audio recording
 	intervalTime = 1000, // Max duration for audio recording
@@ -64,7 +69,18 @@ $(function(){
 			if($target.parents('.rec-panel').length>0){
 				
 				if($target.hasClass('submit')){
-					console.log('Yahoo!');
+					//console.log('Yahoo!');
+					
+					$.ajax({
+						url:urls.recordings,
+						type:'POST',
+						data:{
+							recordingId:recordingId,
+							action:'save'
+						}})
+					.done(function(data){
+						
+					});
 				}
 				
 			}
@@ -107,11 +123,11 @@ $(function(){
 
 					intervalId = setInterval(function(){
 						
-						console.log(+($countdown.html()));
+						
 						var countdownValue = +($countdown.html());
 						
 						countdownValue=countdownValue-1;
-						console.log($countdown);
+						
 						$countdown.html(countdownValue);
 						
 						if(countdownValue==0){
@@ -119,7 +135,6 @@ $(function(){
 							clearInterval(intervalId);
 						}
 						
-						//console.log('timedout');
 						
 					},intervalTime);
 
@@ -138,9 +153,12 @@ $(function(){
 					
 					var formData = new FormData();
 					formData.append('recording', recordRTC.getBlob());
+					formData.append('itemId', itemId);
+					formData.append('itemType', itemType);
 
 						xhr('./uploads/', formData, function (response) {
 								console.log(response);
+								recordingId = response.recordingId;
 								$this.text('Done');
 								
 								var $parentRecPanel = $this.parents('.rec-panel');
