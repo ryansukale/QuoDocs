@@ -1,3 +1,30 @@
+a{
+    color:inherit;
+    text-decoration:none;
+}
+.repo-details {
+    padding: 10px 5px;
+    background-color: #f9f9f9;
+    color: #a0a0a0 !important;
+    border-bottom:1px solid #eaeaea;
+}
+
+.repo-details a {
+    color: #a0a0a0 !important;
+    font-size: 20px;
+    
+}
+
+
+.repo-details a:hover {
+    color: #000 !important;
+}
+
+.repo-details:hover {
+    background-color:#fff;
+    cursor:pointer;
+}
+
 .tag{
 	margin:5px;
 }

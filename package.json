@@ -14,7 +14,8 @@
 		"multiparty":"*",
 		"github":"*",
 		"octonode":"*",
-		"mysql":"*"
+		"mysql":"*",
+		"async":"*"
   },
 	"devDependencies":{
 		"nodemon":"*"

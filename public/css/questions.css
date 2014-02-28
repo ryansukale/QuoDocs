@@ -1,0 +1,23 @@
+.main-text{
+	font-weight:bold;
+	padding: 5px 0px;
+	font-size: 18px;
+}
+
+.topic-body {
+	color: #606060;
+	font-size: 15px;
+	padding: 5px 0px 10px;
+}
+
+.tag{
+	color:#666;
+	text-decoration:underline;
+	border-radius:5px;
+	padding:5px 5px !important;
+}
+
+.topic-details{
+	border-bottom:1px solid #dadada;
+	padding:10px 0px;
+}
