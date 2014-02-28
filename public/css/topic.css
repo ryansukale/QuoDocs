@@ -29,3 +29,8 @@
 .rec-panel {
     width: 800px;
 }
+
+.rec-panel .alert{
+	padding: 5px 20px;
+	margin-bottom: auto;
+}

@@ -112,10 +112,12 @@ $(function(){
 
 						xhr('./uploads/', formData, function (response) {
 								console.log(response);
-								$this.text('Start');
+								$this.text('Done');
 								
-								$this.siblings('.rec-details').removeClass('hidden').find('.rec-link').attr('href',audioURL);
-								$this.toggleClass('start-rec stop-rec');
+								$this.parents('.rec-panel').find('.rec-details').removeClass('hidden').find('.rec-link').attr('href',audioURL);
+								//$this.toggleClass('start-rec stop-rec');
+								$this.removeClass('start-rec stop-rec rec-control btn btn-primary');
+								$this.addClass('alert alert-info');
 								
 						});
 						
