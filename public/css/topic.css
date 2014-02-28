@@ -27,7 +27,8 @@
 }
 
 .rec-panel {
-    width: 800px;
+	/*width: 800px;*/
+	border-top: 1px solid #dadada;
 }
 
 .rec-panel .alert{
@@ -43,4 +44,14 @@
 	color: #a0a0a0;
 	background-color: #eaeaea;
 	border-radius: 5px;
+}
+
+.messages .prompt-first{
+    padding: 5px 10px;
+    background-color: #eaeaea;
+    padding: 1;
+}
+
+.rec-metadata {
+	width: 600px;
 }
