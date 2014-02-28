@@ -52,11 +52,20 @@ $(function(){
 	
 	function bindRecordControls(){
 	
+		$('.rec-panel').on('click',function(event){
+			var $this = $(this);
+			var $target = $(event.target);
+			
+			
+			
+		});
+		
+	
 		$('.record-prompt').on('click',function(event){
 			var $this = $(this);
 			var $target = $(event.target);
 			
-			$this.siblings('.rec-panel').removeClass('hidden');
+			$this.parents('.actionable').find('.rec-panel').removeClass('hidden');
 			
 		});
 		
@@ -65,7 +74,7 @@ $(function(){
 			var $this = $(this);
 			var $target = $(event.target);
 			
-			if($this.hasClass('btn-start-rec')){
+			if($this.hasClass('start-rec')){
 			
 				navigator.getUserMedia({audio: true}, function(mediaStream) {
 
@@ -73,31 +82,36 @@ $(function(){
 					recordRTC.startRecording();
 					
 					$this.text('Stop');
+					$this.toggleClass('start-rec stop-rec');
 
 				});
 				
 			}else{
 				
-				recordRTC.stopRecording(function(audioURL) {
-				//window.open(audioURL);
-				console.log(audioURL);
-				//recordRTC.save();
+				if($this.hasClass('stop-rec')){
 				
-				var formData = new FormData();
-				formData.append('recording', recordRTC.getBlob());
+					recordRTC.stopRecording(function(audioURL) {
+					//window.open(audioURL);
+					console.log(audioURL);
+					//recordRTC.save();
+					
+					var formData = new FormData();
+					formData.append('recording', recordRTC.getBlob());
 
-					xhr('./uploads/', formData, function (response) {
-							console.log(response);
-							$this.text('Start');
-							
-							$this.siblings('.rec-details').removeClass('hidden').find('.rec-link').attr('href',audioURL);
+						xhr('./uploads/', formData, function (response) {
+								console.log(response);
+								$this.text('Start');
+								
+								$this.siblings('.rec-details').removeClass('hidden').find('.rec-link').attr('href',audioURL);
+								$this.toggleClass('start-rec stop-rec');
+								
+						});
+						
 					});
 					
-				});
+				}
 				
 			}
-			
-			$this.toggleClass('btn-start-rec btn-stop-rec');
 
 		});
 		
