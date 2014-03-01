@@ -14,10 +14,17 @@ app.post('/uploads/',function(req,res){
 			return;
 		}
 		
+		//console.log(fields);
+		
+		var userId = req.session.userInfo,
+		itemId = fields['itemId'],
+		itemType = fields['itemType'],
+		projectId = fields['projectId'];
+		
 		var audioUploadDir = [rootDir,config.uploads.base,config.uploads.type['audio']].join(path.sep);
 		
-		console.dir(files.recording[0].path);
-		console.dir(audioUploadDir);
+		//console.dir(files.recording[0].path);
+		//console.dir(audioUploadDir);
 		
 		fs.readFile(files.recording[0].path, function (err, data) {
 		
@@ -26,7 +33,7 @@ app.post('/uploads/',function(req,res){
 				
 				fs.unlink(files.recording[0].path, function (err) {
 					if (err) throw err;
-					console.log('successfully deleted ' + files.recording[0].path);
+					console.log('successfully deleted temp file' + files.recording[0].path);
 				});
 				
 				res.send('Uploaded');
@@ -36,7 +43,7 @@ app.post('/uploads/',function(req,res){
 		
 	});
 	
-	console.log(multiparty);
+	//console.log(multiparty);
 	//res.send(req.files);
 	
 });

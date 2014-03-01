@@ -3,7 +3,8 @@ $(function(){
 	var urls={
 		uploads:'./uploads/',
 		topics:'topics',
-		recordings:'recordings'
+		recordings:'recordings',
+		userInfo:'./userinfo'
 	},
 	rtcOptions = {
    'buffer-size': 16384,
@@ -11,11 +12,19 @@ $(function(){
 	
 	var itemId='',
 	recordingId='',
-	itemType='';
+	itemType='',
+	userInfo={};
 	
 	var countdownTime = 5000, // Max duration for audio recording
 	intervalTime = 1000, // Max duration for audio recording
 	intervalId  = '';
+	
+	//Fetch the userInfo
+	$.ajax(urls.userInfo)
+		.done(function( data, textStatus, jqXHR ) {
+			userInfo=data;
+			//console.log('userInfo',userInfo);
+		});
 	
 	var tmpl = {
 		topic : _.template($('#_tmplTopic').html()),
@@ -37,7 +46,17 @@ $(function(){
 		$.ajax([urls.topics,topicId].join('/'))
 			.done(function( data, textStatus, jqXHR ) {
 				
-				$('.topic-details .topic').html(tmpl.topic(data.topicInfo));
+				var itemInfo = {
+					itemId:data.topicInfo.id,
+					projectId:data.topicInfo.project_id,
+					itemType:'topic'
+					};
+				
+				$('.topic-details .topic')
+					.html(tmpl.topic(data.topicInfo));
+					
+				$('.topic-details')
+					.attr('data-itemInfo',JSON.stringify(itemInfo));
 				
 				var responsesArray = [];
 				
@@ -155,10 +174,14 @@ $(function(){
 					console.log(audioURL);
 					//recordRTC.save();
 					
+					var itemInfo = JSON.parse($this.parents('.actionable').attr('data-itemInfo'));
+					//console.log('itemInfo',itemInfo);
+					
 					var formData = new FormData();
 					formData.append('recording', recordRTC.getBlob());
-					formData.append('itemId', itemId);
-					formData.append('itemType', itemType);
+					formData.append('itemId', itemInfo.itemId);
+					formData.append('itemType', itemInfo.itemType);
+					formData.append('projectId', itemInfo.projectId);
 
 						xhr('./uploads/', formData, function (response) {
 								console.log(response);

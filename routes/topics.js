@@ -48,7 +48,7 @@ app.get('/topics/:topicId', function(req, res) {
 			}
 			
 			topics = JSON.parse(data);
-			console.log(topics);
+			//console.log(topics);
 			
 			var responsesFile = [rootDir,'data',userId,'responses.json'].join(path.sep);
 		
@@ -59,9 +59,9 @@ app.get('/topics/:topicId', function(req, res) {
 				}
 				
 				responses = JSON.parse(data);
-				console.log(responses);
+				//console.log(responses);
 				
-				console.log('req.params.topicId',req.params.topicId);
+				//console.log('req.params.topicId',req.params.topicId);
 				var responseObj = {};
 				responseObj.topicInfo = _.findWhere(topics, {id: topicId});
 				responseObj.responseInfo = _.where(responses, {"topic_id": topicId});
