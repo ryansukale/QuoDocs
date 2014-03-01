@@ -118,6 +118,8 @@ $(function(){
 					$this.text('Stop');
 					$this.toggleClass('start-rec stop-rec');
 					
+					$parentRecPanel.find('.control-feedback .info.recording').removeClass('hidden');
+					
 					var $countdown = $parentRecPanel.find('.countdown');
 					$countdown.html(countdownTime/1000);
 
@@ -145,6 +147,8 @@ $(function(){
 				if($this.hasClass('stop-rec')){
 				
 					clearInterval(intervalId);
+					$parentRecPanel.find('.control-feedback .info.recording').addClass('hidden');
+					$parentRecPanel.find('.control-feedback .info.processing').removeClass('hidden');
 					
 					recordRTC.stopRecording(function(audioURL) {
 					//window.open(audioURL);
@@ -169,6 +173,8 @@ $(function(){
 								$this.addClass('alert alert-info');
 								
 								$parentRecPanel.find('.final-actions').removeClass('hidden');
+								$parentRecPanel.find('.control-feedback .info.processing').addClass('hidden');
+								
 								
 						});
 						

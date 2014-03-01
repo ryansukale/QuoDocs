@@ -55,3 +55,7 @@
 .rec-metadata {
 	width: 600px;
 }
+
+.rec-panel .control-feedback .info{
+	color: #A0A130;
+}
