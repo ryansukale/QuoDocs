@@ -4,7 +4,8 @@ $(function(){
 		uploads:'./uploads/',
 		topics:'topics',
 		recordings:'recordings',
-		userInfo:'./userinfo'
+		userInfo:'./userinfo',
+		saveTags:'./tags'
 	},
 	rtcOptions = {
    'buffer-size': 16384,
@@ -15,7 +16,7 @@ $(function(){
 	itemType='',
 	userInfo={};
 	
-	var countdownTime = 5000, // Max duration for audio recording
+	var countdownTime = 2000, // Max duration for audio recording
 	intervalTime = 1000, // Max duration for audio recording
 	intervalId  = '';
 	
@@ -88,18 +89,44 @@ $(function(){
 			if($target.parents('.rec-panel').length>0){
 				
 				if($target.hasClass('submit')){
-					//console.log('Yahoo!');
+					console.log('submitting!');
 					
+					var itemInfo = JSON.parse($target.parents('.actionable').attr('data-itemInfo'));
+					
+					var $parentRecPanel = $target.parents('.rec-panel');
+					
+					var rawTagString = $parentRecPanel.find('textarea[name="recTags"]').val();
+					
+					var rawTextArr = _.without(rawTagString.split(' '),''); //get all the tags and clear the spaces
+
+					var correctedTagsArr = _.map(rawTextArr, function(tagText){
+					
+							var finalText;
+							var firstChar = tagText.charAt(0);
+							if(firstChar === '@' || firstChar === '#'){
+								finalText=tagText;
+							}else{
+								finalText='#'+tagText;
+							}
+							
+							return finalText; 
+					});
+					
+					console.log('tags',correctedTagsArr);
 					$.ajax({
-						url:urls.recordings,
+						url:urls.saveTags,
 						type:'POST',
 						data:{
 							recordingId:recordingId,
-							action:'save'
-						}})
+							tags:correctedTagsArr
+						}
+					})
 					.done(function(data){
 						
 					});
+					
+					event.preventDefault();
+					
 				}
 				
 			}

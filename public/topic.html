@@ -84,35 +84,38 @@
 					
 					<div class="rec-panel clearfix mt-5 pt-10 hidden">
 							
-							<div class="clearfix">
-								
-								<div class="controls pull-left">
-									<div class="clearfix">
-									<div class="control-feedback pull-left">
-										<!-- <span class="glyphicon glyphicon-bullhorn"></span> -->
-										<div class="countdown"></div>
-										<div class="info recording c hidden">Recording...</div>
-										<div class="info processing c hidden">Processing...</div>
+							<form action="" method="post">
+								<div class="clearfix">
+									
+									<div class="controls pull-left">
+										<div class="clearfix">
+										<div class="control-feedback pull-left">
+											<!-- <span class="glyphicon glyphicon-bullhorn"></span> -->
+											<div class="countdown"></div>
+											<div class="info recording c hidden">Recording...</div>
+											<div class="info processing c hidden">Processing...</div>
+										</div>
+										<div class="rec-control btn btn-primary start-rec pull-right">
+											Start Recording
+										</div>
+										</div>
+										<div class="rec-details pull-right mt-10 mr-5 hidden">
+											<a href="" target="_blank" class="rec-link b">Listen</a>
+										</div>
 									</div>
-									<div class="rec-control btn btn-primary start-rec pull-right">
-										Start Recording
-									</div>
-									</div>
-									<div class="rec-details pull-right mt-10 mr-5 hidden">
-										<a href="" target="_blank" class="rec-link b">Listen</a>
+									
+									<div class="rec-metadata ml-10 pull-left">
+										<textarea name="recTags" id="" cols="125" rows="3" placeholder="Example #tag1 #tag2 @username"></textarea>
 									</div>
 								</div>
 								
-								<div class="rec-metadata ml-10 pull-left">
-									<textarea name="rec-tags" id="" cols="125" rows="3" placeholder="Example #tag1 #tag2 @username"></textarea>
+								
+								<div class="final-actions clearfix pull-right hidden">
+									<div class="btn btn-success submit">Submit</div>
+									<div class="btn btn-warning cancel">Cancel</div>
 								</div>
-							</div>
-							
-							
-							<div class="final-actions clearfix pull-right hidden">
-								<div class="btn btn-success submit">Submit</div>
-								<div class="btn btn-warning cancel">Cancel</div>
-							</div>
+								
+							</form>
 							
 					</div>
 						
