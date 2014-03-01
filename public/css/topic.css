@@ -19,7 +19,6 @@
 
 .topic-details{
 	border-bottom:1px solid #dadada;
-	padding:10px 0px;
 }
 
 .controls {
@@ -58,4 +57,8 @@
 
 .rec-panel .control-feedback .info{
 	color: #A0A130;
+}
+
+.actions-panel {
+	border-top: 1px solid #e0e0e0;
 }
