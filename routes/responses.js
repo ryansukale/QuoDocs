@@ -128,10 +128,15 @@ app.post('/responses/upload', function(req, res) {
 
 //Update the tags for a response
 app.post('/responses/tags/:responseId', function(req, res) {
-
-	var requestAuthURL = authUrls[req.params.responseId];
 	
-	res.writeHead(301, {'Content-Type': 'text/plain', 'Location': requestAuthURL})
-	res.end('Redirecting to ' + requestAuthURL);
+	console.log('Request' + req.url);
+	
+	var respObj = {'uninitialized':true};
+	
+	var responseId = req.params.responseId;
+	
+	console.log(responseId);
+	
+	res.json(respObj);
 	
 });

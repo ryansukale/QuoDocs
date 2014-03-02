@@ -5,7 +5,7 @@ $(function(){
 		topics:'topics',
 		recordings:'recordings',
 		userInfo:'./userinfo',
-		saveTags:'./responses'
+		saveTags:'./responses/tags/'
 	},
 	rtcOptions = {
    'buffer-size': 16384,
@@ -89,8 +89,10 @@ $(function(){
 			var $this = $(this);
 			var $target = $(event.target);
 			
+			var $parentRecPanel = $target.parents('.rec-panel');
+			
 			//Check if the action is from the recording panel
-			if($target.parents('.rec-panel').length>0){
+			if($parentRecPanel.length>0){
 				
 				if($target.hasClass('submit')){
 					//console.log('submitting!');
@@ -118,18 +120,19 @@ $(function(){
 					
 					console.log(pageData.responseInfo);
 					
-					//console.log('tags',correctedTagsArr);
-					//$.ajax({
-					//	url:urls.saveTags,
-					//	type:'POST',
-					//	data:{
-					//		recordingId:recordingId,
-					//		tags:correctedTagsArr
-					//	}
-					//})
-					//.done(function(data){
-					//	
-					//});
+					var responseId = $parentRecPanel.find('.response-id').val();
+					
+					console.log('tags',correctedTagsArr);
+					$.ajax({
+						url:urls.saveTags+responseId,
+						type:'POST',
+						data:{
+							tags:correctedTagsArr
+						}
+					})
+					.done(function(data){
+						console.log(data);
+					});
 					
 					event.preventDefault();
 					
@@ -215,19 +218,21 @@ $(function(){
 					formData.append('itemId', itemInfo.itemId);
 					formData.append('itemType', itemInfo.itemType);
 					formData.append('projectId', itemInfo.projectId);
-					console.log(itemInfo);
+					
 						xhr(urls.uploads, formData, function (response) {
-								console.log(response);
+								//console.log(response);
 								
+								response = JSON.parse(response);
 								//Add the response details to the existing responses to on the page
 								pageData.responseInfo.push(response.responseDtls);
 								
 								//Render a new block of the response on the page //TODO
 								
-								recordingId = response.recordingId;
 								$this.text('Done');
 								
 								var $parentRecPanel = $this.parents('.rec-panel');
+								
+								$parentRecPanel.find('.response-id').val(response.responseDtls.id);
 								
 								$parentRecPanel.find('.rec-details').removeClass('hidden').find('.rec-link').attr('href',audioURL);
 								//$this.toggleClass('start-rec stop-rec');
