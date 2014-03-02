@@ -14,7 +14,8 @@ $(function(){
 	var itemId='',
 	recordingId='',
 	itemType='',
-	userInfo={};
+	userInfo={},
+	pageData={};
 	
 	var countdownTime = 2000, // Max duration for audio recording
 	intervalTime = 1000, // Max duration for audio recording
@@ -46,6 +47,9 @@ $(function(){
 		
 		$.ajax([urls.topics,topicId].join('/'))
 			.done(function( data, textStatus, jqXHR ) {
+				
+				//Save all the data that is used to render the contents of this page.
+				pageData = data;
 				
 				var itemInfo = {
 					itemId:data.topicInfo.id,
@@ -112,18 +116,20 @@ $(function(){
 							return finalText; 
 					});
 					
-					console.log('tags',correctedTagsArr);
-					$.ajax({
-						url:urls.saveTags,
-						type:'POST',
-						data:{
-							recordingId:recordingId,
-							tags:correctedTagsArr
-						}
-					})
-					.done(function(data){
-						
-					});
+					console.log(pageData.responseInfo);
+					
+					//console.log('tags',correctedTagsArr);
+					//$.ajax({
+					//	url:urls.saveTags,
+					//	type:'POST',
+					//	data:{
+					//		recordingId:recordingId,
+					//		tags:correctedTagsArr
+					//	}
+					//})
+					//.done(function(data){
+					//	
+					//});
 					
 					event.preventDefault();
 					
@@ -212,6 +218,12 @@ $(function(){
 					console.log(itemInfo);
 						xhr(urls.uploads, formData, function (response) {
 								console.log(response);
+								
+								//Add the response details to the existing responses to on the page
+								pageData.responseInfo.push(response.responseDtls);
+								
+								//Render a new block of the response on the page //TODO
+								
 								recordingId = response.recordingId;
 								$this.text('Done');
 								

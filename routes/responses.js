@@ -107,8 +107,7 @@ app.post('/responses/upload', function(req, res) {
 					//Write the responses to dynamic responses file
 					fs.writeFileSync(responsesFilePath, JSON.stringify(allResponseDtls));
 					
-					respObject.responseId = responseId;
-					respObject.fileName = fileName;
+					respObject.responseDtls = topicResponse;
 					
 					res.send(respObject);
 				
