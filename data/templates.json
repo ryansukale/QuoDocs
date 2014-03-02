@@ -8,12 +8,12 @@
 			"file_name":"",
 			"posted_on" : "mm/dd/yyyy",
 			"up_count":0,
-			"down_count":0,
-			"tags":[
-				"#tag1",
-				"#tag2",
-				"#tag3"
-			]
+			"down_count":0
 		}
+		"tags":[
+			"#tag1",
+			"#tag2",
+			"#tag3"
+		]
 	}
 }

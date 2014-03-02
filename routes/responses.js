@@ -26,16 +26,19 @@ app.post('/responses/upload', function(req, res) {
 			return;
 		}
 		
-		var itemId = fields['itemId'],
-		itemType = fields['itemType'],
-		projectId = fields['projectId'];
+		var itemId = fields['itemId'][0],
+		itemType = fields['itemType'][0],
+		projectId = fields['projectId'][0];
 	
+		//console.log(fields);
 		var audioUploadDir = [rootDir,config.uploads.base,config.uploads.type['audio']].join(path.sep);
 		
 		var fileNameBase = [itemType,projectId,itemId].join('_');
+		console.log(itemId);
+		//console.log(fileNameBase);
 		
 		var audioFiles = fs.readdirSync(audioUploadDir); // Get the list of existing files
-		console.log(audioFiles);
+		//console.log(audioFiles);
 		
 		var audioCount = 0;
 		
@@ -67,38 +70,42 @@ app.post('/responses/upload', function(req, res) {
 					
 					var responsesFilePath = [rootDir,'data',userId,dynamicDir,'responses.json'].join(path.sep);
 					
-					var topicResponseDtls = {};
+					var allResponseDtls = [];
 					
 					if (fs.existsSync(responsesFilePath)) {
+							
 							console.log('file Exists');
-							//Read the responses from that file
+							var fileContents = fs.readFileSync(responsesFilePath);	//Read the responses from that file
+							allResponseDtls = JSON.parse(fileContents);
 							
 					}else{
-						//Create a new file in that path
 						console.log('file does not exist');
 					}
 
 		
 					var responseId = randomstring.generate();
-				
+					console.log(itemId);
 					//Create a new response using the generatedId
-					//var topicResponse = {
-					//	"id":responseId,
-					//	"topic_id":itemId,
-					//	"user_id":userId,
-					//	"type" : "audio",
-					//	"response_details":{
-					//		"file_name":"",
-					//		"posted_on" : "mm/dd/yyyy",
-					//		"up_count":0,
-					//		"down_count":0,
-					//		"tags":[
-					//		]
-					//	}
-					//};
-					//Append the response to the list of responses
+					var topicResponse = {
+						"id":responseId,
+						"topic_id":itemId,
+						"user_id":userId,
+						"type" : "audio",
+						"response_details":{
+							"file_name":"",
+							"posted_on" : "mm/dd/yyyy",
+							"up_count":0,
+							"down_count":0
+						},
+						"tags":[]
+					};
+					
+					console.log(topicResponse);
+					//Add the response to the list of responses
+					allResponseDtls.push(topicResponse);
 					
 					//Write the responses to dynamic responses file
+					fs.writeFileSync(responsesFilePath, JSON.stringify(allResponseDtls));
 					
 					respObject.responseId = responseId;
 					respObject.fileName = fileName;
@@ -106,9 +113,6 @@ app.post('/responses/upload', function(req, res) {
 					res.send(respObject);
 				
 				}
-				
-				
-				
 				
 			});
 			

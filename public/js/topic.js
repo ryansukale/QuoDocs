@@ -5,7 +5,7 @@ $(function(){
 		topics:'topics',
 		recordings:'recordings',
 		userInfo:'./userinfo',
-		saveTags:'./tags'
+		saveTags:'./responses'
 	},
 	rtcOptions = {
    'buffer-size': 16384,
@@ -209,7 +209,7 @@ $(function(){
 					formData.append('itemId', itemInfo.itemId);
 					formData.append('itemType', itemInfo.itemType);
 					formData.append('projectId', itemInfo.projectId);
-
+					console.log(itemInfo);
 						xhr(urls.uploads, formData, function (response) {
 								console.log(response);
 								recordingId = response.recordingId;
