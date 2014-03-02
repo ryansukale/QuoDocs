@@ -1,0 +1,19 @@
+{
+	'audioResponse':{		
+		"id":1,
+		"topic_id":1,
+		"user_id":100,
+		"type" : "audio",
+		"response_details":{
+			"file_name":"",
+			"posted_on" : "mm/dd/yyyy",
+			"up_count":0,
+			"down_count":0,
+			"tags":[
+				"#tag1",
+				"#tag2",
+				"#tag3"
+			]
+		}
+	}
+}

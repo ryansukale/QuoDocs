@@ -1,7 +1,7 @@
 $(function(){
 	
 	var urls={
-		uploads:'./uploads/',
+		uploads:'./responses/upload',
 		topics:'topics',
 		recordings:'recordings',
 		userInfo:'./userinfo',
@@ -89,7 +89,7 @@ $(function(){
 			if($target.parents('.rec-panel').length>0){
 				
 				if($target.hasClass('submit')){
-					console.log('submitting!');
+					//console.log('submitting!');
 					
 					var itemInfo = JSON.parse($target.parents('.actionable').attr('data-itemInfo'));
 					
@@ -210,7 +210,7 @@ $(function(){
 					formData.append('itemType', itemInfo.itemType);
 					formData.append('projectId', itemInfo.projectId);
 
-						xhr('./uploads/', formData, function (response) {
+						xhr(urls.uploads, formData, function (response) {
 								console.log(response);
 								recordingId = response.recordingId;
 								$this.text('Done');

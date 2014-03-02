@@ -15,7 +15,9 @@
 		"github":"*",
 		"octonode":"*",
 		"mysql":"*",
-		"async":"*"
+		"async":"*",
+		"randomstring":"*",
+		"dateformat":"*"
   },
 	"devDependencies":{
 		"nodemon":"*"
