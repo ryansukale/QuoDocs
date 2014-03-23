@@ -134,7 +134,7 @@
 					
 					<div class="other-responses">
 						
-						<div class="audio-response response clearfix">
+						<div class="response audio-response clearfix mt-5 pt-5">
 		
 							<div class="votes pull-left">
 								<div><span>2</span><span class="vote-action up"> + </span></div>
@@ -145,7 +145,7 @@
 								<div class="listen">Listen</div>
 								<div class="meta">
 									<div class="notification hidden"></div>
-									<div class="owner">Chris</div>
+									<div><span>By: </span><span class="owner">Chris</span></div>
 									<div class="response-date"></div>
 								</div>
 							</div>
@@ -157,7 +157,15 @@
 										<li class="tag">tag1</li>
 										<li class="tag">tag2</li>
 										<li class="tag">tag3</li>
-									</ul>	
+									</ul>
+									
+									<textarea name="responseTags" class="hidden" id="" cols="30" rows="1"></textarea>
+									
+									<div class="tag-update-actions hidden">
+										<div class="btn btn-xs btn-warning">Save</div>
+										<div class="btn btn-xs btn-danger">Cancel</div>
+									</div>
+									
 								</div>
 								
 								<div class="supporting-text">
@@ -168,8 +176,8 @@
 							</div>
 							
 							<div class="response-actions pull-right">
-								<div class="btn btn-warning">Edit</div>
-								<div class="btn btn-danger">Delete</div>
+								<div class="btn btn-xs btn-warning">Edit</div>
+								<div class="btn btn-xs btn-danger">Delete</div>
 							</div>
 							
 						</div>
@@ -236,7 +244,7 @@
 	
 	<script type="text/template" id="_tmplTextResponse">
 			
-		<div class="response">
+		<div class="response text-response mt-5 pt-5">
 		
 			<div class="stats hidden">
 				<span><%=response_details.up_count%></span><span> + </span>
