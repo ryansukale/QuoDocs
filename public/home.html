@@ -19,6 +19,7 @@
 	
 	<!-- Moving the utils stylesheet to the bottom -->
 	<link rel="stylesheet" href="css/utils.css">
+	<link rel="stylesheet" href="css/mainmenu.css">
 		
 	<style>
 			body {
@@ -52,15 +53,16 @@
 					</li>
 					<li>
 						<form role="form" action="/search">
-							<div class="form-group">
-								<input type="search" class="form-control" id="search" placeholder="Search	">
-							</div>
+								<input type="search" class="form-control mt-10" id="searchMain" placeholder="Search	">
 						</form>
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="http://expo.getbootstrap.com" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Community links', 'Expo']);">Profile</a></li>
-					<li><a href="http://blog.getbootstrap.com" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Community links', 'Blog']);">Sign Out</a></li>
+					<li class=" mt-10">
+						<div class="totalPoints b">5</div>
+					</li>
+					<li><a href="" onclick="">Profile</a></li>
+					<li><a href="" onclick="">Sign Out</a></li>
 				</ul>
 			</nav>
 		</div>

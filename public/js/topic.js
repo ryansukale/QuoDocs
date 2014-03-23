@@ -133,7 +133,7 @@ $(function(){
 				
 			$responseItem.find('.tag-list').addClass('hidden');
 			
-			return false;
+			e.preventDefault();
 		});
 		
 		$responseItem.find('.tag-update-actions').on('click',function(e){
@@ -382,6 +382,8 @@ $(function(){
 								$('.response-details .other-responses')
 									.prepend(tmpl.audioResponse(response.responseDtls));
 								var $newResponse = $('.response-details .other-responses').children().eq(0);
+								
+								bindResponseHandlers($newResponse);
 								
 								$newResponse.find('.notifications').removeClass('hidden')
 									.children('.new').removeClass('hidden');

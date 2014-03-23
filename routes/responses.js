@@ -217,7 +217,7 @@ app.post('/responses/tags/:responseId', function(req, res) {
 		currentResponse.tags=newTags;
 		
 		//At the moment, only supports updating tags for dynamic responses
-		fs.writeFileSync(dynamicResponsesFilePath, JSON.stringify(allResponses));
+		fs.writeFileSync(dynamicResponsesFilePath, JSON.stringify(dynamicResponses));
 		
 		res.json(currentResponse);
 		
