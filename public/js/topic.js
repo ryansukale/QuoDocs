@@ -64,6 +64,8 @@ $(function(){
 					
 				$('.topic-details')
 					.attr('data-itemInfo',JSON.stringify(itemInfo));
+					
+				bindRecordControls();
 				
 			});
 	
@@ -87,12 +89,24 @@ $(function(){
 					
 				});
 				
-				$('.response-details .other-responses').append(responsesArray.join(""));
+				$otherResponsesContainer = $('.response-details .other-responses');
 				
-				bindHandlers();
+				$otherResponsesContainer.append(responsesArray.join(""));
+				
+					_.each($otherResponsesContainer.children(), function(responseItem, index, list){
+						bindResponseHandlers(responseItem);
+					});
+				
+				//bindHandlers();
 				
 			});
 	
+		
+	}
+	
+	function bindResponseHandlers(selector){
+		var $responseItem = $(selector);
+		console.log('here');
 		
 	}
 	
@@ -277,7 +291,7 @@ $(function(){
 	
 	function bindHandlers(){
 	
-		bindRecordControls();
+		//bindRecordControls();
 		
 	}
 
