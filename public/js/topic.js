@@ -185,7 +185,23 @@ $(function(){
 						}
 					})
 					.done(function(data){
-						console.log('Updated Tags',data);
+					
+						var currentResponse = _.findWhere(pageData.responses, {"id": responseId});
+						currentResponse.tags = data.tags;
+						
+						var tagListItems = tmpl.responseTags({tags:currentResponse.tags});
+						$responseItem.find('.tag-list').html(tagListItems)
+							.removeClass('hidden');
+						
+						//Clear the textarea				
+						$responseItem.find('textarea[name="responseTags"]')
+							.val('')
+							.addClass('hidden');
+						
+						//Hide the tag update actions
+						$responseItem.find('.tag-update-actions')
+							.addClass('hidden');
+							
 					});
 					
 				}
