@@ -17,7 +17,7 @@ $(function(){
 	userInfo={},
 	pageData={};
 	
-	var countdownTime = 2000, // Max duration for audio recording
+	var countdownTime = 5000, // Max duration for audio recording
 	intervalTime = 1000, // Max duration for audio recording
 	intervalId  = '';
 	

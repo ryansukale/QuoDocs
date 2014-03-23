@@ -49,7 +49,8 @@ app.post('/responses/upload', function(req, res) {
 		}
 		
 		audioCount++;
-		var fileName = [fileNameBase,audioCount].join('_')+fileExtension;
+		//var fileName = [fileNameBase,audioCount].join('_')+fileExtension;
+		var fileName = randomstring.generate(); 
 		console.log('proposedFileName',fileName);
 		
 		fs.readFile(files.recording[0].path, function (err, data) {
@@ -65,7 +66,7 @@ app.post('/responses/upload', function(req, res) {
 				
 				if(uri.hostname===null){
 				
-					var userId = env.DEMOUSERID || 100;
+					var userId = ''+env.DEMOUSERID || 100;
 					var dynamicDir = env.DYNAMIC_RESP_DIR;
 					
 					var responsesFilePath = [rootDir,'data',userId,dynamicDir,'responses.json'].join(path.sep);
@@ -92,7 +93,7 @@ app.post('/responses/upload', function(req, res) {
 						"user_id":userId,
 						"type" : "audio",
 						"response_details":{
-							"file_name":"",
+							"file_name":fileName,
 							"posted_on" : "mm/dd/yyyy",
 							"up_count":0,
 							"down_count":0
@@ -102,7 +103,7 @@ app.post('/responses/upload', function(req, res) {
 					
 					console.log(topicResponse);
 					//Add the response to the list of responses
-					allResponseDtls.push(topicResponse);
+					allResponseDtls.unshift(topicResponse);
 					
 					//Write the responses to dynamic responses file
 					fs.writeFileSync(responsesFilePath, JSON.stringify(allResponseDtls));
