@@ -196,25 +196,49 @@
 	
 	<script type="text/template" id="_tmplTextResponse">
 			
-			<div class="response">
-			
-				<div class="stats hidden">
-					<span><%=response_details.up_count%></span><span> + </span>
-					<span><%=response_details.down_count%></span><span> - </span>
-				</div>
-			
-				<div class="response-text">
-					<%=response_details.response_text%>
-				</div>
-				
-				<ul class="tags list-unstyled list-inline">
-					<%_.each(response_details.tags, function(tagName, index, tags){%>
-						
-						<li class="tag"><%=tagName%></li>
-						
-					<%});%>
-				</ul>
+		<div class="response">
+		
+			<div class="stats hidden">
+				<span><%=response_details.up_count%></span><span> + </span>
+				<span><%=response_details.down_count%></span><span> - </span>
 			</div>
+		
+			<div class="response-text">
+				<%=response_details.response_text%>
+			</div>
+			
+			<ul class="tags list-unstyled list-inline">
+				<%_.each(response_details.tags, function(tagName, index, tags){%>
+					
+					<li class="tag"><%=tagName%></li>
+					
+				<%});%>
+			</ul>
+		</div>
+			
+	</script>
+	
+	<script type="text/template" id="_tmplAudioResponse">
+			
+		<div class="audio-response response">
+		
+			<div class="stats hidden">
+				<span><%=response_details.up_count%></span><span> + </span>
+				<span><%=response_details.down_count%></span><span> - </span>
+			</div>
+		
+			<div class="response-text">
+				<%=response_details.response_text%>
+			</div>
+			
+			<ul class="tags list-unstyled list-inline">
+				<%_.each(response_details.tags, function(tagName, index, tags){%>
+					
+					<li class="tag"><%=tagName%></li>
+					
+				<%});%>
+			</ul>
+		</div>
 			
 	</script>
 	

@@ -31,10 +31,13 @@ app.get('/topics', function(req, res) {
 	
 });
 
+//Get the details for a topic
 app.get('/topics/:topicId', function(req, res) {
 	
 	var uri = url.parse(req.url);
 	var topicId = +(req.params.topicId);
+	
+	var returnObj = {};
 	
 	if(uri.hostname===null){
 	
@@ -59,14 +62,10 @@ app.get('/topics/:topicId', function(req, res) {
 				}
 				
 				responses = JSON.parse(data);
-				//console.log(responses);
 				
-				//console.log('req.params.topicId',req.params.topicId);
-				var responseObj = {};
-				responseObj.topicInfo = _.findWhere(topics, {id: topicId});
-				responseObj.responseInfo = _.where(responses, {"topic_id": topicId});
+				returnObj = _.findWhere(topics, {id: topicId});
 				
-				res.json(responseObj);
+				res.json(returnObj);
 				
 			});
 			
@@ -74,7 +73,7 @@ app.get('/topics/:topicId', function(req, res) {
 		
 	}
 	else{
-		
+		res.json(returnObj);
 	}
 	
 });

@@ -2,13 +2,14 @@ $(function(){
 	
 	var urls={
 		uploads:'./responses/upload',
-		topics:'topics',
+		topicsDetailsFor:'/topics',
 		recordings:'recordings',
 		userInfo:'./userinfo',
-		saveTags:'./responses/tags/'
+		saveTags:'./responses/tags/',
+		responsesFor:'/responses'
 	},
 	rtcOptions = {
-   'buffer-size': 16384,
+		'buffer-size': 16384,
 	};
 	
 	var itemId='',
@@ -18,7 +19,7 @@ $(function(){
 	pageData={};
 	
 	var countdownTime = 5000, // Max duration for audio recording
-	intervalTime = 1000, // Max duration for audio recording
+	intervalTime = 1000, // Countdown for recording
 	intervalId  = '';
 	
 	//Fetch the userInfo
@@ -45,27 +46,37 @@ $(function(){
 	//If the user is selecting a particular topic, render the topic details interface
 	if(topicId){
 		
-		$.ajax([urls.topics,topicId].join('/'))
+		$.ajax([urls.topicsDetailsFor,topicId].join('/'))
 			.done(function( data, textStatus, jqXHR ) {
 				
 				//Save all the data that is used to render the contents of this page.
-				pageData = data;
+				pageData.topicInfo = data;
 				
 				var itemInfo = {
-					itemId:data.topicInfo.id,
-					projectId:data.topicInfo.project_id,
+					itemId:pageData.topicInfo.id,
+					projectId:pageData.topicInfo.project_id,
 					itemType:'topic'
-					};
+				};
 				
 				$('.topic-details .topic')
-					.html(tmpl.topic(data.topicInfo));
+					.html(tmpl.topic(pageData.topicInfo));
 					
 				$('.topic-details')
 					.attr('data-itemInfo',JSON.stringify(itemInfo));
 				
+				bindHandlers();
+				
+			});
+	
+		$.ajax([urls.responsesFor,topicId].join('/'))
+			.done(function( data, textStatus, jqXHR ) {
+				
+				//Save all the data that is used to render the contents of this page.
+				pageData.responses = data.responses;
+				
 				var responsesArray = [];
 				
-				_.each(data.responseInfo, function(responseDtls, index, list){
+				_.each(pageData.responses, function(responseDtls, index, list){
 					
 					if(responseDtls.type==="text"){
 						responsesArray.push(tmpl.textResponse(responseDtls));
@@ -79,7 +90,6 @@ $(function(){
 				
 			});
 	
-		
 		
 	}
 	
