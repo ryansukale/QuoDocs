@@ -27,6 +27,7 @@ $(function(){
 	$.ajax(urls.userInfo)
 		.done(function( data, textStatus, jqXHR ) {
 			userInfo=data;
+			pageData.userInfo=data;
 			//console.log('userInfo',userInfo);
 		});
 	
