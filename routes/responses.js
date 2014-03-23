@@ -181,14 +181,51 @@ app.get('/responses/:topicId', function(req, res) {
 //Update the tags for a response
 app.post('/responses/tags/:responseId', function(req, res) {
 	
-	console.log('Request' + req.url);
+	console.log(req.method+':' + req.url);
 	
-	var respObj = {'uninitialized':true};
+	var uri = url.parse(req.url);
+	var returnObj = {};
 	
+	var userId = req.session.userInfo;
 	var responseId = req.params.responseId;
+	var newTags = req.body.tags;
 	
-	console.log(responseId);
+	//console.log('responseId:'+responseId);
+	//console.log('newTags:'+newTags);
 	
-	res.json(respObj);
+	if(uri.hostname===null){
+				
+		var userId = ''+env.DEMOUSERID || 100;
+		var dynamicDir = env.DYNAMIC_RESP_DIR;
+		
+		var staticResponsesFilePath = [rootDir,'data',userId,'responses.json'].join(path.sep);
+		var dynamicResponsesFilePath = [rootDir,'data',userId,dynamicDir,'responses.json'].join(path.sep);
+		
+		var staticResponses = JSON.parse(fs.readFileSync(staticResponsesFilePath));
+		var dynamicResponses = [];
+		
+		if (fs.existsSync(dynamicResponsesFilePath)) {
+			console.log('Dynamic responses exist');
+			dynamicResponses = JSON.parse(fs.readFileSync(dynamicResponsesFilePath));
+		}else{
+			console.log('No dynamic responses found for user:'+userId);
+		}
+		
+		var allResponses = dynamicResponses.concat(staticResponses);
+		var currentResponse = _.findWhere(allResponses, {"id": responseId});
+		
+		currentResponse.tags=newTags;
+		
+		//At the moment, only supports updating tags for dynamic responses
+		fs.writeFileSync(dynamicResponsesFilePath, JSON.stringify(allResponses));
+		
+		res.json(currentResponse);
+		
+	}else{
+	
+		res.json(returnObj);
+		
+	}
+	
 	
 });

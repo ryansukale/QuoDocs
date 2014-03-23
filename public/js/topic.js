@@ -6,6 +6,7 @@ $(function(){
 		recordings:'recordings',
 		userInfo:'./userinfo',
 		saveTags:'./responses/tags/',
+		saveTagsForResponse:'./responses/tags',
 		responsesFor:'/responses'
 	},
 	rtcOptions = {
@@ -168,6 +169,26 @@ $(function(){
 				$responseItem.find('.tag-update-actions')
 					.addClass('hidden');
 				
+			}else{
+				if($target.hasClass('save')){
+					var rawTagString = $responseItem.find('textarea[name="responseTags"]').val();
+					
+					var correctedTagsArr = getPrefixedTagArr(rawTagString);
+					
+					console.log(correctedTagsArr);
+					
+					$.ajax({
+						url:[urls.saveTagsForResponse,responseId].join('/'),
+						type:'POST',
+						data:{
+							tags:correctedTagsArr
+						}
+					})
+					.done(function(data){
+						console.log('Updated Tags',data);
+					});
+					
+				}
 			}
 			
 		});
@@ -237,6 +258,25 @@ $(function(){
 			
 		});
 		
+	}
+	
+	function getPrefixedTagArr(rawTagString){
+	
+		var rawTextArr = _.without(rawTagString.split(' '),''); //get all the tags and clear the spaces
+		var correctedTagsArr = _.map(rawTextArr, function(tagText){
+					
+				var finalText;
+				var firstChar = tagText.charAt(0);
+				if(firstChar === '@' || firstChar === '#'){
+					finalText=tagText;
+				}else{
+					finalText='#'+tagText;
+				}
+				
+				return finalText;
+		});
+		
+		return correctedTagsArr;
 	}
 	
 	function bindRecordControls(){
