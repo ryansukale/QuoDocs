@@ -108,7 +108,6 @@ $(function(){
 	function bindResponseHandlers(selector){
 		var $responseItem = $(selector);
 		console.log('here');
-		
 	}
 	
 	function bindActionable(selector){

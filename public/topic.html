@@ -242,11 +242,32 @@
 			<div class="text-block pull-left">
 				
 				<div class="response-tags">
-					<ul class="tag-list list-unstyled list-inline">
-						<%_.each(tags, function(tagName, index, tags){%>
-							<li class="tag"><%=tagName%></li>
-						<%});%>
-					</ul>
+				
+					<%if(tags.length===0){%>
+						
+						<div class="prompts">
+							<div class="add-tags"><a href="">Add tags</a> so that others can find this recording</div>
+						</div>
+						
+						<ul class="tag-list list-unstyled list-inline hidden">
+							<%_.each(tags, function(tagName, index, tags){%>
+								<li class="tag"><%=tagName%></li>
+							<%});%>
+						</ul>
+						
+					<%}else{%>
+						
+						<div class="prompts hidden">
+							<div class="add-tags hidden"><a href="">Add tags</a> so that others can find this recording</div>
+						</div>
+						
+						<ul class="tag-list list-unstyled list-inline">
+							<%_.each(tags, function(tagName, index, tags){%>
+								<li class="tag"><%=tagName%></li>
+							<%});%>
+						</ul>
+						
+					<%}%>
 					
 					<textarea name="responseTags" class="hidden" id="" cols="30" rows="1"></textarea>
 					
