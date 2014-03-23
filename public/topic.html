@@ -223,6 +223,8 @@
 			
 		<div class="response audio-response clearfix mt-5 pt-5">
 	
+			<input type="hidden" name="responseId" value="<%=id%>"/>
+			
 			<div class="votes pull-left">
 				<div><span><%=response_details.up_count%></span><span class="vote-action up"> + </span></div>
 				<div><span><%=response_details.down_count%></span><span class="vote-action down"> - </span></div>
@@ -272,8 +274,8 @@
 					<textarea name="responseTags" class="hidden" id="" cols="30" rows="1"></textarea>
 					
 					<div class="tag-update-actions hidden">
-						<div class="btn btn-xs btn-warning">Save</div>
-						<div class="btn btn-xs btn-danger">Cancel</div>
+						<div class="save btn btn-xs btn-success">Save</div>
+						<div class="cancel btn btn-xs btn-danger">Cancel</div>
 					</div>
 					
 				</div>
@@ -286,8 +288,8 @@
 			</div>
 			
 			<div class="response-actions pull-right">
-				<div class="btn btn-xs btn-warning">Edit</div>
-				<div class="btn btn-xs btn-danger">Delete</div>
+				<div class="edit btn btn-xs btn-warning">Edit</div>
+				<div class="delete btn btn-xs btn-danger">Delete</div>
 			</div>
 			
 		</div>
@@ -329,6 +331,12 @@
 			</div>
 			
 		</form>
+	</script>
+	
+	<script type="text/template" id="_tmplResponseTags">
+		<%_.each(tags, function(tagName, index, tags){%>
+			<li class="tag"><%=tagName%></li>
+		<%});%>
 	</script>
 	
 	

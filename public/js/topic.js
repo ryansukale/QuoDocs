@@ -33,7 +33,8 @@ $(function(){
 		topic : _.template($('#_tmplTopic').html()),
 		textResponse : _.template($('#_tmplTextResponse').html()),
 		audioResponse : _.template($('#_tmplAudioResponse').html()),
-		recPanelDefault : _.template($('#_tmplRecPanel_Default').html())
+		recPanelDefault : _.template($('#_tmplRecPanel_Default').html()),
+		responseTags : _.template($('#_tmplResponseTags').html())
 	}
 	
 	function getParameterByName(name) {
@@ -109,14 +110,27 @@ $(function(){
 		var $responseItem = $(selector);
 		//console.log('here');
 		$responseItem.find('.add-tags a').on('click',function(e){
+			
+			var responseId = $responseItem.find('[name="responseId"]').val(),
+				currentResponse = _.findWhere(pageData.responses, {"id": responseId});
+		
 			$responseItem.find('.prompts').addClass('hidden')
-				.children().addClass('hidden');
-				
+				.children('.add-tags').addClass('hidden');
+			
+			//Get the current tags for the response
+			var currentTagsArr = [];
+			_.each(currentResponse.tags,function(element, index, value){
+				currentTagsArr.push(element);
+			});
+			
 			$responseItem.find('textarea[name="responseTags"]')
-				.removeClass('hidden');
+					.val(currentTagsArr.join(' '))
+					.removeClass('hidden');
 			
 			$responseItem.find('.tag-update-actions')
-				.removeClass('hidden');;
+				.removeClass('hidden');
+				
+			$responseItem.find('.tag-list').addClass('hidden');
 			
 			return false;
 		});
@@ -125,6 +139,41 @@ $(function(){
 			var $this = $(this),
 				$target = $(e.target);
 			
+			var responseId = $responseItem.find('[name="responseId"]').val();
+			
+			if($target.hasClass('cancel')){
+			
+				//Fetch the existing values
+				var currentResponse = _.findWhere(pageData.responses, {"id": responseId});
+				
+				//Show/hide the appropriate elements
+				if(currentResponse.tags.length===0){
+				
+					//Show the prompts to add tags
+					$responseItem.find('.prompts').removeClass('hidden')
+					.children('.add-tags').removeClass('hidden');
+					
+				}else{
+					var tagListItems = tmpl.responseTags({tags:currentResponse.tags});
+					$responseItem.find('.tag-list').html(tagListItems)
+						.removeClass('hidden');
+				}
+				
+				//Clear the textarea				
+				$responseItem.find('textarea[name="responseTags"]')
+					.val('')
+					.addClass('hidden');
+				
+				//Hide the tag update actions
+				$responseItem.find('.tag-update-actions')
+					.addClass('hidden');
+				
+			}
+			
+		});
+		
+		$responseItem.find('.edit').on('click',function(e){
+			$responseItem.find('.add-tags a').trigger('click');
 		});
 		
 	}
