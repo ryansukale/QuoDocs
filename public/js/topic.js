@@ -31,7 +31,8 @@ $(function(){
 	
 	var tmpl = {
 		topic : _.template($('#_tmplTopic').html()),
-		textResponse : _.template($('#_tmplTextResponse').html())
+		textResponse : _.template($('#_tmplTextResponse').html()),
+		audioResponse : _.template($('#_tmplAudioResponse').html())
 	}
 	
 	function getParameterByName(name) {
@@ -80,6 +81,10 @@ $(function(){
 					
 					if(responseDtls.type==="text"){
 						responsesArray.push(tmpl.textResponse(responseDtls));
+					}else{
+						if(responseDtls.type==="audio"){
+							responsesArray.push(tmpl.audioResponse(responseDtls));
+						}
 					}
 					
 				});

@@ -32,6 +32,7 @@ app.use(express.session({secret: env.SESSION_SECRET}));
 //app.use(express.csrf());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 
 // development only

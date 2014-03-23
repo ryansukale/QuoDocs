@@ -134,53 +134,6 @@
 					
 					<div class="other-responses">
 						
-						<div class="response audio-response clearfix mt-5 pt-5">
-		
-							<div class="votes pull-left">
-								<div><span>2</span><span class="vote-action up"> + </span></div>
-								<div><span>5</span><span class="vote-action down"> - </span></div>
-							</div>
-							
-							<div class="audio-options pull-left">
-								<div class="listen">Listen</div>
-								<div class="meta">
-									<div class="notification hidden"></div>
-									<div><span>By: </span><span class="owner">Chris</span></div>
-									<div class="response-date"></div>
-								</div>
-							</div>
-						
-							<div class="text-block pull-left">
-								
-								<div class="response-tags">
-									<ul class="tag-list list-unstyled list-inline">
-										<li class="tag">tag1</li>
-										<li class="tag">tag2</li>
-										<li class="tag">tag3</li>
-									</ul>
-									
-									<textarea name="responseTags" class="hidden" id="" cols="30" rows="1"></textarea>
-									
-									<div class="tag-update-actions hidden">
-										<div class="btn btn-xs btn-warning">Save</div>
-										<div class="btn btn-xs btn-danger">Cancel</div>
-									</div>
-									
-								</div>
-								
-								<div class="supporting-text">
-									<div class="display-text"></div>
-									<textarea name="" id="" cols="30" rows="10" class="hidden"></textarea>
-								</div>
-								
-							</div>
-							
-							<div class="response-actions pull-right">
-								<div class="btn btn-xs btn-warning">Edit</div>
-								<div class="btn btn-xs btn-danger">Delete</div>
-							</div>
-							
-						</div>
 						
 					</div>
 					
@@ -263,6 +216,59 @@
 				<%});%>
 			</ul>
 		</div>
+			
+	</script>
+	
+	<script type="text/template" id="_tmplAudioResponse">
+			
+		<div class="response audio-response clearfix mt-5 pt-5">
+	
+			<div class="votes pull-left">
+				<div><span><%=response_details.up_count%></span><span class="vote-action up"> + </span></div>
+				<div><span><%=response_details.down_count%></span><span class="vote-action down"> - </span></div>
+			</div>
+			
+			<div class="audio-options pull-left">
+				<div class="listen"><a href="/audio/<%=response_details.file_name%>.wav" target="_blank">Listen</a></div>
+				<div class="meta">
+					<div class="notification hidden"></div>
+					<div class="hidden"><span>By: </span><span class="owner">Chris</span></div>
+					<div class="response-date hidden"></div>
+				</div>
+			</div>
+		
+			<div class="text-block pull-left">
+				
+				<div class="response-tags">
+					<ul class="tag-list list-unstyled list-inline">
+						<%_.each(tags, function(tagName, index, tags){%>
+							<li class="tag"><%=tagName%></li>
+						<%});%>
+					</ul>
+					
+					<textarea name="responseTags" class="hidden" id="" cols="30" rows="1"></textarea>
+					
+					<div class="tag-update-actions hidden">
+						<div class="btn btn-xs btn-warning">Save</div>
+						<div class="btn btn-xs btn-danger">Cancel</div>
+					</div>
+					
+				</div>
+				
+				<div class="supporting-text">
+					<div class="display-text"></div>
+					<textarea name="" id="" cols="30" rows="10" class="hidden"></textarea>
+				</div>
+				
+			</div>
+			
+			<div class="response-actions pull-right">
+				<div class="btn btn-xs btn-warning">Edit</div>
+				<div class="btn btn-xs btn-danger">Delete</div>
+			</div>
+			
+		</div>
+						
 			
 	</script>
 	
