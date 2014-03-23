@@ -127,6 +127,57 @@ app.post('/responses/upload', function(req, res) {
 });
 
 
+//Returns all the responses for a given topic
+app.get('/responses/:topicId', function(req, res) {
+
+	console.log('Request' + req.url);
+	
+	var uri = url.parse(req.url);
+	var returnObj = {};
+	
+	var userId = req.session.userInfo;
+	
+	var topicId = req.params.topicId;
+	
+	if(uri.hostname===null){
+				
+		var userId = ''+env.DEMOUSERID || 100;
+		var dynamicDir = env.DYNAMIC_RESP_DIR;
+		
+		var staticResponsesFilePath = [rootDir,'data',userId,'responses.json'].join(path.sep);
+		var dynamicResponsesFilePath = [rootDir,'data',userId,dynamicDir,'responses.json'].join(path.sep);
+		
+		var staticResponses = JSON.parse(fs.readFileSync(staticResponsesFilePath));
+		var dynamicResponses = [];
+		
+		if (fs.existsSync(dynamicResponsesFilePath)) {
+				console.log('Dynamic responses exist');
+				dynamicResponses = JSON.parse(fs.readFileSync(dynamicResponsesFilePath));
+		}else{
+			console.log('No dynamic responses found for user:'+userId);
+		}
+		
+		var allResponses = dynamicResponses.concat(staticResponses);
+		var topicResponses = _.where(allResponses, {"topic_id": topicId})
+		
+		returnObj = {
+			count:topicResponses.length,
+			responses:topicResponses
+		};
+		
+		res.json(returnObj);
+		
+	}else{
+	
+		res.json(returnObj);
+		
+	}
+	
+	
+	
+});
+
+
 //Update the tags for a response
 app.post('/responses/tags/:responseId', function(req, res) {
 	
