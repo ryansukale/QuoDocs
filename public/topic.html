@@ -19,13 +19,13 @@
 
 	<!-- CSS specific to this page -->
 	<link rel="stylesheet" href="css/topic.css">
+	<link rel="stylesheet" href="css/mainmenu.css">
 	
 	<!-- Moving the utils stylesheet to the bottom -->
 	<link rel="stylesheet" href="css/utils.css">
 		
 	<style>
 			body {
-					padding-top: 60px;
 					padding-bottom: 40px;
 			}
 	</style>
@@ -36,6 +36,44 @@
 			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
 
+	<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="./home.html" class="navbar-brand">QuoDocs</a>
+			</div>
+			<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="../getting-started">My Projects</a>
+					</li>
+					<li class="active">
+						<a href="../css">i</a>
+					</li>
+					<li>
+						<form role="form" action="/search">
+								<input type="search" class="form-control mt-10" id="searchMain" placeholder="Search	">
+						</form>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="mt-10">
+						<div class="totalPoints b"></div>
+						<div class="updatedPoints b"></div>
+					</li>
+					<li><a href="" onclick="">Profile</a></li>
+					<li><a href="" onclick="">Sign Out</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	
+	
   <div class="container">
 	
 		<div class="row">
@@ -178,6 +216,7 @@
 	<!-- Script specific to this page -->
 	<script src="js/plugins/recordrtc.js"></script>
 	<script src="js/topic.js"></script>
+	<script src="js/mainmenu.js"></script>
 	
 	<script type="text/template" id="_tmplTopic">
 			<div class="main-text">
