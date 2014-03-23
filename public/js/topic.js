@@ -94,9 +94,9 @@ $(function(){
 				
 				$otherResponsesContainer.append(responsesArray.join(""));
 				
-					_.each($otherResponsesContainer.children(), function(responseItem, index, list){
-						bindResponseHandlers(responseItem);
-					});
+				_.each($otherResponsesContainer.children(), function(responseItem, index, list){
+					bindResponseHandlers(responseItem);
+				});
 				
 				//bindHandlers();
 				
@@ -107,7 +107,26 @@ $(function(){
 	
 	function bindResponseHandlers(selector){
 		var $responseItem = $(selector);
-		console.log('here');
+		//console.log('here');
+		$responseItem.find('.add-tags a').on('click',function(e){
+			$responseItem.find('.prompts').addClass('hidden')
+				.children().addClass('hidden');
+				
+			$responseItem.find('textarea[name="responseTags"]')
+				.removeClass('hidden');
+			
+			$responseItem.find('.tag-update-actions')
+				.removeClass('hidden');;
+			
+			return false;
+		});
+		
+		$responseItem.find('.tag-update-actions').on('click',function(e){
+			var $this = $(this),
+				$target = $(e.target);
+			
+		});
+		
 	}
 	
 	function bindActionable(selector){
