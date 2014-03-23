@@ -87,7 +87,7 @@ $(function(){
 					
 				});
 				
-				$('.response-details .other-responses').append(responsesArray.join());
+				$('.response-details .other-responses').append(responsesArray.join(""));
 				
 				bindHandlers();
 				
@@ -240,6 +240,13 @@ $(function(){
 								pageData.responses.push(response.responseDtls);
 								
 								//Render a new block of the response on the page //TODO
+								console.log(response.responseDtls);
+								$('.response-details .other-responses')
+									.prepend(tmpl.audioResponse(response.responseDtls));
+								var $newResponse = $('.response-details .other-responses').children().eq(0);
+								
+								$newResponse.find('.notifications').removeClass('hidden')
+									.children('.new').removeClass('hidden');
 								
 								$this.text('Done');
 								

@@ -95,3 +95,8 @@
 .response{
 	border-bottom:1px solid #eaeaea;
 }
+
+.notifications .new{
+	color: red;
+	font-weight: bold;
+}
