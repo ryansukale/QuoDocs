@@ -65,8 +65,6 @@ $(function(){
 				$('.topic-details')
 					.attr('data-itemInfo',JSON.stringify(itemInfo));
 				
-				bindHandlers();
-				
 			});
 	
 		$.ajax([urls.responsesFor,topicId].join('/'))
@@ -133,7 +131,7 @@ $(function(){
 							return finalText; 
 					});
 					
-					console.log(pageData.responseInfo);
+					console.log(pageData.responses);
 					
 					var responseId = $parentRecPanel.find('.response-id').val();
 					
@@ -239,7 +237,7 @@ $(function(){
 								
 								response = JSON.parse(response);
 								//Add the response details to the existing responses to on the page
-								pageData.responseInfo.push(response.responseDtls);
+								pageData.responses.push(response.responseDtls);
 								
 								//Render a new block of the response on the page //TODO
 								
