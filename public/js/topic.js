@@ -32,7 +32,8 @@ $(function(){
 	var tmpl = {
 		topic : _.template($('#_tmplTopic').html()),
 		textResponse : _.template($('#_tmplTextResponse').html()),
-		audioResponse : _.template($('#_tmplAudioResponse').html())
+		audioResponse : _.template($('#_tmplAudioResponse').html()),
+		recPanelDefault : _.template($('#_tmplRecPanel_Default').html())
 	}
 	
 	function getParameterByName(name) {
@@ -276,6 +277,12 @@ $(function(){
 								$parentRecPanel.find('.final-actions').removeClass('hidden');
 								$parentRecPanel.find('.control-feedback .info.processing').addClass('hidden');
 								
+								//Transfer tags if any to the new response, and display appropriate response status
+								
+								//Reset the recording panel to its original state
+								resetRecPanel();
+								
+								//Toggle height/close the rec panel
 								
 						});
 						
@@ -286,6 +293,15 @@ $(function(){
 			}
 
 		});
+		
+	}
+	
+	function resetRecPanel(){
+		var recPanelDefault = tmpl.recPanelDefault();
+		
+		$('.rec-panel').children().remove();
+		$('.rec-panel').append(recPanelDefault);
+		bindRecordControls();
 		
 	}
 	
