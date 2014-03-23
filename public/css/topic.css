@@ -62,3 +62,32 @@
 .actions-panel {
 	border-top: 1px solid #e0e0e0;
 }
+
+.votes{
+	margin:5px;
+}
+
+.audio-options{
+	margin:5px 10px;
+	width:100px;
+}
+
+.text-block{
+	border-left:1px solid #eaeaea;
+	margin:5px;
+	padding:5px 10px;;
+}
+
+.response-tags{
+	padding:0px 10px;
+	border-bottom:1px solid #eaeaea;
+}
+
+.response-actions{
+	margin:5px;
+	width:50px;
+}
+
+.response-actions .btn{
+	margin:5px 0px;
+}

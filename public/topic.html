@@ -84,39 +84,39 @@
 					
 					<div class="rec-panel clearfix mt-5 pt-10 hidden">
 							
-							<form action="" method="post">
-								<div class="clearfix">
-									
-									<div class="controls pull-left">
-										<div class="clearfix">
-										<div class="control-feedback pull-left">
-											<!-- <span class="glyphicon glyphicon-bullhorn"></span> -->
-											<div class="countdown"></div>
-											<div class="info recording c hidden">Recording...</div>
-											<div class="info processing c hidden">Processing...</div>
-										</div>
-										<div class="rec-control btn btn-primary start-rec pull-right">
-											Start Recording
-										</div>
-										</div>
-										<div class="rec-details pull-right mt-10 mr-5 hidden">
-											<a href="" target="_blank" class="rec-link b">Listen</a>
-										</div>
+						<form action="" method="post">
+							<div class="clearfix">
+								
+								<div class="controls pull-left">
+									<div class="clearfix">
+									<div class="control-feedback pull-left">
+										<!-- <span class="glyphicon glyphicon-bullhorn"></span> -->
+										<div class="countdown"></div>
+										<div class="info recording c hidden">Recording...</div>
+										<div class="info processing c hidden">Processing...</div>
 									</div>
-									
-									<div class="rec-metadata ml-10 pull-left">
-										<textarea name="recTags" id="" cols="125" rows="3" placeholder="Example #tag1 #tag2 @username"></textarea>
-										<input type="hidden" class="response-id" name="responseId" />
+									<div class="rec-control btn btn-primary start-rec pull-right">
+										Start Recording
+									</div>
+									</div>
+									<div class="rec-details pull-right mt-10 mr-5 hidden">
+										<a href="" target="_blank" class="rec-link b">Listen</a>
 									</div>
 								</div>
 								
-								
-								<div class="final-actions clearfix pull-right hidden">
-									<div class="btn btn-success submit">Submit</div>
-									<div class="btn btn-warning cancel">Cancel</div>
+								<div class="rec-metadata ml-10 pull-left">
+									<textarea name="recTags" id="" cols="125" rows="3" placeholder="Example #tag1 #tag2 @username"></textarea>
+									<input type="hidden" class="response-id" name="responseId" />
 								</div>
-								
-							</form>
+							</div>
+							
+							
+							<div class="final-actions clearfix pull-right hidden">
+								<div class="btn btn-success submit">Submit</div>
+								<div class="btn btn-warning cancel">Cancel</div>
+							</div>
+							
+						</form>
 							
 					</div>
 						
@@ -133,6 +133,46 @@
 					</div>
 					
 					<div class="other-responses">
+						
+						<div class="audio-response response clearfix">
+		
+							<div class="votes pull-left">
+								<div><span>2</span><span class="vote-action up"> + </span></div>
+								<div><span>5</span><span class="vote-action down"> - </span></div>
+							</div>
+							
+							<div class="audio-options pull-left">
+								<div class="listen">Listen</div>
+								<div class="meta">
+									<div class="notification hidden"></div>
+									<div class="owner">Chris</div>
+									<div class="response-date"></div>
+								</div>
+							</div>
+						
+							<div class="text-block pull-left">
+								
+								<div class="response-tags">
+									<ul class="tag-list list-unstyled list-inline">
+										<li class="tag">tag1</li>
+										<li class="tag">tag2</li>
+										<li class="tag">tag3</li>
+									</ul>	
+								</div>
+								
+								<div class="supporting-text">
+									<div class="display-text"></div>
+									<textarea name="" id="" cols="30" rows="10" class="hidden"></textarea>
+								</div>
+								
+							</div>
+							
+							<div class="response-actions pull-right">
+								<div class="btn btn-warning">Edit</div>
+								<div class="btn btn-danger">Delete</div>
+							</div>
+							
+						</div>
 						
 					</div>
 					
@@ -197,30 +237,6 @@
 	<script type="text/template" id="_tmplTextResponse">
 			
 		<div class="response">
-		
-			<div class="stats hidden">
-				<span><%=response_details.up_count%></span><span> + </span>
-				<span><%=response_details.down_count%></span><span> - </span>
-			</div>
-		
-			<div class="response-text">
-				<%=response_details.response_text%>
-			</div>
-			
-			<ul class="tags list-unstyled list-inline">
-				<%_.each(response_details.tags, function(tagName, index, tags){%>
-					
-					<li class="tag"><%=tagName%></li>
-					
-				<%});%>
-			</ul>
-		</div>
-			
-	</script>
-	
-	<script type="text/template" id="_tmplAudioResponse">
-			
-		<div class="audio-response response">
 		
 			<div class="stats hidden">
 				<span><%=response_details.up_count%></span><span> + </span>
