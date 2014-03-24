@@ -108,3 +108,17 @@
 .project-members .header{
 	border-top:1px solid #dadada;
 }
+
+.main-text{
+	font-size:40px;
+	padding:0px 5px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+}
+
+.description{
+	font-size:20px;
+	padding:0px 5px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+}

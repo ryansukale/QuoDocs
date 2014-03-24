@@ -23,6 +23,8 @@
 	
 	<!-- Moving the utils stylesheet to the bottom -->
 	<link rel="stylesheet" href="css/utils.css">
+	
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
 		
 	<style>
 			body {
@@ -99,23 +101,31 @@
 				<div class="topic-details actionable pb-5" data-itemInfo="">
 				
 					<div class="status">
-						Showing conversation #Number in #project
+						<!--Showing conversation #Number in #project-->
 					</div>
 					
 					<div class="topic clearfix">
-						
-						
-						
+						<div>
+							<textarea name="mainText" class="main-text" id="" cols="45" rows="2"></textarea>
+						</div>
+						<div>
+							<textarea name="description" class="description" id="" cols="90" rows="10"></textarea>
+						</div>
+						<div>
+							<textarea name="topicTags" class="topic-tags" id="" cols="150" rows="1"></textarea>
+						</div>
+					</div>
+					
+					<div class="topic-actions mt-10 mb-10">
+						<div class="save btn btn-sm btn-success">Submit</div>
+						<div class="cancel btn btn-sm btn-danger">Cancel</div>
 					</div>
 					
 				</div>
 				
 			</div>
 			
-			
-			
 		</div>
-		
 		
   </div> 
 	<!-- /container -->
