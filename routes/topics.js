@@ -53,7 +53,7 @@ app.get('/topics/:topicId', function(req, res) {
 			}
 			
 			topics = JSON.parse(data);
-			console.log(topics);
+			//console.log(topics);
 			
 			var responsesFile = [rootDir,'data',userId,'responses.json'].join(path.sep);
 		
