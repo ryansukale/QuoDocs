@@ -79,8 +79,18 @@
 		<div class="row">
 			
 			<div class="col-md-2">
-				<div class="topic-meta"></div>
-				<div class="project-members"></div>
+				<div class="topic-meta">
+					<div class="header"></div>
+					<div class="body"></div>
+				</div>
+				<div class="project-members">
+					<div class="header">Team members</div>
+					<div class="body">
+						<ul class="member-list list-unstyled">
+							
+						</ul>
+					</div>
+				</div>
 				<div class="related-questions"></div>
 			</div>
 			
@@ -378,5 +388,10 @@
 		<%});%>
 	</script>
 	
+	<script type="text/template" id="_tmplMemberLI">
+		<%_.each(members, function(member, index, tags){%>
+			<li class="username"><%=username%></li>
+		<%});%>
+	</script>
 	
 </html>

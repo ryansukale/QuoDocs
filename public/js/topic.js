@@ -7,7 +7,8 @@ $(function(){
 		userInfo:'./userinfo',
 		saveTags:'./responses/tags/',
 		saveTagsForResponse:'./responses/tags',
-		responsesFor:'/responses'
+		responsesFor:'/responses',
+		membersForProject:'/projects/members'
 	},
 	rtcOptions = {
 		'buffer-size': 16384,
@@ -36,7 +37,8 @@ $(function(){
 		textResponse : _.template($('#_tmplTextResponse').html()),
 		audioResponse : _.template($('#_tmplAudioResponse').html()),
 		recPanelDefault : _.template($('#_tmplRecPanel_Default').html()),
-		responseTags : _.template($('#_tmplResponseTags').html())
+		responseTags : _.template($('#_tmplResponseTags').html()),
+		memberLI : _.template($('#_tmplMemberLI').html())
 	}
 	
 	function getParameterByName(name) {
@@ -105,6 +107,19 @@ $(function(){
 				
 			});
 	
+		//Fetch the userInfo
+		$.ajax(urls.membersForProject)
+			.done(function( data, textStatus, jqXHR ) {
+				pageData.projectMembers=data;
+				
+				var memberItems = [];
+				_.each(pageData.projectMembers, function(memberDetails, index, list){
+					memberItems.push(tmpl.memberLI(memberDetails));
+				});
+				
+				$('.member-list').append(memberItems.join(''));
+				
+			});
 		
 	}
 	
