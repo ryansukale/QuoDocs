@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="css/frameworks/bootstrap.min.css">
+	<link href="css/frameworks/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
+		
+	<!-- Sitewide common CSS stylesheet -->
+	<link rel="stylesheet" href="css/common.css">
+
+	<!-- CSS specific to this page -->
+	<link rel="stylesheet" href="css/newTopic.css">
+	<link rel="stylesheet" href="css/mainmenu.css">
+	
+	<!-- Moving the utils stylesheet to the bottom -->
+	<link rel="stylesheet" href="css/utils.css">
+		
+	<style>
+			body {
+					padding-bottom: 40px;
+			}
+	</style>
+		
+</head>
+<body>
+	<!--[if lt IE 7]>
+			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+	<![endif]-->
+
+	<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="./home.html" class="navbar-brand">QuoDocs</a>
+			</div>
+			<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="../getting-started">My Projects</a>
+					</li>
+					<li class="active">
+						<a href="../css">i</a>
+					</li>
+					<li>
+						<form role="form" action="/search">
+								<input type="search" class="form-control mt-10" id="searchMain" placeholder="Search	">
+						</form>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="mt-10">
+						<div class="total-points b mr-10"></div>
+						<div class="updated-points hidden b mr-10"></div>
+					</li>
+					<li><a href="" onclick="">Profile</a></li>
+					<li><a href="" onclick="">Sign Out</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	
+	
+  <div class="container">
+	
+		<div class="row">
+			
+			<div class="col-md-2">
+				<div class="topic-meta">
+					<div class="header"></div>
+					<div class="body"></div>
+				</div>
+				<div class="project-members">
+					<div class="header b mb-5 pt-5">Team members</div>
+					<div class="body">
+						<ul class="member-list list-unstyled">
+							
+						</ul>
+					</div>
+				</div>
+				<div class="related-questions"></div>
+			</div>
+			
+			<div class="col-md-10">
+				
+				<div class="topic-details actionable pb-5" data-itemInfo="">
+					<div class="status">
+						Showing conversation #Number in #project
+					</div>
+					
+					<div class="topic clearfix">
+						<!-- <div class="main-text">
+							Question/Topic Title Question/Topic Title Question/Topic Title Question/Topic Title 
+						</div>
+						<div class="topic-body">
+							Question/Topic Body Question/Topic Body Question/Topic Body Question/Topic Body Question/Topic Body Question/Topic Body Question/Topic Body Question/Topic Body Question/Topic Body Question/Topic Body 
+						</div>
+						<ul class="tags">
+							<li class="tag pull-left"><%=tag%></li>
+							<li class="tag pull-left"><%=tag%></li>
+							<li class="tag pull-left"><%=tag%></li>
+						</ul> -->
+					</div>
+					
+					<div class="actions-panel clearfix mt-10 pt-5">
+						<div class="action-prompts pull-left">
+							<div class="btn btn-primary record-prompt">Record Audio</div>
+							<div class="btn btn-primary draw-options">Draw Flowchart</div>
+							<div class="btn btn-primary write-options">Write</div>
+						</div>
+						
+						<div class="messages pull-left mt-2 ml-10">
+							<div class="prompt-first">
+								<span>Be the first to answer - 10 pts</span>
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="rec-panel clearfix mt-5 pt-10 hidden">
+							
+						<form action="" method="post">
+							<div class="clearfix">
+								
+								<div class="controls pull-left">
+									<div class="clearfix">
+									<div class="control-feedback pull-left">
+										<!-- <span class="glyphicon glyphicon-bullhorn"></span> -->
+										<div class="countdown"></div>
+										<div class="info recording c hidden">Recording...</div>
+										<div class="info processing c hidden">Processing...</div>
+									</div>
+									<div class="rec-control btn btn-primary start-rec pull-right">
+										Start Recording
+									</div>
+									</div>
+									<div class="rec-details pull-right mt-10 mr-5 hidden">
+										<a href="" target="_blank" class="rec-link b">Listen</a>
+									</div>
+								</div>
+								
+								<div class="rec-metadata ml-10 pull-left">
+									<textarea name="recTags" id="" cols="125" rows="3" placeholder="Example #tag1 #tag2 @username"></textarea>
+									<input type="hidden" class="response-id" name="responseId" />
+								</div>
+							</div>
+							
+							
+							<div class="final-actions clearfix pull-right hidden">
+								<div class="btn btn-success submit">Submit</div>
+								<div class="btn btn-warning cancel">Cancel</div>
+							</div>
+							
+						</form>
+							
+					</div>
+						
+					
+				</div>
+				
+				<div class="response-details">
+				
+					<div class="img-response">
+						<div class="hidden">
+							<span>Do you think a diagram would help?</span>
+							<span class="btn-btn-default">Draw One</span>
+						</div>
+					</div>
+					
+					<div class="other-responses">
+						
+						
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			
+			
+		</div>
+		
+		<div class="topic-meta">
+			
+		</div>
+		
+		<!-- <div class="">
+		
+			<div class="recording-control btn btn-primary btn-start-rec">
+				Start
+			</div>
+			
+			<a href="" target="_blank" class="rec-link hidden">Listen</a>
+		
+		</div> -->
+		
+  </div> 
+	<!-- /container -->
+
+</body>
+	
+	<script src="js/frameworks/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<!-- Unminified Scripts for Dev -->
+	
+	<script src="js/frameworks/jquery-1.9.1.min.js"></script>
+	<script src="js/frameworks/require.js"></script>
+	<script src="js/frameworks/vendor/bootstrap.js"></script>
+	<script src="js/frameworks/jquery-ui-1.10.0.custom.js"></script>
+	<script src="js/frameworks/json2.js"></script>
+	<script src="js/frameworks/underscore.js"></script>
+	<script src="js/frameworks/backbone.js"></script>
+
+	<!-- Script specific to this page -->
+	<script src="js/plugins/recordrtc.js"></script>
+	<script src="js/newTopic.js"></script>
+	<script src="js/mainmenu.js"></script>
+	<script src="js/plugins/jquery.elastic.source.js"></script>
+	<script src="js/plugins/triggeredAutocomplete.js"></script>
+	
+	<script type="text/template" id="_tmplTopic">
+			<div class="main-text">
+				<%=main_text%>
+			</div>
+			<div class="topic-body">
+				<%=description%>
+			</div>
+			<ul class="tags list-unstyled list-inline">
+				<%_.each(tags, function(tagName, index, tags){%>
+							
+					<li class="tag"><%=tagName%></li>
+					
+				<%});%>
+			</ul>
+	</script>
+	
+	<script type="text/template" id="_tmplTextResponse">
+			
+		<div class="response text-response mt-5 pt-5">
+		
+			<div class="stats hidden">
+				<span><%=response_details.up_count%></span><span> + </span>
+				<span><%=response_details.down_count%></span><span> - </span>
+			</div>
+		
+			<div class="response-text">
+				<%=response_details.response_text%>
+			</div>
+			
+			<ul class="tags list-unstyled list-inline">
+				<%_.each(response_details.tags, function(tagName, index, tags){%>
+					
+					<li class="tag"><%=tagName%></li>
+					
+				<%});%>
+			</ul>
+		</div>
+			
+	</script>
+	
+	<script type="text/template" id="_tmplAudioResponse">
+			
+		<div class="response audio-response clearfix mt-5 pt-5">
+	
+			<input type="hidden" name="responseId" value="<%=id%>"/>
+			
+			<div class="votes pull-left">
+				<div><span><%=response_details.up_count%></span><span class="vote-action up"> + </span></div>
+				<div><span><%=response_details.down_count%></span><span class="vote-action down"> - </span></div>
+			</div>
+			
+			<div class="audio-options pull-left">
+				<div class="listen"><a href="/audio/<%=response_details.file_name%>.wav" target="_blank">Listen</a></div>
+				<div class="meta">
+					<div class="notifications hidden">
+						<div class="new">New!</div>
+					</div>
+					<div class="hidden"><span>By: </span><span class="owner">Chris</span></div>
+					<div class="response-date hidden"></div>
+				</div>
+			</div>
+		
+			<div class="text-block pull-left">
+				
+				<div class="response-tags">
+				
+					<%if(tags.length===0){%>
+						
+						<div class="prompts">
+							<div class="add-tags"><a href="">Add tags</a> so that others can find this recording</div>
+						</div>
+						
+						<ul class="tag-list list-unstyled list-inline hidden">
+							<%_.each(tags, function(tagName, index, tags){%>
+								<li class="tag"><%=tagName%></li>
+							<%});%>
+						</ul>
+						
+					<%}else{%>
+						
+						<div class="prompts hidden">
+							<div class="add-tags hidden"><a href="#">Add tags</a> so that others can find this recording</div>
+						</div>
+						
+						<ul class="tag-list list-unstyled list-inline">
+							<%_.each(tags, function(tagName, index, tags){%>
+								<li class="tag"><%=tagName%></li>
+							<%});%>
+						</ul>
+						
+					<%}%>
+					
+					<textarea name="responseTags" class="hidden" id="" cols="100" rows="1"></textarea>
+					
+					<div class="tag-update-actions hidden mt-5">
+						<div class="save btn btn-xs btn-success">Save</div>
+						<div class="cancel btn btn-xs btn-danger">Cancel</div>
+					</div>
+					
+				</div>
+				
+				<div class="supporting-text">
+					<div class="display-text"></div>
+					<textarea name="" id="" cols="30" rows="10" class="hidden"></textarea>
+				</div>
+				
+			</div>
+			
+			<div class="response-actions pull-right">
+				<div class="edit btn btn-xs btn-warning">Edit</div>
+				<div class="delete btn btn-xs btn-danger">Delete</div>
+			</div>
+			
+		</div>
+		
+	
+	</script>
+	
+	<script type="text/template" id="_tmplRecPanel_Default">
+		<form action="" method="post">
+			<div class="clearfix">
+				
+				<div class="controls pull-left">
+					<div class="clearfix">
+					<div class="control-feedback pull-left">
+						<!-- <span class="glyphicon glyphicon-bullhorn"></span> -->
+						<div class="countdown"></div>
+						<div class="info recording c hidden">Recording...</div>
+						<div class="info processing c hidden">Processing...</div>
+					</div>
+					<div class="rec-control btn btn-primary start-rec pull-right">
+						Start Recording
+					</div>
+					</div>
+					<div class="rec-details pull-right mt-10 mr-5 hidden">
+						<a href="" target="_blank" class="rec-link b">Listen</a>
+					</div>
+				</div>
+				
+				<div class="rec-metadata ml-10 pull-left">
+					<textarea name="recTags" id="" cols="125" rows="3" placeholder="Example #tag1 #tag2 @username"></textarea>
+					<input type="hidden" class="response-id" name="responseId" />
+				</div>
+			</div>
+			
+			
+			<div class="final-actions clearfix pull-right hidden">
+				<div class="btn btn-success submit">Submit</div>
+				<div class="btn btn-warning cancel">Cancel</div>
+			</div>
+			
+		</form>
+	</script>
+	
+	<script type="text/template" id="_tmplResponseTags">
+		<%_.each(tags, function(tagName, index, tags){%>
+			<li class="tag"><%=tagName%></li>
+		<%});%>
+	</script>
+	
+	<script type="text/template" id="_tmplMemberLI">
+			<li class="username"><%=username%></li>
+	</script>
+	
+</html>

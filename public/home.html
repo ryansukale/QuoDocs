@@ -89,53 +89,39 @@
 						Showing All Conversations in Projects I Own
 					</div>
 					
-					<a class="btn btn-default inb pull-right new-topic" href="./topic.html">
+					<div class="btn btn-default inb pull-right new-topic">
 						+ New Topic
-					</a>
+					</div>
+					
+					<button class="hidden launch-project-selector" data-toggle="modal" data-target="#projectSelectorModal">
+						ProjectSelector
+					</button>
 					
 				</div>
 				
 				<div class="convo-list">
 					<ul class="list-unstyled">
-						<!-- <li class="convo-details clearfix">
-								<div class="convo-main">
-									<div class="inb conversation-title">
-										<a href="./topic/?id=1">Question Title</a>
-									</div>
-									<div class="inb pull-right">
-										Project Name
-									</div>
-								</div>
-								<div class="convo-tags">
-									<ul class="list-unstyled">
-										<li class="tag pull-left">tagName</li>
-										<li class="tag pull-left">@tagName</li>
-										<li class="tag pull-left">tagName</li>
-										<li class="tag pull-left">@tagName</li>
-									</ul>
-								</div>
-						</li>
-						
-						<li class="convo-details clearfix">
-								<div class="convo-main">
-									<div class="inb conversation-title">
-										<a href="./topic/?id=1">Question Title</a>
-									</div>
-									<div class="inb pull-right">
-										Project Name
-									</div>
-								</div>
-								<div class="convo-tags">
-									<ul class="list-unstyled">
-										<li class="tag pull-left">tagName</li>
-										<li class="tag pull-left">@tagName</li>
-										<li class="tag pull-left">tagName</li>
-										<li class="tag pull-left">@tagName</li>
-									</ul>
-								</div>
-						</li>
-						 -->
 					</ul>
+				</div>
+				
+				<div class="modal fade" id="projectSelectorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Select a project</h4>
+							</div>
+							<div class="modal-body">
+								<ul class="project-list-selection list-unstyled">
+									
+								</ul>
+							</div>
+							<div class="modal-footer">
+								
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
 				</div>
 				
 			</div>
@@ -168,7 +154,7 @@
 				<div class="inb">
 					<%=name%>
 				</div>
-				<div class="inb forkStatus">
+				<div class="inb forkStatus hidden">
 					<%=fork%>
 				</div>
 			</a>
@@ -198,6 +184,19 @@
 				</ul>
 			</div>
 	</li>
+	</script>
+	
+	<script type="text/template" id="_tmplProjectSelectorLI">
+		<li class="repo-details mt-4 mb-3" data-projectid="<%=id%>">
+			<a href="#" class="repo_<%=id%>">
+				<div class="inb">
+					<%=name%>
+				</div>
+				<div class="inb forkStatus hidden">
+					<%=fork%>
+				</div>
+			</a>
+		</li>
 	</script>
 	
 </html>
