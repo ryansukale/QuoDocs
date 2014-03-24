@@ -108,7 +108,7 @@ app.post('/responses/upload', function(req, res) {
 						"tags":[]
 					};
 					
-					console.log(topicResponse);
+					//console.log(topicResponse);
 					//Add the response to the list of responses
 					dynamicResponses.unshift(topicResponse);
 					

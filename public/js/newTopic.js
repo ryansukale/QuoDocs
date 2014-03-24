@@ -92,7 +92,7 @@ $(function(){
 						pageData.mentionsData.push(member.username);
 					});
 					
-					$('textarea[name="responseTags"]').triggeredAutocomplete({
+					$('.topic-tags').triggeredAutocomplete({
 						hidden: '#hidden_inputbox',
 						source: pageData.mentionsData,
 							 trigger: "@" ,
@@ -193,7 +193,7 @@ $(function(){
 							.removeClass('hidden');
 						
 						//Clear the textarea				
-						$responseItem.find('textarea[name="responseTags"]')
+						$responseItem.find('.topic-tags')
 							.val('')
 							.addClass('hidden');
 						
@@ -214,7 +214,7 @@ $(function(){
 		
 		//console.log(pageData.mentionsData);
 		if(pageData.mentionsData){
-			$responseItem.find('textarea[name="responseTags"]').triggeredAutocomplete({
+			$responseItem.find('.topic-tags').triggeredAutocomplete({
 				hidden: '#hidden_inputbox',
 				source: pageData.mentionsData,
 					 trigger: "@" ,
