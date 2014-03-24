@@ -17,7 +17,7 @@ app.post('/responses/upload', function(req, res) {
 	
 	var form = new multiparty.Form();
 	
-	var userId = req.session.userInfo;
+	var userInfo = req.session.userInfo;
 	
 	form.parse(req, function(err, fields, files) {
 		if (err) {
@@ -69,6 +69,13 @@ app.post('/responses/upload', function(req, res) {
 					var userId = ''+env.DEMOUSERID || 100;
 					var dynamicDir = env.DYNAMIC_RESP_DIR;
 					
+					var userInfoFilePath = [rootDir,'data',userId,'user.json'].join(path.sep);
+	
+					if(!userInfo){
+						var userInfo = JSON.parse(fs.readFileSync(userInfoFilePath));
+						req.session.userInfo = userInfo;
+					}
+	
 					var responsesFilePath = [rootDir,'data',userId,dynamicDir,'responses.json'].join(path.sep);
 					
 					var dynamicResponses = [];
@@ -125,6 +132,9 @@ app.post('/responses/upload', function(req, res) {
 						}
 					});
 					
+					userInfo.points += pointDetails.totalPoints;
+					fs.writeFileSync(userInfoFilePath, JSON.stringify(userInfo));
+					
 					console.log(pointDetails);
 					
 					respObject.responseDtls = topicResponse;
@@ -149,7 +159,7 @@ app.post('/responses/upload', function(req, res) {
 //Returns all the responses for a given topic
 app.get('/responses/:topicId', function(req, res) {
 
-	console.log('Request' + req.url);
+	console.log(req.method + ':' + req.url);
 	
 	var uri = url.parse(req.url);
 	var returnObj = {};
@@ -157,6 +167,7 @@ app.get('/responses/:topicId', function(req, res) {
 	var userId = req.session.userInfo;
 	
 	var topicId = req.params.topicId;
+	console.log(topicId);
 	
 	if(uri.hostname===null){
 				
@@ -177,7 +188,7 @@ app.get('/responses/:topicId', function(req, res) {
 		}
 		
 		var allResponses = dynamicResponses.concat(staticResponses);
-		var topicResponses = _.where(allResponses, {"topic_id": topicId})
+		var topicResponses = _.where(allResponses, {"topic_id": topicId});
 		
 		returnObj = {
 			count:topicResponses.length,
