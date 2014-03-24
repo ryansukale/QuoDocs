@@ -71,13 +71,13 @@ app.post('/responses/upload', function(req, res) {
 					
 					var responsesFilePath = [rootDir,'data',userId,dynamicDir,'responses.json'].join(path.sep);
 					
-					var allResponseDtls = [];
+					var dynamicResponses = [];
 					
 					if (fs.existsSync(responsesFilePath)) {
 							
 							console.log('file Exists');
 							var fileContents = fs.readFileSync(responsesFilePath);	//Read the responses from that file
-							allResponseDtls = JSON.parse(fileContents);
+							dynamicResponses = JSON.parse(fileContents);
 							
 					}else{
 						console.log('file does not exist');
@@ -103,10 +103,29 @@ app.post('/responses/upload', function(req, res) {
 					
 					console.log(topicResponse);
 					//Add the response to the list of responses
-					allResponseDtls.unshift(topicResponse);
+					dynamicResponses.unshift(topicResponse);
 					
 					//Write the responses to dynamic responses file
-					fs.writeFileSync(responsesFilePath, JSON.stringify(allResponseDtls));
+					fs.writeFileSync(responsesFilePath, JSON.stringify(dynamicResponses));
+					
+					var staticResponsesFilePath = [rootDir,'data',userId,'responses.json'].join(path.sep);
+					var staticResponses = JSON.parse(fs.readFileSync(staticResponsesFilePath));
+					
+					var totalResponses = dynamicResponses.concat(staticResponses);
+					
+					var topicResponses = _.where(totalResponses, {"topic_id": itemId})
+					
+					
+					var pointDetails = utils.grantPoints({
+						userId : userId,
+						type : 'response-audio',
+						details : {
+							allResponses:topicResponses,
+							currentResponse:topicResponse
+						}
+					});
+					
+					console.log(pointDetails);
 					
 					respObject.responseDtls = topicResponse;
 					
