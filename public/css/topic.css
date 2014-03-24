@@ -104,3 +104,7 @@
 .response-tags .prompts .add-tags{
 	color:#b0b0b0;
 }
+
+.project-members .header{
+	border-top:1px solid #dadada;
+}
