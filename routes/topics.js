@@ -34,8 +34,10 @@ app.get('/topics', function(req, res) {
 //Get the details for a topic
 app.get('/topics/:topicId', function(req, res) {
 	
+	console.log(req.method+':' + req.url);
+	
 	var uri = url.parse(req.url);
-	var topicId = +(req.params.topicId);
+	var topicId = req.params.topicId;
 	
 	var returnObj = {};
 	
@@ -51,7 +53,7 @@ app.get('/topics/:topicId', function(req, res) {
 			}
 			
 			topics = JSON.parse(data);
-			//console.log(topics);
+			console.log(topics);
 			
 			var responsesFile = [rootDir,'data',userId,'responses.json'].join(path.sep);
 		

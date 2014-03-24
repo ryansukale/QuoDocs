@@ -72,6 +72,7 @@ $(function(){
 					.attr('data-itemInfo',JSON.stringify(itemInfo));
 					
 				bindRecordControls();
+				getProjectMembers();
 				
 			});
 	
@@ -107,19 +108,23 @@ $(function(){
 				
 			});
 	
-		//Fetch the userInfo
-		$.ajax(urls.membersForProject)
-			.done(function( data, textStatus, jqXHR ) {
-				pageData.projectMembers=data;
-				
-				var memberItems = [];
-				_.each(pageData.projectMembers, function(memberDetails, index, list){
-					memberItems.push(tmpl.memberLI(memberDetails));
+		function getProjectMembers(){
+			
+			var projectId = pageData.topicInfo.project_id;
+			
+			$.ajax([urls.membersForProject,projectId].join('/'))
+				.done(function( data, textStatus, jqXHR ) {
+					pageData.projectMembers=data.members;
+					
+					var memberItems = [];
+					_.each(pageData.projectMembers, function(memberDetails, index, list){
+						memberItems.push(tmpl.memberLI(memberDetails));
+					});
+					
+					$('.member-list').append(memberItems.join(''));
+					
 				});
-				
-				$('.member-list').append(memberItems.join(''));
-				
-			});
+		};
 		
 	}
 	
