@@ -4,7 +4,7 @@ $(function(){
 		uploads:'./responses/upload',
 		topicsDetailsFor:'/topics',
 		recordings:'recordings',
-		userInfo:'./userinfo',
+		userInfo:'/userinfo',
 		saveTags:'./responses/tags/',
 		saveTagsForResponse:'./responses/tags',
 		responsesFor:'/responses',
@@ -25,12 +25,33 @@ $(function(){
 	intervalId  = '';
 	
 	//Fetch the userInfo
+	
 	$.ajax(urls.userInfo)
 		.done(function( data, textStatus, jqXHR ) {
 			userInfo=data;
 			pageData.userInfo=data;
 			//console.log('userInfo',userInfo);
 		});
+	
+	function updateUserInfo(){
+		$.ajax(urls.userInfo)
+			.done(function( data, textStatus, jqXHR ) {
+				pageData.userInfo=data;
+				console.log(pageData.userInfo);
+				$('.navbar .total-points').html(pageData.userInfo.points).addClass('hidden');
+				$('.navbar .updated-points').html(pageData.userInfo.points).removeClass('hidden');
+				
+				$('.navbar .updated-points').animate({
+					opacity:0
+				},
+				6000,
+				function(){
+					$(this).addClass('hidden').css({opacity:1});
+					$('.navbar .total-points').removeClass('hidden');
+				});
+				
+			});
+	}
 	
 	var tmpl = {
 		topic : _.template($('#_tmplTopic').html()),
@@ -104,6 +125,9 @@ $(function(){
 					bindResponseHandlers(responseItem);
 				});
 				
+				if(pageData.responses.length>0){
+					$('.topic-details .messages .prompt-first').addClass('hidden');
+				}
 				//bindHandlers();
 				
 			});
@@ -427,7 +451,7 @@ $(function(){
 								
 								//Reset the recording panel to its original state
 								resetRecPanel();
-								
+								updateUserInfo();
 								//Toggle height/close the rec panel
 								
 						});

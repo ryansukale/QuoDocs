@@ -11,7 +11,8 @@ $(function (){
 			pageData.userInfo=data;
 			
 			//Update the points in the main menu block
-			$('.navbar .totalPoints').html(pageData.userInfo.points);
+			$('.navbar .total-points').html(pageData.userInfo.points);
+			$('.navbar .updated-points').html(pageData.userInfo.points);
 			
 		});
 	
