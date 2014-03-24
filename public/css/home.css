@@ -43,3 +43,10 @@ a{
 .convo-details{
 	border-bottom:1px solid #eaeaea;
 }
+
+.tag.highlighted-tag{
+	background-color:rgb(250, 136, 136);
+	color:white;
+	padding:2px 5px;
+	font-weight:bold;
+}
