@@ -74,7 +74,7 @@
 		<div class="row">
 			<div class="col-md-3">
 				<div class="repo-search pb-10">
-					<input type="text" class="repo-list-filter form-control" />
+					<input type="text" class="repo-list-filter form-control" placeholder="Filter by title"/>
 				</div>
 				<div class="repo-list">
 					<ul class="list-unstyled">
@@ -151,7 +151,7 @@
 	<script type="text/template" id="_tmplRepoLI">
 		<li class="repo-details" data-projectid="<%=id%>">
 			<a href="#" class="repo_<%=id%>">
-				<div class="inb">
+				<div class="inb project-name">
 					<%=name%>
 				</div>
 				<div class="inb forkStatus hidden">

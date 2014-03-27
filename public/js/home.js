@@ -1,5 +1,14 @@
 $(function(){
 
+	if (!String.prototype.trim) {
+  
+		String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
+		String.prototype.ltrim=function(){return this.replace(/^\s+/,'');};
+		String.prototype.rtrim=function(){return this.replace(/\s+$/,'');};
+		String.prototype.fulltrim=function(){return this.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');};
+		
+	}
+
 	var urls = {
 		allRepos : '/projects',
 		parentRepos : '/getParentRepos',
@@ -157,6 +166,30 @@ $(function(){
 				window.location = 'newTopic.html?projectId='+pageData.selectedProjectId;
 			}else{
 				$('.launch-project-selector').trigger('click');
+			}
+			
+		});
+		
+		$('.repo-list-filter').on('keyup',function(e){
+			var $this = $(this);
+			var value = $this.val();
+			console.log(e.which);
+			console.log(value);
+			if(!value || value.trim==='' || value===null){
+				//Show the entire project list
+				$('.repo-list .repo-details').removeClass('hidden');
+			}else{
+				//filter the project list
+				_.each($('.repo-list .repo-details .project-name'),function(element, index, list){
+					var $element = $(element);
+					$element.parents('.repo-details').addClass('hidden');
+					var projectName = $element.text();
+					if(projectName.toLowerCase().indexOf(value.toLowerCase())>-1){
+						$element.parents('.repo-details').removeClass('hidden');
+					}else{
+					}
+				});
+				
 			}
 			
 		});
