@@ -47,7 +47,8 @@
 
 .messages .prompt-first{
     padding: 5px 10px;
-    background-color: #eaeaea;
+    /*background-color: #eaeaea;*/
+		margin-bottom: 0px;
     padding: 1;
 }
 
