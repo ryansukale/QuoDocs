@@ -108,3 +108,9 @@
 .project-members .header{
 	border-top:1px solid #dadada;
 }
+
+textarea{
+	border-radius: 3px;
+	border-color: #cacaca;
+	padding-left:5px;
+}
