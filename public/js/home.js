@@ -4,7 +4,8 @@ $(function(){
 		allRepos : '/projects',
 		parentRepos : '/getParentRepos',
 		userInfo : '/userinfo',
-		topics : '/topics'
+		topics : '/topics',
+		topicsWhere : '/topics/criteria'
 	};
 	
 	var tmpl = {
@@ -28,7 +29,9 @@ $(function(){
 	
 	getUserInfo();
 	
-	var selectedProjectId='';
+	var pageData = {
+		selectedProjectId:''
+	};
 		
 	function init(){
 	
@@ -52,8 +55,17 @@ $(function(){
 					bindProjectSelection(element);
 				});
 				
+				_.each($('.repo-list .repo-details'),function(element, index, list){
+					bindProjectListListeners(element);
+				});
+				
 			});
 			
+			getTopics();
+
+	}
+	
+	function getTopics(){
 		$.ajax(urls.topics)
 			.done(function( data, textStatus, jqXHR ) {
 				//console.log(data);
@@ -73,7 +85,6 @@ $(function(){
 				}
 				
 			});
-
 	}
 	
 	function highlightMyTags(userInfo){
@@ -85,6 +96,23 @@ $(function(){
 		});
 	}
 	
+	function bindProjectListListeners(element){
+		
+		var $project = $(element);
+		
+		$project.on('click',function(element, index, value){
+			var projectId = $project.data('projectid');
+			pageData.selectedProjectId = projectId;
+			
+			var criteria = {
+				projectId : pageData.selectedProjectId
+			};
+			filterTopicStream(criteria);
+			
+		});
+		
+	}
+	
 	function bindProjectSelection(selector){
 		var $element = $(selector);
 		$element.on('click',function(e){
@@ -93,12 +121,37 @@ $(function(){
 		})
 	}
 	
+	function filterTopicStream(criteria){
+	
+		//In the real sytems make an ajax call using the criteria
+		//and render the stream.
+		//$.ajax(urls.topicsWhere, {data:criteria});
+			
+		if(criteria.projectId){
+			
+			//For now, just filter the stream
+			_.each($('.convo-list .convo-details'),function(element, index, list){
+				var $element = $(element);
+				if($element.data('projectid')!==criteria.projectId){
+					$element.addClass('hidden');
+				}else{
+					$element.removeClass('hidden');
+				}
+			});
+			
+			//if no topics are visible, display the filler prompt
+			
+		}else{
+			//Render the entire stream
+		}
+	}
+	
 	function bindEventHandlers(){
 		
 		$('.new-topic').on('click',function(e){
 			
-			if(selectedProjectId){
-				window.location = 'newTopic.html?projectId='+selectedProjectId;
+			if(pageData.selectedProjectId){
+				window.location = 'newTopic.html?projectId='+pageData.selectedProjectId;
 			}else{
 				$('.launch-project-selector').trigger('click');
 			}

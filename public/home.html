@@ -149,7 +149,7 @@
 	<link rel="stylesheet" href="css/home.css">
 	
 	<script type="text/template" id="_tmplRepoLI">
-		<li class="repo-details">
+		<li class="repo-details" data-projectid="<%=id%>">
 			<a href="#" class="repo_<%=id%>">
 				<div class="inb">
 					<%=name%>
@@ -163,7 +163,7 @@
 	
 	
 	<script type="text/template" id="_tmplConvoLI">
-		<li class="convo-details mt-10 mb-10 pb-10 clearfix">
+		<li class="convo-details mt-10 mb-10 pb-10 clearfix" data-projectid="<%=project_id%>">
 			<div class="convo-main">
 				<div class="inb conversation-title b">
 					<a href="topic.html?id=<%=id%>">	<%=main_text%></a>
