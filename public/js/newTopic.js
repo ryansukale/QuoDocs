@@ -219,9 +219,9 @@ $(function(){
 					tags:correctedTagsArr
 				}
 			})
-			.done(function(data){
+			.done(function(newTopic){
 			
-				console.log(data);
+				window.location = 'http://localhost:5000/topic.html?id='+newTopic.id;
 					
 			});
 			

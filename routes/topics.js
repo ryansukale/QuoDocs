@@ -37,7 +37,7 @@ app.get('/topics', function(req, res) {
 		
 	}
 	else{
-		
+		res.json(returnObj);
 	}
 	
 });
@@ -54,35 +54,31 @@ app.get('/topics/:topicId', function(req, res) {
 	
 	if(uri.hostname===null){
 	
-		var userId = env.DEMOUSERID;
+		var userId = ''+env.DEMOUSERID || 100;		
+		var dynamicDir = env.DYNAMIC_RESP_DIR;
+		
+		var staticTopicsFilePath = [rootDir,'data',userId,'topics.json'].join(path.sep);
+		var dynamicTopicsFilePath = [rootDir,'data',userId,dynamicDir,'topics.json'].join(path.sep);
+		
+		var staticTopics = JSON.parse(fs.readFileSync(staticTopicsFilePath));
+		var dynamicTopics = [];
+		
+		if (fs.existsSync(dynamicTopicsFilePath)) {
+			console.log('Dynamic topics exist');
+			dynamicTopics = JSON.parse(fs.readFileSync(dynamicTopicsFilePath));
+			console.log('dynamicTopics:',dynamicTopics);
+		}else{
+			console.log('No dynamic topics found ');
+		}
+		
 		var topicsFile = [rootDir,'data',userId,'topics.json'].join(path.sep);
 		
-		fs.readFile(topicsFile, 'utf8', function (err, data) {
+		var allTopics = dynamicTopics.concat(staticTopics);
 		
-			if (err) {
-				console.log('Error: reading file' + topicsFile);return {};
-			}
-			
-			topics = JSON.parse(data);
-			//console.log(topics);
-			
-			var responsesFile = [rootDir,'data',userId,'responses.json'].join(path.sep);
-		
-			fs.readFile(responsesFile, 'utf8', function (err, data) {
-			
-				if (err) {
-					console.log('Error: reading file' + responsesFile);return {};
-				}
+		returnObj = _.findWhere(allTopics, {id: topicId});
+		//returnObj = allTopics;
 				
-				responses = JSON.parse(data);
-				
-				returnObj = _.findWhere(topics, {id: topicId});
-				
-				res.json(returnObj);
-				
-			});
-			
-		});
+		res.json(returnObj);
 		
 	}
 	else{
@@ -134,16 +130,16 @@ app.post('/topics', function(req, res) {
 		
 		var newTopic = {
 			"id":topicId,
-			"repo_id":projectId,
+			"project_id":projectId,
 			"owner_id":userId,
-			"main_text" : mainText,
-			"main_description" : description,
+			"main_text" : mainText || '',
+			"description" : description||'',
 			"up_count" : "0",
 			"down_count" : "0",
 			"is_anwered" : "0",
 			"answer_count" : "0",
 			"posted_on" : "10/03/2014",
-			"tags": tags
+			"tags": tags||[]
 		}
 		
 		dynamicTopics.unshift(newTopic);
