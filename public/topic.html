@@ -250,24 +250,65 @@
 	
 	<script type="text/template" id="_tmplTextResponse">
 			
-		<div class="response text-response mt-5 pt-5">
+		<div class="response text-response mt-5 pt-5 clearfix">
 		
-			<div class="stats hidden">
-				<span><%=response_details.up_count%></span><span> + </span>
-				<span><%=response_details.down_count%></span><span> - </span>
-			</div>
-		
-			<div class="response-text">
-				<%=response_details.response_text%>
+			<input type="hidden" name="responseId" value="<%=id%>"/>
+			
+			<div class="votes pull-left">
+				<div><span><%=response_details.up_count%></span><span class="vote-action up"> + </span></div>
+				<div><span><%=response_details.down_count%></span><span class="vote-action down"> - </span></div>
 			</div>
 			
-			<ul class="tags list-unstyled list-inline">
-				<%_.each(response_details.tags, function(tagName, index, tags){%>
+			
+			
+			<div class="text-block pull-left ml-10">
+				<div class="response-text">
+					<%=response_details.response_text%>
+				</div>
+				
+				<div class="response-tags">
 					
-					<li class="tag"><%=tagName%></li>
-					
-				<%});%>
-			</ul>
+						<%if(response_details.tags.length===0){%>
+							
+							<div class="prompts">
+								<div class="add-tags"><a href="">Add tags</a> so that others can find this recording</div>
+							</div>
+							
+							<ul class="tag-list list-unstyled list-inline hidden">
+								<%_.each(response_details.tags, function(tagName, index, tags){%>
+									<li class="tag"><%=tagName%></li>
+								<%});%>
+							</ul>
+							
+						<%}else{%>
+							
+							<div class="prompts hidden">
+								<div class="add-tags hidden"><a href="#">Add tags</a> so that others can find this recording</div>
+							</div>
+							
+							<ul class="tag-list list-unstyled list-inline">
+								<%_.each(response_details.tags, function(tagName, index, tags){%>
+									<li class="tag"><%=tagName%></li>
+								<%});%>
+							</ul>
+							
+						<%}%>
+						
+						<textarea name="responseTags" class="hidden" id="" cols="100" rows="1"></textarea>
+						
+						<div class="tag-update-actions hidden mt-5">
+							<div class="save btn btn-xs btn-success">Save</div>
+							<div class="cancel btn btn-xs btn-danger">Cancel</div>
+						</div>
+						
+					</div>
+				</div>	
+			
+			<div class="response-actions pull-right">
+				<div class="edit btn btn-xs btn-warning">Edit</div>
+				<div class="delete btn btn-xs btn-danger">Delete</div>
+			</div>
+
 		</div>
 			
 	</script>
