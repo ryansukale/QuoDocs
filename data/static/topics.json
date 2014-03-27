@@ -3,12 +3,10 @@
 		"id":"1",
 		"repo_id":"1",
 		"owner_id":"100",
-		"name":"Sample Project 1",
 		"main_text" : "Sample Question title  1",
 		"main_description" : "Sample question description",
 		"up_count" : "9",
 		"down_count" : "2",
-		"owner_id" : "100",
 		"is_anwered" : "0",
 		"answer_count" : "0",
 		"posted_on" : "10/03/2014",
@@ -23,7 +21,23 @@
 		"id":"2",
 		"repo_id":"2",
 		"owner_id":"100",
-		"name":"Sample Project 2",
+		"main_text" : "Sample Question title 2",
+		"main_description" : "Sample question description 2",
+		"up_count" : "9",
+		"down_count" : "2",
+		"is_anwered" : "0",
+		"answer_count" : "0",
+		"posted_on" : "10/03/2014",
+		"tags": [
+			"#tag12",
+			"@person3",
+			"@person4",
+			"#tag5"
+		]
+	},
+	{
+		"id":"2",
+		"repo_id":"2",
 		"main_text" : "Sample Question title 2",
 		"main_description" : "Sample question description 2",
 		"up_count" : "9",
@@ -42,7 +56,6 @@
 	{
 		"id":"2",
 		"repo_id":"2",
-		"name":"Sample Project 2",
 		"main_text" : "Sample Question title 2",
 		"main_description" : "Sample question description 2",
 		"up_count" : "9",
@@ -61,26 +74,6 @@
 	{
 		"id":"2",
 		"repo_id":"2",
-		"name":"Sample Project 2",
-		"main_text" : "Sample Question title 2",
-		"main_description" : "Sample question description 2",
-		"up_count" : "9",
-		"down_count" : "2",
-		"owner_id" : "100",
-		"is_anwered" : "0",
-		"answer_count" : "0",
-		"posted_on" : "10/03/2014",
-		"tags": [
-			"#tag12",
-			"@person3",
-			"@person4",
-			"#tag5"
-		]
-	},
-	{
-		"id":"2",
-		"repo_id":"2",
-		"name":"Sample Project 2",
 		"main_text" : "Sample Question title 2",
 		"main_description" : "Sample question description 2",
 		"up_count" : "9",

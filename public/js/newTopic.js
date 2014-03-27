@@ -1,13 +1,8 @@
 $(function(){
 	
 	var urls={
-		uploads:'./responses/upload',
-		topicsDetailsFor:'/topics',
-		recordings:'recordings',
+		createTopic:'/topics',
 		userInfo:'/userinfo',
-		saveTags:'./responses/tags/',
-		saveTagsForResponse:'./responses/tags',
-		responsesFor:'/responses',
 		membersForProject:'/projects/members'
 	},
 	rtcOptions = {
@@ -54,11 +49,6 @@ $(function(){
 	}
 	
 	var tmpl = {
-		topic : _.template($('#_tmplTopic').html()),
-		textResponse : _.template($('#_tmplTextResponse').html()),
-		audioResponse : _.template($('#_tmplAudioResponse').html()),
-		recPanelDefault : _.template($('#_tmplRecPanel_Default').html()),
-		responseTags : _.template($('#_tmplResponseTags').html()),
 		memberLI : _.template($('#_tmplMemberLI').html())
 	}
 	
@@ -169,41 +159,6 @@ $(function(){
 					.addClass('hidden');
 				
 			}else{
-				if($target.hasClass('save')){
-					var rawTagString = $responseItem.find('textarea[name="responseTags"]').val();
-					
-					var correctedTagsArr = getPrefixedTagArr(rawTagString);
-					
-					console.log(correctedTagsArr);
-					
-					$.ajax({
-						url:[urls.saveTagsForResponse,responseId].join('/'),
-						type:'POST',
-						data:{
-							tags:correctedTagsArr
-						}
-					})
-					.done(function(data){
-					
-						var currentResponse = _.findWhere(pageData.responses, {"id": responseId});
-						currentResponse.tags = data.tags;
-						
-						var tagListItems = tmpl.responseTags({tags:currentResponse.tags});
-						$responseItem.find('.tag-list').html(tagListItems)
-							.removeClass('hidden');
-						
-						//Clear the textarea				
-						$responseItem.find('.topic-tags')
-							.val('')
-							.addClass('hidden');
-						
-						//Hide the tag update actions
-						$responseItem.find('.tag-update-actions')
-							.addClass('hidden');
-							
-					});
-					
-				}
 			}
 			
 		});
@@ -248,8 +203,33 @@ $(function(){
 	
 	function bindHandlers(){
 	
+		$('.submit').on('click',function(){
+		
+			var rawTagString =$('textarea[name="topicTags"]').val();
+			
+			var correctedTagsArr = getPrefixedTagArr(rawTagString);
+			
+			$.ajax({
+				url:[urls.createTopic],
+				type:'POST',
+				data:{
+					projectId:projectId,
+					mainText:$('.main-text').val(),
+					description:$('.description').val(),
+					tags:correctedTagsArr
+				}
+			})
+			.done(function(data){
+			
+				console.log(data);
+					
+			});
+			
+		});
 		//bindRecordControls();
 		
 	}
+	
+	bindHandlers();
 	
 });

@@ -1,28 +1,39 @@
 var github = require('octonode'),
 	url = require('url'),
 	fs = require('fs'),
+	randomstring = require("randomstring"),
 	_ = require('underscore');
 	
 app.get('/topics', function(req, res) {
 	
+	console.log(req.method+':' + req.url);
 	var uri = url.parse(req.url);
+	
+	var returnObj = {};
 	
 	if(uri.hostname===null){
 	
-		var userId = env.DEMOUSERID;
-		var file = [rootDir,'data',userId,'topics.json'].join(path.sep);
+		var userId = ''+env.DEMOUSERID || 100;
+		var dynamicDir = env.DYNAMIC_RESP_DIR;
 		
-		fs.readFile(file, 'utf8', function (err, data) {
+		var staticTopicsFilePath = [rootDir,'data',userId,'topics.json'].join(path.sep);
+		var dynamicTopicsFilePath = [rootDir,'data',userId,dynamicDir,'topics.json'].join(path.sep);
 		
-			if (err) {
-				console.log('Error: reading file' + file);
-				return {};
-			}
-			
-			topics = JSON.parse(data);
-			res.json(topics);
-			
-		});
+		var staticTopics = JSON.parse(fs.readFileSync(staticTopicsFilePath));
+		var dynamicTopics = [];
+		
+		if (fs.existsSync(dynamicTopicsFilePath)) {
+			console.log('Dynamic topics exist');
+			dynamicTopics = JSON.parse(fs.readFileSync(dynamicTopicsFilePath));
+		}else{
+			console.log('No dynamic topics found ');
+		}
+		
+		var allTopics = dynamicTopics.concat(staticTopics);
+		
+		returnObj = allTopics;
+		
+		res.json(returnObj);
 		
 	}
 	else{
@@ -82,70 +93,69 @@ app.get('/topics/:topicId', function(req, res) {
 
 
 //Update the tags for a response
-//app.post('/topics', function(req, res) {
-//	
-//	console.log(req.method+':' + req.url);
-//	
-//	var uri = url.parse(req.url);
-//	var returnObj = {};
-//	
-//	var responseId = req.params.responseId;
-//	
-//	var mainText = req.body.mainText,
-//		description = req.body.description;
-//		tags = req.body.tags;
-//	
-//	if(uri.hostname===null){
-//		
-//		var userId = ''+env.DEMOUSERID || 100;
-//		var dynamicDir = env.DYNAMIC_RESP_DIR;
-//		
-//		var userInfoFilePath = [rootDir,'data',userId,'user.json'].join(path.sep);
-//	
-//		if(!userInfo){
-//			var userInfo = JSON.parse(fs.readFileSync(userInfoFilePath));
-//			req.session.userInfo = userInfo;
-//		}
-//		
-//		var staticTopicsFilePath = [rootDir,'data',userId,'topics.json'].join(path.sep);
-//		var dynamicTopicsFilePath = [rootDir,'data',userId,dynamicDir,'topics.json'].join(path.sep);
-//		
-//		var staticTopics = JSON.parse(fs.readFileSync(staticTopicsFilePath));
-//		var dynamicTopics = [];
-//		
-//		if (fs.existsSync(dynamicTopicsFilePath)) {
-//			console.log('Dynamic responses exist');
-//			dynamicTopics = JSON.parse(fs.readFileSync(dynamicTopicsFilePath));
-//		}else{
-//			console.log('No dynamic responses found for user:'+userId);
-//		}
-//		
-//		var topicId = randomstring.generate();
-//		
-//		var newTopic = {
-//			"id":topicId,
-//			"topic_id":itemId,
-//			"user_id":userId,
-//			"type" : "audio",
-//			"response_details":{
-//				"file_name":fileName,
-//				"posted_on" : "mm/dd/yyyy",
-//				"up_count":0,
-//				"down_count":0
-//			},
-//			"tags":tags
-//		};
-//		
-//		dynamicTopics.unshift(newTopic);
-//		
-//		fs.writeFileSync(dynamicTopicsFilePath, JSON.stringify(dynamicTopics));
-//		
-//		res.json(newTopic);
-//		
-//	}else{
-//	
-//		res.json(returnObj);
-//		
-//	}
-//	
-//});
+app.post('/topics', function(req, res) {
+	
+	console.log(req.method+':' + req.url);
+	
+	var uri = url.parse(req.url);
+	var returnObj = {};
+	
+	var responseId = req.params.responseId;
+	
+	var mainText = req.body.mainText,
+		projectId = req.body.projectId,
+		description = req.body.description;
+		tags = req.body.tags;
+	
+	if(uri.hostname===null){
+		
+		var userId = ''+env.DEMOUSERID || 100;
+		var dynamicDir = env.DYNAMIC_RESP_DIR;
+		
+		var userInfoFilePath = [rootDir,'data',userId,'user.json'].join(path.sep);
+	
+		if(!userInfo){
+			var userInfo = JSON.parse(fs.readFileSync(userInfoFilePath));
+			req.session.userInfo = userInfo;
+		}
+		
+		var dynamicTopicsFilePath = [rootDir,'data',userId,dynamicDir,'topics.json'].join(path.sep);
+		
+		var dynamicTopics = [];
+		
+		if (fs.existsSync(dynamicTopicsFilePath)) {
+			console.log('Dynamic topics exist');
+			dynamicTopics = JSON.parse(fs.readFileSync(dynamicTopicsFilePath));
+		}else{
+			console.log('No dynamic topics found ');
+		}
+		
+		var topicId = randomstring.generate();
+		
+		var newTopic = {
+			"id":topicId,
+			"repo_id":projectId,
+			"owner_id":userId,
+			"main_text" : mainText,
+			"main_description" : description,
+			"up_count" : "0",
+			"down_count" : "0",
+			"is_anwered" : "0",
+			"answer_count" : "0",
+			"posted_on" : "10/03/2014",
+			"tags": tags
+		}
+		
+		dynamicTopics.unshift(newTopic);
+		
+		fs.writeFileSync(dynamicTopicsFilePath, JSON.stringify(dynamicTopics));
+		
+		res.json(newTopic);
+		
+	}else{
+	
+		res.json(returnObj);
+		
+	}
+	
+});
