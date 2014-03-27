@@ -10,7 +10,7 @@ a{
 }
 
 .repo-details a {
-    color: #a0a0a0 !important;
+    color: #a0a0a0 ;
     font-size: 20px;
     
 }
@@ -49,4 +49,12 @@ a{
 	color:white;
 	padding:2px 5px;
 	font-weight:bold;
+}
+
+.repo-details.selected {
+	background-color: rgba(60, 132, 224, 0.28);
+}
+
+.repo-details.selected  a{
+	color: black !important;
 }

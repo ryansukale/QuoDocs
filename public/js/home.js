@@ -109,6 +109,9 @@ $(function(){
 			};
 			filterTopicStream(criteria);
 			
+			$project.addClass('selected')
+				.siblings().removeClass('selected');
+			
 		});
 		
 	}
