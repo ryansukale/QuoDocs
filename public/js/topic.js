@@ -150,7 +150,7 @@ $(function(){
 						pageData.mentionsData.push(member.username);
 					});
 					
-					$('textarea[name="responseTags"]').triggeredAutocomplete({
+					$('textarea[name="responseTags"],textarea[name="recTags"]').triggeredAutocomplete({
 						hidden: '#hidden_inputbox',
 						source: pageData.mentionsData,
 							 trigger: "@" ,
@@ -270,7 +270,7 @@ $(function(){
 		
 		//console.log(pageData.mentionsData);
 		if(pageData.mentionsData){
-			$responseItem.find('textarea[name="responseTags"]').triggeredAutocomplete({
+			$responseItem.find('textarea[name="responseTags"],textarea[name="responseTags"]').triggeredAutocomplete({
 				hidden: '#hidden_inputbox',
 				source: pageData.mentionsData,
 					 trigger: "@" ,
