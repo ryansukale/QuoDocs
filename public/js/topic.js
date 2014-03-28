@@ -93,6 +93,7 @@ $(function(){
 					.attr('data-itemInfo',JSON.stringify(itemInfo));
 					
 				bindRecordControls();
+				bindRecordPrompt();
 				getProjectMembers();
 				
 			});
@@ -360,18 +361,24 @@ $(function(){
 		return correctedTagsArr;
 	}
 	
-	function bindRecordControls(){
-	
-		bindActionable('.actionable');
-	
+	function bindRecordPrompt(){
 		$('.record-prompt').on('click',function(event){
 			var $this = $(this);
 			var $target = $(event.target);
 			
-			$this.parents('.actionable').find('.rec-panel').removeClass('hidden');
+			var $recPanel = $this.parents('.actionable').find('.rec-panel');
+			if($recPanel.is(':visible') && intervalId ===''){
+				$recPanel.addClass('hidden');
+			}else{
+				$recPanel.removeClass('hidden');
+			}
 			
 		});
-		
+	}
+	
+	function bindRecordControls(){
+	
+		bindActionable('.actionable');
 		
 		$('.rec-control').on('click',function(event){
 			var $this = $(this);
@@ -405,7 +412,6 @@ $(function(){
 						
 						if(countdownValue==0){
 							$parentRecPanel.find('.stop-rec').click();
-							clearInterval(intervalId);
 						}
 						
 						
@@ -418,6 +424,7 @@ $(function(){
 				if($this.hasClass('stop-rec')){
 				
 					clearInterval(intervalId);
+					intervalId = '';
 					$parentRecPanel.find('.control-feedback .info.recording').addClass('hidden');
 					$parentRecPanel.find('.control-feedback .info.processing').removeClass('hidden');
 					
@@ -499,6 +506,13 @@ $(function(){
 		$('.rec-panel').children().remove();
 		$('.rec-panel').append(recPanelDefault);
 		bindRecordControls();
+		
+		$('textarea[name="recTags"]').triggeredAutocomplete({
+			hidden: '#hidden_inputbox',
+			source: pageData.mentionsData,
+				 trigger: "@" ,
+				 allowDuplicates: false
+			});
 		
 	}
 	
