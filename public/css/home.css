@@ -10,9 +10,10 @@ a{
 }
 
 .repo-details a {
-    color: #a0a0a0 ;
-    font-size: 20px;
-    
+    color: #525252;
+		font-size: 15px;
+		font-weight: 400;
+		font-family: "Roboto", sans-serif;
 }
 
 
@@ -21,7 +22,7 @@ a{
 }
 
 .repo-details:hover {
-    background-color:#fff;
+    background-color:#E4E4E4;
     cursor:pointer;
 }
 
@@ -57,4 +58,10 @@ a{
 
 .repo-details.selected  a{
 	color: black !important;
+}
+
+.conversation-title a {
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	font-size: 17px;
 }
