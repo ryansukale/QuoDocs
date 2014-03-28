@@ -115,3 +115,8 @@ textarea{
 	border-color: #cacaca;
 	padding-left:5px;
 }
+
+.response-options{
+	margin: 5px 10px;
+	width: 100px;
+}

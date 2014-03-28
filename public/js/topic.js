@@ -5,6 +5,7 @@ $(function(){
 		topicsDetailsFor:'/topics',
 		recordings:'recordings',
 		userInfo:'/userinfo',
+		allUsers:'/users',
 		saveTags:'./responses/tags/',
 		saveTagsForResponse:'./responses/tags',
 		responsesFor:'/responses',
@@ -32,6 +33,21 @@ $(function(){
 			pageData.userInfo=data;
 			//console.log('userInfo',userInfo);
 		});
+	
+	function getAllUsers(callback){
+		
+		$.ajax(urls.allUsers)
+			.done(function( data, textStatus, jqXHR ) {
+				pageData.allUsers=data;
+				console.log(pageData.allUsers);
+				
+				if(callback&&typeof(callback)==='function'){
+					callback(data);
+				}
+				
+			});
+			
+	}
 	
 	function updateUserInfo(){
 		$.ajax(urls.userInfo)
@@ -118,7 +134,7 @@ $(function(){
 					
 				});
 				
-				$otherResponsesContainer = $('.response-details .other-responses');
+				var $otherResponsesContainer = $('.response-details .other-responses');
 				
 				$otherResponsesContainer.append(responsesArray.join(""));
 				
@@ -127,6 +143,13 @@ $(function(){
 				});
 				
 				updateTopicMessages();
+				
+				if(!pageData.allUsers){
+					getAllUsers(updateResponseMetadata);
+				}else{
+					updateResponseMetadata();
+				}
+				
 				//bindHandlers();
 				
 			});
@@ -160,6 +183,19 @@ $(function(){
 						
 				});
 		};
+		
+	}
+	
+	function updateResponseMetadata(){
+	
+		var $otherResponsesContainer = $('.response-details .other-responses');
+		
+		_.each($otherResponsesContainer.children(), function(responseItem, index, list){
+			var $responseItem = $(responseItem);
+			
+			console.log($responseItem.find('.meta .user').data('userid'));
+			
+		});
 		
 	}
 	

@@ -259,7 +259,15 @@
 				<div><span><%=response_details.down_count%></span><span class="vote-action down"> - </span></div>
 			</div>
 			
-			
+			<div class="text-options response-options pull-left">
+				<div class="meta">
+					<div class="notifications hidden">
+						<div class="new">New!</div>
+					</div>
+					<div class="mt-5"><span>By: </span><span class="user" data-userid="<%=user_id%>"></span></div>
+					<div class="response-date"></div>
+				</div>
+			</div>
 			
 			<div class="text-block pull-left ml-10">
 				<div class="response-text">
@@ -324,13 +332,13 @@
 				<div><span><%=response_details.down_count%></span><span class="vote-action down"> - </span></div>
 			</div>
 			
-			<div class="audio-options pull-left">
+			<div class="audio-options response-options pull-left">
 				<div class="listen"><a href="/audio/<%=response_details.file_name%>.wav" target="_blank">Listen</a></div>
 				<div class="meta">
 					<div class="notifications hidden">
 						<div class="new">New!</div>
 					</div>
-					<div class="mt-5"><span>By: </span><span class="owner"></span></div>
+					<div class="mt-5"><span>By: </span><span class="user" data-userid="<%=user_id%>"></span></div>
 					<div class="response-date"></div>
 				</div>
 			</div>
