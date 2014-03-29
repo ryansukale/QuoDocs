@@ -1,7 +1,16 @@
+var util = require('util'),
+url = require('url'),
+fs = require('fs'),
+_ = require('underscore'),
+randomstring = require("randomstring"),
+dateformat = require('dateformat');
+
+var filename = __filename.slice(__filename.lastIndexOf(path.sep)+1);
+
 //Update the tags for a response
 app.post('/topics', function(req, res) {
 	
-	console.log(req.method+':' + req.url);
+	console.log(filename+":"+req.method+':' + req.url);
 	
 	var uri = url.parse(req.url);
 	var returnObj = {};
@@ -12,7 +21,7 @@ app.post('/topics', function(req, res) {
 		description = req.body.description;
 		tags = req.body.tags;
 	
-	if(uri.hostname===null){
+	if(env.phase==='prototype'){
 		
 		var userId = ''+env.DEMOUSERID || 100;
 		var dynamicDir = env.DYNAMIC_RESP_DIR;
