@@ -64,3 +64,9 @@ a{
 	font-weight: 400;
 	font-size: 17px;
 }
+
+.show-all-topics {
+	color: #b0b0b0;
+	text-decoration: underline;
+	cursor:pointer;
+}

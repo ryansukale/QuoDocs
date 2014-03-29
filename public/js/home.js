@@ -85,10 +85,16 @@ $(function(){
 		if(pageData.selectedProjectId){
 			var currentProject = _.findWhere(pageData.allProjects,{id:''+pageData.selectedProjectId});
 			currentProjectName = currentProject.name;
+			$('.show-all-topics').removeClass('hidden');
 		}else{
 			currentProjectName="All Projects";
+			$('.show-all-topics').addClass('hidden');
+			$('.repo-list .repo-details').removeClass('selected');
+			$('.repo-list-filter').val('').trigger('keyup');
+			filterTopicStream({});
 		}
 		$('.current-project-name').text(currentProjectName);
+		
 	}
 	
 	function getTopics(){
@@ -171,11 +177,16 @@ $(function(){
 			//if no topics are visible, display the filler prompt
 			
 		}else{
+			$('.convo-list .convo-details').removeClass('hidden');
 			//Render the entire stream
 		}
 	}
 	
 	function bindEventHandlers(){
+		
+		$('.show-all-topics').on('click',function(e){
+			pageData.selectedProjectId = '';
+		})
 		
 		$('.new-topic').on('click',function(e){
 			
