@@ -84,7 +84,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-7">
+			<div class="col-md-9">
 				
 				<div class="question-actions">
 				
@@ -170,24 +170,36 @@
 	
 	<script type="text/template" id="_tmplConvoLI">
 		<li class="convo-details mt-10 mb-10 pb-10 clearfix" data-projectid="<%=project_id%>">
-			<div class="convo-main">
-				<div class="inb conversation-title b">
-					<a href="topic.html?id=<%=id%>">	<%=main_text%></a>
+		
+			<div class="row">
+				<div class="col-md-10">
+					<div class="convo-main">
+						<div class="inb conversation-title b">
+							<a href="topic.html?id=<%=id%>">	<%=main_text%></a>
+						</div>
+						<div class="inb pull-right">
+							<%=name%>
+						</div>
+					</div>
+					<div class="convo-tags">
+						<ul class="list-unstyled">
+							
+							<%_.each(tags, function(tag, index, tags){%>
+								
+								<li class="tag pull-left"><%=tag%></li>
+								
+							<%});%>
+							
+						</ul>
+					</div>
 				</div>
-				<div class="inb pull-right">
-					<%=name%>
+				<div class="col-md-2">
+					
+					<div class="asker-id hidden"><%=owner_id%></div>
+					<div><span>By: </span><span class="asker-name"></span></div>
+					<div class="hidden">Asked on<span class="ask-date"></span></div>
+					
 				</div>
-			</div>
-			<div class="convo-tags">
-				<ul class="list-unstyled">
-					
-					<%_.each(tags, function(tag, index, tags){%>
-						
-						<li class="tag pull-left"><%=tag%></li>
-						
-					<%});%>
-					
-				</ul>
 			</div>
 	</li>
 	</script>

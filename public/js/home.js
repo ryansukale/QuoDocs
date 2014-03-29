@@ -14,6 +14,7 @@ $(function(){
 		parentRepos : '/getParentRepos',
 		userInfo : '/userinfo',
 		topics : '/topics',
+		allUsers : '/users',
 		topicsWhere : '/topics/criteria'
 	};
 	
@@ -23,7 +24,19 @@ $(function(){
 		projectSelectorLI : _.template($('#_tmplProjectSelectorLI').html())
 	};
 	
-	pageData={};
+	var pageData = {
+		selectedProjectId:''
+	};
+	
+	function getAllUsers(callback){
+		
+		$.ajax(urls.allUsers)
+		.done(function( data, textStatus, jqXHR ) {
+			pageData.allUsers=data.users;
+			if(callback) callback(data);
+		});
+		
+	};
 	
 	function getUserInfo(callback){
 		
@@ -37,10 +50,7 @@ $(function(){
 	};
 	
 	getUserInfo();
-	
-	var pageData = {
-		selectedProjectId:''
-	};
+	getAllUsers();
 		
 	function init(){
 	
@@ -115,8 +125,28 @@ $(function(){
 				}else{
 					highlightMyTags(pageData.userInfo);
 				}
+				//console.log(pageData);
+				
+				if(!pageData.allUsers){
+					watch(pageData, "allUsers", renderAskers);
+				}else{
+					renderAskers();
+				}
+				
 				
 			});
+	}
+	
+	function renderAskers(prop, action, newvalue, oldvalue){
+		_.each($('.convo-list .convo-details'),function(element, index, value){
+			var askerId = $('.asker-id',element).text();
+			var asker = _.findWhere(pageData.allUsers,{id:''+askerId});
+			$('.asker-name',element).text(asker.fname);
+			
+			if(prop){
+				unwatch(pageData, "allUsers", renderAskers);
+			}
+		});
 	}
 	
 	function highlightMyTags(userInfo){
