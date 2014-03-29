@@ -3,7 +3,8 @@ $(function(){
 	var urls={
 		createTopic:'/topics',
 		userInfo:'/userinfo',
-		membersForProject:'/projects/members'
+		membersForProject:'/projects/members',
+		projectInfo:'/projects'
 	},
 	rtcOptions = {
 		'buffer-size': 16384,
@@ -64,37 +65,52 @@ $(function(){
 	//If the user is selecting a particular topic, render the topic details interface
 	if(projectId){
 		
-		function fetchProjectMembers(){
-			
-			$.ajax([urls.membersForProject,projectId].join('/'))
-				.done(function( data, textStatus, jqXHR ) {
-					pageData.projectMembers=data.members;
-					
-					var memberItems = [];
-					_.each(pageData.projectMembers, function(memberDetails, index, list){
-						memberItems.push(tmpl.memberLI(memberDetails));
-					});
-					
-					$('.member-list').append(memberItems.join(''));
-					
-					pageData.mentionsData = [];
-					_.each(pageData.projectMembers, function(member, index, list){
-						pageData.mentionsData.push(member.username);
-					});
-					
-					$('.topic-tags').triggeredAutocomplete({
-						hidden: '#hidden_inputbox',
-						source: pageData.mentionsData,
-							 trigger: "@" ,
-							 allowDuplicates: false
-						});
-						
-				});
-		}
-		
 		fetchProjectMembers();
+		fetchProjectInfo();
 		
 	}
+	
+	function fetchProjectInfo(){
+		
+		$.ajax([urls.projectInfo,projectId].join('/'))
+			.done(function( data, textStatus, jqXHR ) {
+				pageData.projectDetails=data;
+				
+				$('.current-project-name').text(pageData.projectDetails.name);
+				
+			});
+		
+	}
+	
+	function fetchProjectMembers(){
+			
+		$.ajax([urls.membersForProject,projectId].join('/'))
+			.done(function( data, textStatus, jqXHR ) {
+				pageData.projectMembers=data.members;
+				
+				var memberItems = [];
+				_.each(pageData.projectMembers, function(memberDetails, index, list){
+					memberItems.push(tmpl.memberLI(memberDetails));
+				});
+				
+				$('.member-list').append(memberItems.join(''));
+				
+				pageData.mentionsData = [];
+				_.each(pageData.projectMembers, function(member, index, list){
+					pageData.mentionsData.push(member.username);
+				});
+				
+				$('.topic-tags').triggeredAutocomplete({
+					hidden: '#hidden_inputbox',
+					source: pageData.mentionsData,
+						 trigger: "@" ,
+						 allowDuplicates: false
+					});
+					
+			});
+	}
+		
+		
 	
 	function bindResponseHandlers(selector){
 		var $responseItem = $(selector);
