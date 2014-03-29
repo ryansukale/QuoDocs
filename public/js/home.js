@@ -46,7 +46,8 @@ $(function(){
 	
 		$.ajax(urls.allRepos)
 			.done(function( data, textStatus, jqXHR ) {
-				//console.log(data);
+				pageData.allProjects = data;
+				
 				var htmlElems = [];
 				var modalhtmlElems = [];
 				_.each(data, function(element, index, list){
@@ -71,7 +72,23 @@ $(function(){
 			});
 			
 			getTopics();
+			updateCurrentProject();
 
+	}
+	
+	watch(pageData, "selectedProjectId", function(prop, action, newvalue, oldvalue){
+		updateCurrentProject();
+	});
+	
+	function updateCurrentProject(){
+		var currentProjectName = '';
+		if(pageData.selectedProjectId){
+			var currentProject = _.findWhere(pageData.allProjects,{id:''+pageData.selectedProjectId});
+			currentProjectName = currentProject.name;
+		}else{
+			currentProjectName="All Projects";
+		}
+		$('.current-project-name').text(currentProjectName);
 	}
 	
 	function getTopics(){
