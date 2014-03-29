@@ -55,10 +55,6 @@ app.get('/users', function(req, res) {
 	
 		var userId = ''+env.DEMOUSERID || 100;
 		
-		if(req.session.userInfo){
-			returnObj = req.session.userInfo;
-			res.json(returnObj);
-		}else{
 			var userInfoFilePath = [rootDir,'data',userId,'user.json'].join(path.sep);
 			var userInfo = JSON.parse(fs.readFileSync(userInfoFilePath));
 			req.session.userInfo = userInfo;
@@ -73,7 +69,6 @@ app.get('/users', function(req, res) {
 			};
 			
 			res.json(returnObj);
-		}
 		
 	}else{
 		res.json(returnObj);

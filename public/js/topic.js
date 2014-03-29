@@ -186,16 +186,38 @@ $(function(){
 		
 	}
 	
-	function updateResponseMetadata(){
+	function updateResponseMetadata(data,selector){
 	
-		var $otherResponsesContainer = $('.response-details .other-responses');
+		if(!selector){
+			var $otherResponsesContainer = $('.response-details .other-responses');
+
+			if(!pageData.allUsers){
+				watch(pageData, "allUsers", function(prop, action, newvalue, oldvalue){
+					if(!oldvalue){
+						_.each($otherResponsesContainer.children(), function(responseItem, index, list){
+							var $responseItem = $(responseItem);
+							var userId = $responseItem.find('.meta .user').data('userid');
+							var member = _.findWhere(pageData.allUsers.users, {id:''+userId});
+							$responseItem.find('.meta .user').text(member.fname);
+						});
+					}
+				});
+			}else{
+				_.each($otherResponsesContainer.children(), function(responseItem, index, list){
+					var $responseItem = $(responseItem);
+					var userId = $responseItem.find('.meta .user').data('userid');
+					var member = _.findWhere(pageData.allUsers.users, {id:''+userId});
+					$responseItem.find('.meta .user').text(member.fname);
+				});
+			}
+		}else{
+			var $responseItem = $(selector);
+			var userId = $responseItem.find('.meta .user').data('userid');
+			var member = _.findWhere(pageData.allUsers.users, {id:''+userId});
+			$responseItem.find('.meta .user').text(member.fname);
+		}
+	
 		
-		_.each($otherResponsesContainer.children(), function(responseItem, index, list){
-			var $responseItem = $(responseItem);
-			
-			console.log($responseItem.find('.meta .user').data('userid'));
-			
-		});
 		
 	}
 	
@@ -516,6 +538,7 @@ $(function(){
 								resetRecPanel();
 								updateUserInfo();
 								updateTopicMessages();
+								updateResponseMetadata(pageData.allUsers,$newResponse);
 								//Toggle height/close the rec panel
 								
 						});
@@ -569,5 +592,7 @@ $(function(){
 		request.open('POST', url);
 		request.send(data);
 	}
+	
+	
 	
 });
