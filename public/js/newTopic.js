@@ -4,7 +4,8 @@ $(function(){
 		createTopic:'/topics',
 		userInfo:'/userinfo',
 		membersForProject:'/projects/members',
-		projectInfo:'/projects'
+		projectInfo:'/projects',
+		allProjects:'/projects'
 	},
 	rtcOptions = {
 		'buffer-size': 16384,
@@ -50,7 +51,8 @@ $(function(){
 	}
 	
 	var tmpl = {
-		memberLI : _.template($('#_tmplMemberLI').html())
+		memberLI : _.template($('#_tmplMemberLI').html()),
+		projectSelectorLI : _.template($('#_tmplProjectSelectorLI').html())
 	}
 	
 	function getParameterByName(name) {
@@ -67,11 +69,46 @@ $(function(){
 		
 		fetchProjectMembers();
 		fetchProjectInfo();
-		
+		getAllProjects();
+	}
+	
+	function getAllProjects(){
+		$.ajax(urls.allProjects)
+			.done(function( data, textStatus, jqXHR ) {
+				pageData.allProjects = data;
+				
+				var modalhtmlElems = [];
+				_.each(data, function(element, index, list){
+					modalhtmlElems.push(tmpl.projectSelectorLI(element));
+				});
+				
+				$('.project-list-selection').append(modalhtmlElems.join(''));
+				
+				_.each($('.project-list-selection').children(),function(element, index, list){
+					bindProjectSelection(element);
+				});
+				
+			});
+	}
+	
+	function bindProjectSelection(selector){
+		var $element = $(selector);
+		$element.on('click',function(e){
+			var pId = $element.data('projectid');
+			
+			$.ajax([urls.projectInfo,pId].join('/'))
+			.done(function( data, textStatus, jqXHR ) {
+				pageData.projectDetails=data;
+				projectId = pId;
+				$('.current-project-name').text(pageData.projectDetails.name);
+				$('#projectSelectorModal .close').trigger('click');
+			});
+			
+		})
 	}
 	
 	function fetchProjectInfo(){
-		
+	
 		$.ajax([urls.projectInfo,projectId].join('/'))
 			.done(function( data, textStatus, jqXHR ) {
 				pageData.projectDetails=data;
@@ -237,12 +274,22 @@ $(function(){
 			})
 			.done(function(newTopic){
 			
-				window.location = 'http://localhost:5000/topic.html?id='+newTopic.id;
+				window.location = './topic.html?id='+newTopic.id;
 					
 			});
 			
 		});
 		//bindRecordControls();
+		
+		//$('.change-project').on('click',function(e){
+		//	
+		//	if(pageData.selectedProjectId){
+		//		window.location = 'newTopic.html?projectId='+pageData.selectedProjectId;
+		//	}else{
+		//		$('.launch-project-selector').trigger('click');
+		//	}
+		//	
+		//});
 		
 	}
 	

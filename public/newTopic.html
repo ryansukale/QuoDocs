@@ -103,9 +103,10 @@
 						<span>Posting new topic in <span><span class="current-project-name alert-info pl-5 pt-5 pr-5 pb-5"></span>
 					</div>
 					
-					<span class="inb ml-10 launch-project-selector" data-toggle="modal" data-target="#projectSelectorModal">
+					<span class="inb ml-10 change-project" data-toggle="modal" data-target="#projectSelectorModal">
 						Change project
 					</span>
+					
 					
 				</div>
 				
@@ -138,7 +139,26 @@
 			
 		</div>
 		
-  </div> 
+  </div>
+
+	<div class="modal fade" id="projectSelectorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Select a project</h4>
+				</div>
+				<div class="modal-body">
+					<ul class="project-list-selection list-unstyled">
+						
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>	
 	<!-- /container -->
 
 </body>
@@ -287,6 +307,19 @@
 	
 	<script type="text/template" id="_tmplMemberLI">
 			<li class="username"><%=username%></li>
+	</script>
+	
+	<script type="text/template" id="_tmplProjectSelectorLI">
+		<li class="repo-details mt-4 mb-3" data-projectid="<%=id%>">
+			<a href="#" class="repo_<%=id%>">
+				<div class="inb">
+					<%=name%>
+				</div>
+				<div class="inb forkStatus hidden">
+					<%=fork%>
+				</div>
+			</a>
+		</li>
 	</script>
 	
 </html>
