@@ -195,7 +195,13 @@ $(function(){
 		//In the real sytems make an ajax call using the criteria
 		//and render the stream.
 		//$.ajax(urls.topicsWhere, {data:criteria});
+		
+		if(_.isEmpty(criteria)){
+			$('.convo-list .convo-details').removeClass('hidden');
+		}else{
 			
+		}
+		
 		if(criteria.projectId){
 			
 			//For now, just filter the stream
@@ -221,15 +227,35 @@ $(function(){
 			}
 			
 		}else{
-			$('.convo-list .convo-details').removeClass('hidden');
-			//Render the entire stream
+			if(criteria.userName){
+			
+				$('.convo-list .convo-details').addClass('hidden');
+				//For now, just filter the stream
+				_.each($('.convo-list .convo-details .convo-tags .tag'),function(element, index, list){
+					var $element = $(element);
+					var $parentTopic = $element.parents('.convo-details');
+					if($parentTopic.hasClass('hidden')){
+						if($element.text()===criteria.userName){
+							$parentTopic.removeClass('hidden');
+						}
+					}
+				});
+				
+				$('.current-project-name').text(criteria.userName);
+				$('.show-all-topics').removeClass('hidden');
+				
+			}
 		}
 	}
 	
 	function bindEventHandlers(){
 		
 		$('.show-all-topics').on('click',function(e){
-			pageData.selectedProjectId = '';
+			if(pageData.selectedProjectId!==''){
+				pageData.selectedProjectId = '';
+			}else{
+				updateCurrentProject();
+			}
 		})
 		
 		$('.new-topic').on('click',function(e){
@@ -241,6 +267,17 @@ $(function(){
 			}
 			
 			e.preventDefault();
+			
+		});
+		
+		
+		$('.convo-list').on('click',function(e){
+			var $this = $(this);
+			var $target = $(e.target);
+			
+			if($target.hasClass('highlighted-tag')){
+				filterTopicStream({userName:$target.text()});
+			}
 			
 		});
 		

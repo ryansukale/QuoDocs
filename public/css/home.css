@@ -49,6 +49,7 @@ a{
 	color:white;
 	padding:2px 5px;
 	font-weight:bold;
+	cursor:pointer;
 }
 
 .repo-details.selected {
