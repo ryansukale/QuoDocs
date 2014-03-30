@@ -240,6 +240,8 @@ $(function(){
 				$('.launch-project-selector').trigger('click');
 			}
 			
+			e.preventDefault();
+			
 		});
 		
 		$('.repo-list-filter').on('keyup',function(e){
