@@ -70,3 +70,7 @@ a{
 	text-decoration: underline;
 	cursor:pointer;
 }
+
+.project-dashboard{
+	background-color:#f0f0f0;
+}

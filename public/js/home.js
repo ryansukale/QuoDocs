@@ -96,9 +96,13 @@ $(function(){
 			var currentProject = _.findWhere(pageData.allProjects,{id:''+pageData.selectedProjectId});
 			currentProjectName = currentProject.name;
 			$('.show-all-topics').removeClass('hidden');
+			$('.project-dashboard').removeClass('hidden');
+			
 		}else{
 			currentProjectName="All Projects";
 			$('.show-all-topics').addClass('hidden');
+			$('.project-dashboard').addClass('hidden');
+			$('.no-topics').addClass('hidden');
 			$('.repo-list .repo-details').removeClass('selected');
 			$('.repo-list-filter').val('').trigger('keyup');
 			filterTopicStream({});
@@ -195,16 +199,26 @@ $(function(){
 		if(criteria.projectId){
 			
 			//For now, just filter the stream
+			var visibleTopicCount = 0;
 			_.each($('.convo-list .convo-details'),function(element, index, list){
 				var $element = $(element);
 				if($element.data('projectid')!==criteria.projectId){
 					$element.addClass('hidden');
 				}else{
+					visibleTopicCount++;
 					$element.removeClass('hidden');
 				}
 			});
 			
+			var $topicCountContainer = $('.project-dashboard .topic-count .summary-item-value');
 			//if no topics are visible, display the filler prompt
+			if(visibleTopicCount===0){
+				$('.no-topics').removeClass('hidden');
+				$topicCountContainer.text(0);
+			}else{
+				$('.no-topics').addClass('hidden');
+				$topicCountContainer.text(visibleTopicCount);
+			}
 			
 		}else{
 			$('.convo-list .convo-details').removeClass('hidden');
