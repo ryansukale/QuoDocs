@@ -94,7 +94,7 @@
 						<span class="inb show-all-topics ml-5 hidden">Show All</span>
 					</div>
 					
-					<div class="btn btn-success btn-sm inb pull-right new-topic">
+					<div class="btn btn-success btn-sm inb pull-right new-topic hidden">
 						+ New Topic
 					</div>
 					
@@ -104,9 +104,31 @@
 					
 				</div>
 				
-				<div class="convo-list">
+				<div class="project-dashboard mt-5 clearfix hidden">
+					<div class="summary-bar">
+						<div class="inb b bar-title">Project Activity : </div>
+						<div class="inb topic-count">
+							<span class="summary-item-value"></span>
+							<span class="summary-item-title">Topics </span>
+						</div>
+						<div class="inb member-count">
+							<span class="summary-item-value"></span>
+							<span class="summary-item-title">Members </span>
+						</div>
+						<div class="btn btn-success btn-sm inb pull-right new-topic">
+							+ New Topic
+						</div>
+					</div>
+				</div>
+				
+				<div class="convo-list clearfix mt-5">
 					<ul class="list-unstyled">
 					</ul>
+				</div>
+				
+				<div class="no-topics hidden">
+					<div>Looks like there are no conversation topics for this project.</div>
+					<div>Would you like to<a href="" class="new-topic">create a new one</a></div>
 				</div>
 				
 				<div class="modal fade" id="projectSelectorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
