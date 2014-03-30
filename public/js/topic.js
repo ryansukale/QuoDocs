@@ -9,7 +9,8 @@ $(function(){
 		saveTags:'./responses/tags/',
 		saveTagsForResponse:'./responses/tags',
 		responsesFor:'/responses',
-		membersForProject:'/projects/members'
+		membersForProject:'/projects/members',
+		projectDetails:'/projects'
 	},
 	rtcOptions = {
 		'buffer-size': 16384,
@@ -90,6 +91,8 @@ $(function(){
 	//If the user is selecting a particular topic, render the topic details interface
 	if(topicId){
 		
+		$('.status .topic-id').text(topicId);
+		
 		$.ajax([urls.topicsDetailsFor,topicId].join('/'))
 			.done(function( data, textStatus, jqXHR ) {
 				
@@ -110,6 +113,7 @@ $(function(){
 					
 				bindRecordControls();
 				bindRecordPrompt();
+				getProjectDetails();
 				getProjectMembers();
 				
 			});
@@ -153,6 +157,20 @@ $(function(){
 				//bindHandlers();
 				
 			});
+	
+	
+		function getProjectDetails(){
+			
+			var projectId = pageData.topicInfo.project_id;
+			
+			$.ajax([urls.projectDetails,projectId].join('/'))
+				.done(function( data, textStatus, jqXHR ) {
+					pageData.projectDetails=data;
+					
+					$('.status .current-project-name').text(pageData.projectDetails.name);
+						
+				});
+		}
 	
 		function getProjectMembers(){
 			

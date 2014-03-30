@@ -120,3 +120,10 @@ textarea{
 	margin: 5px 10px;
 	width: 100px;
 }
+
+.topic-details .status{
+	border-bottom: 1px solid #dadada;
+}
+.topic-details .topic-id{
+	color: #a0a0a0;
+}
