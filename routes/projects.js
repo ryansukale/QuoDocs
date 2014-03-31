@@ -103,7 +103,7 @@ app.get('/projects/invitees/:projectId', function(req, res) {
 		var userId = ''+env.DEMOUSERID || 100;
 		var dynamicDir = env.DYNAMIC_RESP_DIR;
 		
-		var allUsersFilePath = [rootDir,'data','allUsers.json'].join(path.sep);
+		var allUsersFilePath = [rootDir,'data','allInvitees.json'].join(path.sep);
 		
 		var allUsers = JSON.parse(fs.readFileSync(allUsersFilePath));
 		
