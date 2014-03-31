@@ -10,7 +10,8 @@ $(function(){
 		saveTagsForResponse:'./responses/tags',
 		responsesFor:'/responses',
 		membersForProject:'/projects/members',
-		projectDetails:'/projects'
+		projectDetails:'/projects',
+		inviteesForProject:'/projects/:projectId/invitees'
 	},
 	rtcOptions = {
 		'buffer-size': 16384,
@@ -50,6 +51,23 @@ $(function(){
 			
 	}
 	
+	function getInvitees(projectId){
+	
+		$.ajax(urls.inviteesForProject.replace(':projectId',projectId))
+			.done(function( data, textStatus, jqXHR ) {
+				pageData.allInvitees=data.invitees;
+				
+				var inviteeItems = [];
+					_.each(pageData.allInvitees, function(inviteeDetails, index, list){
+						inviteeItems.push(tmpl.inviteeLI(inviteeDetails));
+					});
+					
+					$('.invitee-list').append(inviteeItems.join(''));
+					
+			});
+			
+	}
+	
 	function updateUserInfo(){
 		$.ajax(urls.userInfo)
 			.done(function( data, textStatus, jqXHR ) {
@@ -76,6 +94,7 @@ $(function(){
 		audioResponse : _.template($('#_tmplAudioResponse').html()),
 		recPanelDefault : _.template($('#_tmplRecPanel_Default').html()),
 		responseTags : _.template($('#_tmplResponseTags').html()),
+		inviteeLI : _.template($('#_tmplInviteeLI').html()),
 		memberLI : _.template($('#_tmplMemberLI').html())
 	}
 	
@@ -115,6 +134,7 @@ $(function(){
 				bindRecordPrompt();
 				getProjectDetails();
 				getProjectMembers();
+				getInvitees(pageData.topicInfo.project_id);
 				
 			});
 	

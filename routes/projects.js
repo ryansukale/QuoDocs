@@ -89,7 +89,7 @@ app.get('/projects/:projectId', function(req, res) {
 
 
 //Returns all the invitees for a given project
-app.get('/projects/invitees/:projectId', function(req, res) {
+app.get('/projects/:projectId/invitees', function(req, res) {
 	console.log(filename+":");
 	
 	var uri = url.parse(req.url);
