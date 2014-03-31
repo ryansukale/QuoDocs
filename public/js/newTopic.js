@@ -258,7 +258,14 @@ $(function(){
 	
 		$('.submit').on('click',function(){
 		
-			var rawTagString =$('textarea[name="topicTags"]').val();
+			var mainText = $('.main-text').val(),
+				description = $('.description').val(),
+				rawTagString =$('textarea[name="topicTags"]').val();
+				
+			if(!mainText||!description||!rawTagString){
+				$('.validation-prompter').trigger('click');
+				return;
+			}
 			
 			var correctedTagsArr = getPrefixedTagArr(rawTagString);
 			
