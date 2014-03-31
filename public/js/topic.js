@@ -188,7 +188,9 @@ $(function(){
 				.done(function( data, textStatus, jqXHR ) {
 					pageData.projectDetails=data;
 					
-					$('.status .current-project-name').text(pageData.projectDetails.name);
+					$('.status .current-project-name')
+						.text(pageData.projectDetails.name)
+						.attr("data-projectid",pageData.projectDetails.id);
 						
 				});
 		}
@@ -648,6 +650,7 @@ $(function(){
 			
 		});
 		
+	
 	}
 
 	bindHandlers();
