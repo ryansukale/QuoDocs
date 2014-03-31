@@ -300,6 +300,18 @@ $(function(){
 				
 			$responseItem.find('.tag-list').addClass('hidden');
 			
+			$responseItem.find('[name="responseTags"]').on('keypress',function(e){
+						
+					var $this = $(this);
+					var $parentResponse = $this.parents('.response');
+					
+					if(e.which===13){
+						e.preventDefault();
+						$parentResponse.find('.save').click();
+					}
+					
+				});
+			
 			e.preventDefault();
 		});
 		
