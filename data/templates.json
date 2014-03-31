@@ -19,6 +19,6 @@
 }
 
 var invitee = {
-	email_id:"",
-	project_id:""
+	emailId:"",
+	projectId:""
 }

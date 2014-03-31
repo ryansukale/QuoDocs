@@ -48,7 +48,7 @@ app.get('/projects/members/:projectId', function(req, res) {
 	
 });
 
-//Update the tags for a response
+//Returns the details for a given project
 app.get('/projects/:projectId', function(req, res) {
 	
 	console.log(filename+":");
@@ -105,18 +105,14 @@ app.get('/projects/invitees/:projectId', function(req, res) {
 		
 		var allUsersFilePath = [rootDir,'data','allInvitees.json'].join(path.sep);
 		
-		var allUsers = JSON.parse(fs.readFileSync(allUsersFilePath));
+		var allInvitees = JSON.parse(fs.readFileSync(allUsersFilePath));
 		
-		var projectMembers = [];
-		_.each(allUsers, function(user, index, list){
-			if(user.projects.indexOf(projectId)>0){
-				projectMembers.push(user);
-			}
-		});
+		var projectInvitees = _.where(allInvitees,{"projectId":projectId});
+		
 		
 		returnObj = {
-			count:projectMembers.length,
-			members:projectMembers
+			count:projectInvitees.length,
+			invitees:projectInvitees
 		};
 		
 		res.json(returnObj);
