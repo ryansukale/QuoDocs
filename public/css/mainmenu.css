@@ -25,3 +25,8 @@
 .navbar{
 	border-bottom:1px solid #dadada;
 }
+
+.total-points:hover{
+	background-color:blue;
+	cursor:pointer;
+}
