@@ -103,9 +103,9 @@ app.get('/projects/invitees/:projectId', function(req, res) {
 		var userId = ''+env.DEMOUSERID || 100;
 		var dynamicDir = env.DYNAMIC_RESP_DIR;
 		
-		var allUsersFilePath = [rootDir,'data','allInvitees.json'].join(path.sep);
+		var allInviteesFilePath = [rootDir,'data','allInvitees.json'].join(path.sep);
 		
-		var allInvitees = JSON.parse(fs.readFileSync(allUsersFilePath));
+		var allInvitees = JSON.parse(fs.readFileSync(allInviteesFilePath));
 		
 		var projectInvitees = _.where(allInvitees,{"projectId":projectId});
 		
@@ -114,6 +114,48 @@ app.get('/projects/invitees/:projectId', function(req, res) {
 			count:projectInvitees.length,
 			invitees:projectInvitees
 		};
+		
+		res.json(returnObj);
+		
+	}else{
+	
+		res.json(returnObj);
+		
+	}
+	
+});
+
+//Creates an invitee for a project
+app.post('/projects/invitees', function(req, res) {
+
+	console.log(filename+":");
+	
+	var uri = url.parse(req.url);
+	var returnObj = {};
+	
+	if(env.phase==='prototype'){
+		
+		var userId = ''+env.DEMOUSERID || 100;
+		var dynamicDir = env.DYNAMIC_RESP_DIR;
+		
+		var allInviteesFilePath = [rootDir,'data','allInvitees.json'].join(path.sep);
+		
+		var allInvitees = JSON.parse(fs.readFileSync(allInviteesFilePath));
+		
+		//var projectInvitees = _.where(allInvitees,{"projectId":projectId});
+		console.log(req.body);
+		
+		var newInvitee = {
+			emailId:req.body.emailId,
+			projectId:req.body.projectId
+		};
+		
+		console.log(newInvitee);
+		allInvitees.unshift(newInvitee);
+		
+		fs.writeFileSync(allInviteesFilePath, JSON.stringify(allInvitees));
+		
+		returnObj = newInvitee;
 		
 		res.json(returnObj);
 		
