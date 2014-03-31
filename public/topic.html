@@ -94,7 +94,7 @@
 				<div class="project-invitees">
 					<div class="header b mb-5 pt-5">Invitees</div>
 					<div class="body">
-						<div class="invite btn btn-default btn-sm w-100pc">Invite to project<span class="glyphicon glyphicon-plus ml-10"></span></div>
+						<div class="invite btn btn-default btn-sm w-100pc" data-toggle="modal" data-target=".invite-member">Invite to project<span class="glyphicon glyphicon-plus ml-10"></span></div>
 						<ul class="invitee-list list-unstyled">
 							
 						</ul>
@@ -207,6 +207,33 @@
 		<div class="topic-meta">
 			
 		</div>
+		
+		<div class="modal fade invite-member" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+				<div class="modal-header">
+
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Email Invite</h4>
+					</div>
+
+					<div class="modal-body">
+						<div class="input-group centered">
+							<input type="text" class="form-control" placeholder="Email address">
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary">Invite</button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		
+		
 		
 		<!-- <div class="">
 		
