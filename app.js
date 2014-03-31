@@ -13,7 +13,8 @@ path = require('path'),
 app = express(),
 env = require('./env'),
 utils = require('./utils'),
-db = require('./database');
+db = require('./database'),
+middleware = require('./utils/middleware');
 
 //CLIENT_ID = process.env.CLIENT_ID;
 //CLIENT_SECRET = process.env.CLIENT_SECRET;
@@ -29,11 +30,14 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({secret: env.SESSION_SECRET}));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
+
+app.use(middleware.requestLogger);
+app.use(middleware.initSession);
 //console.log();
 //app.use(express.csrf());
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'uploads')));
 
 
 // development only
