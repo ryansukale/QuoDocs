@@ -135,3 +135,7 @@ textarea{
 	color:#a0a0a0;
 	font-size: 12px;
 }
+
+.response-tags{
+	width: 600px;
+}
