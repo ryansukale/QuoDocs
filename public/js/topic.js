@@ -324,7 +324,7 @@ $(function(){
 			if($target.hasClass('cancel')){
 			
 				//Fetch the existing values
-				var currentResponse = _.findWhere(pageData.responses, {"id": responseId});
+				var currentResponse = _.findWhere(pageData.responses, {"id": ''+responseId});
 				
 				//Show/hide the appropriate elements
 				if(currentResponse.tags.length===0){

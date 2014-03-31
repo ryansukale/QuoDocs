@@ -316,14 +316,14 @@
 				
 				<div class="response-tags">
 					
-						<%if(response_details.tags.length===0){%>
+						<%if(tags.length===0){%>
 							
 							<div class="prompts">
 								<div class="add-tags"><a href="">Add tags</a> so that others can find this recording</div>
 							</div>
 							
 							<ul class="tag-list list-unstyled list-inline hidden">
-								<%_.each(response_details.tags, function(tagName, index, tags){%>
+								<%_.each(tags, function(tagName, index, tags){%>
 									<li class="tag"><%=tagName%></li>
 								<%});%>
 							</ul>
@@ -335,7 +335,7 @@
 							</div>
 							
 							<ul class="tag-list list-unstyled list-inline">
-								<%_.each(response_details.tags, function(tagName, index, tags){%>
+								<%_.each(tags, function(tagName, index, tags){%>
 									<li class="tag"><%=tagName%></li>
 								<%});%>
 							</ul>
