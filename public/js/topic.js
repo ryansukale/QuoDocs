@@ -583,9 +583,14 @@ $(function(){
 								$newResponse.find('.notifications').removeClass('hidden')
 									.children('.new').removeClass('hidden');
 								
-								$this.text('Done');
-								
 								var $parentRecPanel = $this.parents('.rec-panel');
+								
+								var enteredText = $parentRecPanel.find('[name="recTags"]').val();
+								
+								if(enteredText&&enteredText!==''){
+									$newResponse.find('.edit').trigger('click');
+									$newResponse.find('[name="responseTags"]').val(enteredText);
+								}
 								
 								$parentRecPanel.find('.response-id').val(response.responseDtls.id);
 								
