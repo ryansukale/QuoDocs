@@ -215,12 +215,14 @@ $(function(){
 						pageData.mentionsData.push(member.username);
 					});
 					
-					$('textarea[name="responseTags"],textarea[name="recTags"]').triggeredAutocomplete({
+					$('[name="responseTags"],[name="recTags"]').triggeredAutocomplete({
 						hidden: '#hidden_inputbox',
 						source: pageData.mentionsData,
 							 trigger: "@" ,
 							 allowDuplicates: false
 						});
+						
+					
 						
 				});
 		};
@@ -279,7 +281,7 @@ $(function(){
 				currentTagsArr.push(element);
 			});
 			
-			$responseItem.find('textarea[name="responseTags"]')
+			$responseItem.find('[name="responseTags"]')
 					.val(currentTagsArr.join(' '))
 					.removeClass('hidden');
 			
@@ -316,7 +318,7 @@ $(function(){
 				}
 				
 				//Clear the textarea				
-				$responseItem.find('textarea[name="responseTags"]')
+				$responseItem.find('[name="responseTags"]')
 					.val('')
 					.addClass('hidden');
 				
@@ -326,7 +328,7 @@ $(function(){
 				
 			}else{
 				if($target.hasClass('save')){
-					var rawTagString = $responseItem.find('textarea[name="responseTags"]').val();
+					var rawTagString = $responseItem.find('[name="responseTags"]').val();
 					
 					var correctedTagsArr = getPrefixedTagArr(rawTagString);
 					
@@ -349,7 +351,7 @@ $(function(){
 							.removeClass('hidden');
 						
 						//Clear the textarea				
-						$responseItem.find('textarea[name="responseTags"]')
+						$responseItem.find('[name="responseTags"]')
 							.val('')
 							.addClass('hidden');
 						
@@ -370,7 +372,7 @@ $(function(){
 		
 		//console.log(pageData.mentionsData);
 		if(pageData.mentionsData){
-			$responseItem.find('textarea[name="responseTags"],textarea[name="responseTags"]').triggeredAutocomplete({
+			$responseItem.find('[name="responseTags"],[name="responseTags"]').triggeredAutocomplete({
 				hidden: '#hidden_inputbox',
 				source: pageData.mentionsData,
 					 trigger: "@" ,
@@ -398,7 +400,7 @@ $(function(){
 					
 					var $parentRecPanel = $target.parents('.rec-panel');
 					
-					var rawTagString = $parentRecPanel.find('textarea[name="recTags"]').val();
+					var rawTagString = $parentRecPanel.find('[name="recTags"]').val();
 					
 					var rawTextArr = _.without(rawTagString.split(' '),''); //get all the tags and clear the spaces
 
@@ -607,7 +609,7 @@ $(function(){
 		$('.rec-panel').append(recPanelDefault);
 		bindRecordControls();
 		
-		$('textarea[name="recTags"]').triggeredAutocomplete({
+		$('[name="recTags"]').triggeredAutocomplete({
 			hidden: '#hidden_inputbox',
 			source: pageData.mentionsData,
 				 trigger: "@" ,
