@@ -143,14 +143,13 @@ app.post('/projects/invitees', function(req, res) {
 		var allInvitees = JSON.parse(fs.readFileSync(allInviteesFilePath));
 		
 		//var projectInvitees = _.where(allInvitees,{"projectId":projectId});
-		console.log(req.body);
+		//console.log(req.body);
 		
 		var newInvitee = {
 			emailId:req.body.emailId,
 			projectId:req.body.projectId
 		};
 		
-		console.log(newInvitee);
 		allInvitees.unshift(newInvitee);
 		
 		fs.writeFileSync(allInviteesFilePath, JSON.stringify(allInvitees));

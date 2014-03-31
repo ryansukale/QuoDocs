@@ -11,7 +11,8 @@ $(function(){
 		responsesFor:'/responses',
 		membersForProject:'/projects/members',
 		projectDetails:'/projects',
-		inviteesForProject:'/projects/:projectId/invitees'
+		inviteesForProject:'/projects/:projectId/invitees',
+		sendProjectInvitation:'/projects/invitees'
 	},
 	rtcOptions = {
 		'buffer-size': 16384,
@@ -617,8 +618,39 @@ $(function(){
 	
 		//bindRecordControls();
 		
+		$('.action-invite').on('click',function(e){
+
+			var $this = $(this);
+			var projectId = pageData.topicInfo.project_id;
+			
+			$.ajax({
+				url:urls.sendProjectInvitation,
+				type: "POST",
+				data :{
+					emailId:$('.invitee-email').val(),
+					projectId:projectId
+				}
+				})
+				.done(function( data, textStatus, jqXHR ) {
+					pageData.allInvitees.unshift(data);
+					
+					var inviteeItems = [];
+						_.each(pageData.allInvitees, function(inviteeDetails, index, list){
+							inviteeItems.push(tmpl.inviteeLI(inviteeDetails));
+						});
+						
+						$('.invitee-list').html(inviteeItems.join(''));
+						
+				});
+				
+				$this.parents('.modal').find('.close').trigger('click');
+				$this.parents('.modal').find('.invitee-email').val('');
+			
+		});
+		
 	}
 
+	bindHandlers();
 	
 	function xhr(url, data, callback) {
 		var request = new XMLHttpRequest();
