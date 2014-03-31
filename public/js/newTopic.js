@@ -286,6 +286,11 @@ $(function(){
 			});
 			
 		});
+		
+		$('.cancel').on('click',function(){
+			window.location = './home.html';
+		});
+		
 		//bindRecordControls();
 		
 		//$('.change-project').on('click',function(e){
