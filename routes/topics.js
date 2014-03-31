@@ -6,7 +6,7 @@ var github = require('octonode'),
 	
 app.get('/topics', function(req, res) {
 	
-	console.log(req.method+':' + req.url);
+	//console.log(req.method+':' + req.url);
 	var uri = url.parse(req.url);
 	
 	var returnObj = {};
@@ -45,7 +45,7 @@ app.get('/topics', function(req, res) {
 //Get the details for a topic
 app.get('/topics/:topicId', function(req, res) {
 	
-	console.log(req.method+':' + req.url);
+	//console.log(req.method+':' + req.url);
 	
 	var uri = url.parse(req.url);
 	var topicId = req.params.topicId;
@@ -91,7 +91,7 @@ app.get('/topics/:topicId', function(req, res) {
 //Update the tags for a response
 app.post('/topics', function(req, res) {
 	
-	console.log(req.method+':' + req.url);
+	//console.log(req.method+':' + req.url);
 	
 	var uri = url.parse(req.url);
 	var returnObj = {};

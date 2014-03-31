@@ -1,0 +1,53 @@
+[
+	{
+		"id":"1",
+		"topic_id":"1",
+		"user_id":"501",
+		"type" : "text",
+		"response_details":{
+			"response_text":"Sample Response Text",
+			"posted_on" : "10/03/2014",
+			"up_count":0,
+			"down_count":0,
+			"tags":[
+				"#tag1",
+				"#tag2",
+				"#tag3"
+			]
+		}
+	},
+	{
+		"id":"2",
+		"topic_id":"1",
+		"user_id":"502",
+		"type" : "image",
+		"response_details":{
+			"file_name":"100_2_img.svg",
+			"posted_on" : "10/03/2014",
+			"up_count":0,
+			"down_count":0,
+			"tags":[
+				"#tag1",
+				"#tag2",
+				"#tag3"
+			]
+		}
+	},
+	{
+		"id":"1",
+		"topic_id":"1",
+		"user_id":"503",
+		"type" : "text",
+		"response_details":{
+			"response_text":"Sample Response Text",
+			"posted_on" : "10/03/2014",
+			"up_count":0,
+			"down_count":0,
+			"tags":[
+				"#tag1",
+				"#tag2",
+				"#tag3"
+			]
+		}
+	}
+]

@@ -5,20 +5,21 @@ module.exports = {
 	
 	initSession : function (req, res, next) {
 		
-		if(!req.session.userInfo){
-			//The user session does not exist
-			console.log('User session does not exist');
-			
 			if(env.phase==='prototype'){
-				var userId = ''+env.DEMOUSERID || 100; //Default userId 100
-				var userInfoFilePath = [rootDir,'data',userId,'user.json'].join(path.sep);
-				var userInfo = JSON.parse(fs.readFileSync(userInfoFilePath));
-				req.session.userInfo = userInfo;
+				var userId = '';
+				if(req.query.loginAsUserId){
+					userId = req.query.loginAsUserId;
+					env.DEMOUSERID = userId;
+					userInfoFilePath = [rootDir,'data',userId,'user.json'].join(path.sep);
+					console.log(userInfoFilePath);
+					var userInfo = JSON.parse(fs.readFileSync(userInfoFilePath));
+					req.session.userInfo = userInfo;
+					console.log("Current user:"+req.session.userInfo.login);
+				}
+				
 			}else{
 				//Setup a 'guest' read only user
 			}
-			console.log("Current user:"+req.session.userInfo.login);
-		}
 		
 		next();
 	},
