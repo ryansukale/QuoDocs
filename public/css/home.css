@@ -52,6 +52,10 @@ a{
 	cursor:pointer;
 }
 
+.highlighted-tag:hover {
+	background-color: rgb(130, 130, 240) !important;
+}
+
 .repo-details.selected {
 	background-color: rgba(60, 132, 224, 0.28);
 }
