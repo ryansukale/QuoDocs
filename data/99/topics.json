@@ -4,17 +4,17 @@
 		"project_id":"1",
 		"owner_id":"501",
 		"main_text" : "Tag display not being saved and is overridden on hide(). I dont understand why.",
-		"description" : "It seems like the display value of the tag has been explicitly overwritten since version 1.3 and it was done in one of jim's commits. Why was the reasoning behind that decision? What alternatives were considered? Are we open to changes on that feature?",
+		"description" : "It seems like the display value of the tag has been explicitly overwritten since version 1.3 and it was done in one of brian's commits. What was the reasoning behind that decision? What alternatives were considered? Are we open to changes on that feature?",
 		"up_count" : 0,
 		"down_count" : 0,
 		"is_anwered" : 0,
 		"answer_count" : 0,
 		"posted_on" : "03/12/2014",
 		"tags": [
-			"#tag1",
+			"#hide",
 			"@jim",
-			"@person2",
-			"#tag2"
+			"@brian",
+			"#v1.3"
 		]
 	},
 	{
@@ -29,15 +29,15 @@
 		"answer_count" : 0,
 		"posted_on" : "03/11/2014",
 		"tags": [
-			"#tag1",
-			"@person1",
+			"#templating",
+			"@kashton",
 			"@jim",
-			"#tag2"
+			"#integration"
 		]
 	},
 	{
 		"id":"3",
-		"project_id":"1",
+		"project_id":"3",
 		"owner_id":"503",
 		"main_text" : "Bootstrap custom components",
 		"description" : "What is the criteria for adding more custom components into bootstrap? Who decides what goes into it? Are there any guidelines?",
@@ -47,10 +47,10 @@
 		"answer_count" : 0,
 		"posted_on" : "03/08/2014",
 		"tags": [
-			"#tag1",
-			"@person1",
-			"@person2",
-			"#tag2"
+			"#customization",
+			"@npatrick",
+			"@kashton",
+			"#designdecisions"
 		]
 	},
 	{
@@ -65,10 +65,10 @@
 		"answer_count" : 0,
 		"posted_on" : "03/08/2014",
 		"tags": [
-			"#tag1",
-			"@person1",
-			"@person2",
-			"#tag2"
+			"#events",
+			"@belanta",
+			"@gbill",
+			"#views"
 		]
 	},
 	{
@@ -83,10 +83,10 @@
 		"answer_count" : 0,
 		"posted_on" : "03/08/2014",
 		"tags": [
-			"#tag1",
-			"@person1",
-			"#tag2",
-			"@aendra"
+			"#icons",
+			"@npatrick",
+			"#build",
+			"@wupen"
 		]
 	},
 	{
@@ -101,11 +101,11 @@
 		"answer_count" : 0,
 		"posted_on" : "03/08/2014",
 		"tags": [
-			"#tag1",
+			"#requestobject",
 			"@jim",
-			"@jenna",
-			"@arkanos",
-			"#tag2"
+			"@ricardoperez",
+			"@arnolds",
+			"#parsing"
 		]
 	}
 ]
