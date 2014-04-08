@@ -1,0 +1,24 @@
+.main-container{
+	background-image: url('../img/index-bg.jpg');
+	height: 668px;
+	background-repeat: no-repeat;
+}
+
+.sitename{
+	font-family: "Roboto", sans-serif;
+	font-weight: 400px;
+	font-size: 90px;
+	color:#f0f0f0;
+	margin:100px 0px 10px 0px;
+}
+
+.tagline{
+	font-family: "Roboto", sans-serif;
+	font-weight: 300px;
+	font-size: 20px;
+	color:#d0d0d0;
+}
+
+.login-options{
+	margin:50px 0px;
+}

@@ -14,17 +14,17 @@
 	<link rel="stylesheet" href="css/frameworks/bootstrap.min.css">
 	<link href="css/frameworks/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/frameworks/bootstrap-responsive.min.css">
-		
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>	
+
 	<!-- Sitewide common CSS stylesheet -->
 	<link rel="stylesheet" href="css/common.css">
 	
 	<!-- Moving the utils stylesheet to the bottom -->
+	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/utils.css">
 		
 	<style>
 			body {
-					padding-top: 60px;
-					padding-bottom: 40px;
 			}
 	</style>
 		
@@ -34,19 +34,31 @@
 			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
 
-  <div class="container">
-	
-		<a class="btn btn-success disabled github-login hidden" href="/oauth/GITHUB">
-			Login using Github
-		</a>
-	
-		<a class="btn btn-default github-login" href="/login?loginAsUserId=100">
-			Login using <span class="b">Jim's</span> github account
-		</a>
+  <div class="">
+
+  	<div class="main-container centered oa">
+
+			<a class="btn btn-success disabled github-login hidden" href="/oauth/GITHUB">
+				Login using Github
+			</a>
+
+			<div class="sitename">QuoDocs</div>
+			<div class="tagline mt-10 mb-10">Voice document your collaborative projects</div>
 		
-		<a class="btn btn-default github-login" href="/login?loginAsUserId=99">
-			Login using <span class="b">Alex's</span> github account
-		</a>
+			<div class="login-options">
+			
+				<a class="btn btn-default github-login" href="/login?loginAsUserId=100">
+					Login using <span class="b">Jim's</span> github account
+				</a>
+				
+				<a class="btn btn-default github-login" href="/login?loginAsUserId=99">
+					Login using <span class="b">Alex's</span> github account
+				</a>	
+
+			</div>
+			
+	  		
+	  	</div>
 	
   </div> 
 	<!-- /container -->
