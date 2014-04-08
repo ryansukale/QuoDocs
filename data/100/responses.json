@@ -5,7 +5,7 @@
 		"user_id":"501",
 		"type" : "text",
 		"response_details":{
-			"response_text":"Sample Response Text",
+			"response_text":"I dont think I was part of the project at that time. Wish I could have helped.",
 			"posted_on" : "10/03/2014",
 			"up_count":0,
 			"down_count":0
@@ -39,7 +39,7 @@
 		"user_id":"503",
 		"type" : "text",
 		"response_details":{
-			"response_text":"Sample Response Text",
+			"response_text":"You need to provide some more details about the problem that you are facing with the way it is currently done. I havent seen any reason for a change yet.",
 			"posted_on" : "10/03/2014",
 			"up_count":0,
 			"down_count":0
