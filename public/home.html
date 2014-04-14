@@ -104,54 +104,86 @@
 					
 				</div>
 				
-				<div class="project-dashboard mt-5 clearfix hidden p-5">
-					<div class="summary-bar">
-						<div class="inb b bar-title">Project Activity : </div>
-						<div class="inb topic-count">
-							<span class="summary-item-value"></span>
-							<span class="summary-item-title">Topics </span>
-						</div>
-						<div class="inb member-count hidden">
-							<span class="summary-item-value"></span>
-							<span class="summary-item-title">Members </span>
-						</div>
-						<div class="btn btn-success btn-sm inb pull-right new-topic">
-							+ New Topic
-						</div>
-					</div>
-				</div>
-				
-				<div class="convo-list clearfix mt-5">
-					<ul class="list-unstyled">
-					</ul>
-				</div>
-				
-				<div class="no-topics hidden">
-					<div>Looks like there are no topics for this project.</div>
-					<div>Would you like to <a href="" class="new-topic">create</a> a new one?</div>
-				</div>
-				
-				<div class="modal fade" id="projectSelectorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-								<h4 class="modal-title" id="myModalLabel">Select a project</h4>
+				<div class="row">
+					<div class="col col-md-12">
+						<div class="project-dashboard mt-5 clearfix hidden p-5">
+							<div class="summary-bar">
+								<div class="inb b bar-title">Project Activity : </div>
+								<div class="inb topic-count">
+									<span class="summary-item-value"></span>
+									<span class="summary-item-title">Topics </span>
+								</div>
+								<div class="inb member-count hidden">
+									<span class="summary-item-value"></span>
+									<span class="summary-item-title">Members </span>
+								</div>
+								<div class="btn btn-success btn-sm inb pull-right new-topic">
+									+ New Topic
+								</div>
 							</div>
-							<div class="modal-body">
-								<ul class="project-list-selection list-unstyled">
+						</div>
+						
+						<div class="convo-list clearfix mt-5">
+							<ul class="list-unstyled">
+							</ul>
+						</div>
+						
+						<div class="no-topics hidden">
+							<div>Looks like there are no topics for this project.</div>
+							<div>Would you like to <a href="" class="new-topic">create</a> a new one?</div>
+						</div>
+						
+						<div class="modal fade" id="projectSelectorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">Select a project</h4>
+									</div>
+									<div class="modal-body">
+										<ul class="project-list-selection list-unstyled">
+											
+										</ul>
+									</div>
+									<div class="modal-footer">
+										
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="col col-md-3 hidden">
+
+						<div class="team-members">
+							<div class="header b mb-5 pt-5">Team members</div>
+							<div class="body">
+								<ul class="member-list list-unstyled">
+									
+								</ul>
+							</div>	
+						</div>
+						<div class="project-invitees">
+							<div class="header b mb-5 pt-5">Invitees</div>
+							<div class="body">
+								<div class="invite btn btn-default btn-sm w-100pc" data-toggle="modal" data-target=".invite-member">Invite to project<span class="glyphicon glyphicon-plus ml-10"></span></div>
+								<ul class="invitee-list list-unstyled">
 									
 								</ul>
 							</div>
-							<div class="modal-footer">
-								
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							</div>
 						</div>
+
 					</div>
 				</div>
-				
+
+			
 			</div>
+
+			<!-- <div class="col col-md-2 hidden">
+				
+			</div> -->
+
 		</div>
 		
   </div>
@@ -237,6 +269,10 @@
 				</div>
 			</a>
 		</li>
+	</script>
+
+	<script type="text/template" id="_tmplMemberLI">
+			<li class="username"><%=username%></li>
 	</script>
 	
 </html>

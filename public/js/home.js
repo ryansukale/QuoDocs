@@ -15,17 +15,20 @@ $(function(){
 		userInfo : '/userinfo',
 		topics : '/topics',
 		allUsers : '/users',
-		topicsWhere : '/topics/criteria'
+		topicsWhere : '/topics/criteria',
+		membersForProject:'/projects/members'
 	};
 	
 	var tmpl = {
 		repoLI : _.template($('#_tmplRepoLI').html()),
 		convoLI : _.template($('#_tmplConvoLI').html()),
-		projectSelectorLI : _.template($('#_tmplProjectSelectorLI').html())
+		projectSelectorLI : _.template($('#_tmplProjectSelectorLI').html()),
+		memberLI : _.template($('#_tmplMemberLI').html())
 	};
 	
 	var pageData = {
-		selectedProjectId:''
+		selectedProjectId:'',
+		projectMembers:{}
 	};
 	
 	function getAllUsers(callback){
@@ -88,7 +91,41 @@ $(function(){
 	
 	watch(pageData, "selectedProjectId", function(prop, action, newvalue, oldvalue){
 		updateCurrentProject();
+
+		if(pageData.selectedProjectId){
+			//TODO: Change the column format to 3 columns
+			$('.project-dashboard').parents('.col.col-md-12')
+				.removeClass('col-md-12').addClass('col-md-9');
+
+			if(pageData.projectMembers[pageData.selectedProjectId]){
+				renderProjectMembers();
+			}else{
+				getProjectMembers(renderProjectMembers);
+			}
+		}else{
+			//Change the column format to 2 columns since there is no current project
+
+			$('.project-dashboard').parents('.col.col-md-9')
+			.removeClass('col-md-9').addClass('col-md-12');
+
+			console.log('updating to 2 column layout');
+			$('.team-members').parents('.col').addClass('hidden');
+		}
+
 	});
+
+	function renderProjectMembers() {
+		//Show the list of project members
+		var memberItems = [];
+		_.each(pageData.projectMembers[pageData.selectedProjectId], 
+			function(memberDetails, index, list){
+			memberItems.push(tmpl.memberLI(memberDetails));
+		});
+		
+		$('.member-list').empty();
+		$('.member-list').append(memberItems.join(''));
+		$('.team-members').parents('.col').removeClass('hidden');
+	}
 	
 	function updateCurrentProject(){
 		var currentProjectName = '';
@@ -141,6 +178,50 @@ $(function(){
 			});
 	}
 	
+
+	function getProjectMembers(callback){
+			
+		var projectId = pageData.selectedProjectId;
+		
+		$.ajax([urls.membersForProject,projectId].join('/'))
+			.done(function( data, textStatus, jqXHR ) {
+				pageData.projectMembers[pageData.selectedProjectId] =data.members;
+				
+				callback(data);
+				//var memberItems = [];
+				//_.each(pageData.projectMembers, function(memberDetails, index, list){
+				//	memberItems.push(tmpl.memberLI(memberDetails));
+				//});
+				//
+				//$('.member-list').append(memberItems.join(''));
+				//
+				//pageData.mentionsData = [];
+				//_.each(pageData.projectMembers, function(member, index, list){
+				//	pageData.mentionsData.push(member.username);
+				//});
+				//
+				//$('[name="responseTags"],[name="recTags"]').triggeredAutocomplete({
+				//	hidden: '#hidden_inputbox',
+				//	source: pageData.mentionsData,
+				//		 trigger: "@" ,
+				//		 allowDuplicates: false
+				//	});
+				//	
+				//$('[name="responseTags"],[name="recTags"]').on('keypress',function(e){
+				//	
+				//	var $this = $(this);
+				//	var $parentResponse = $this.parents('.response');
+				//	
+				//	if(e.which===13){
+				//		e.preventDefault();
+				//		$parentResponse.find('.save').click();
+				//	}
+				//	
+				//});
+					
+			});
+	}
+
 	function renderAskers(prop, action, newvalue, oldvalue){
 		_.each($('.convo-list .convo-details'),function(element, index, value){
 			var askerId = $('.asker-id',element).text();
