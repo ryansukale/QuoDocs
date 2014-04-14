@@ -91,3 +91,8 @@ a{
 	color: #2a6496;
 	text-decoration: underline;
 }
+
+.invitee-list .email-id {
+	color: #a0a0a0;
+	font-size: 12px;
+}

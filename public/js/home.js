@@ -16,19 +16,23 @@ $(function(){
 		topics : '/topics',
 		allUsers : '/users',
 		topicsWhere : '/topics/criteria',
-		membersForProject:'/projects/members'
+		membersForProject:'/projects/members',
+		inviteesForProject:'/projects/:projectId/invitees',
+		sendProjectInvitation:'/projects/invitees'
 	};
 	
 	var tmpl = {
 		repoLI : _.template($('#_tmplRepoLI').html()),
 		convoLI : _.template($('#_tmplConvoLI').html()),
 		projectSelectorLI : _.template($('#_tmplProjectSelectorLI').html()),
+		inviteeLI : _.template($('#_tmplInviteeLI').html()),
 		memberLI : _.template($('#_tmplMemberLI').html())
 	};
 	
 	var pageData = {
 		selectedProjectId:'',
-		projectMembers:{}
+		projectMembers:{},
+		allInvitees:{}
 	};
 	
 	function getAllUsers(callback){
@@ -102,6 +106,7 @@ $(function(){
 			}else{
 				getProjectMembers(renderProjectMembers);
 			}
+			showInvitees(pageData.selectedProjectId);
 		}else{
 			//Change the column format to 2 columns since there is no current project
 
@@ -125,6 +130,24 @@ $(function(){
 		$('.member-list').empty();
 		$('.member-list').append(memberItems.join(''));
 		$('.team-members').parents('.col').removeClass('hidden');
+	}
+
+
+	function showInvitees(projectId){
+	
+		$.ajax(urls.inviteesForProject.replace(':projectId',projectId))
+			.done(function( data, textStatus, jqXHR ) {
+				pageData.allInvitees=data.invitees;
+				
+				var inviteeItems = [];
+					_.each(pageData.allInvitees, function(inviteeDetails, index, list){
+						inviteeItems.push(tmpl.inviteeLI(inviteeDetails));
+					});
+					
+					$('.invitee-list').html(inviteeItems.join(''));
+					
+			});
+			
 	}
 	
 	function updateCurrentProject(){
@@ -337,7 +360,7 @@ $(function(){
 			}else{
 				updateCurrentProject();
 			}
-		})
+		});
 		
 		$('.new-topic').on('click',function(e){
 			
@@ -383,6 +406,40 @@ $(function(){
 				});
 				
 			}
+			
+		});
+
+		$('.action-invite').on('click',function(e){
+
+			var $this = $(this);
+			var projectId = pageData.selectedProjectId;
+			
+			$.ajax({
+				url:urls.sendProjectInvitation,
+				type: "POST",
+				data :{
+					emailId:$('.invitee-email').val(),
+					projectId:projectId
+				}
+				})
+				.done(function( data, textStatus, jqXHR ) {
+					if(!pageData.allInvitees[pageData.selectedProjectId]){
+						pageData.allInvitees[pageData.selectedProjectId]=[];
+					}
+
+					pageData.allInvitees[pageData.selectedProjectId].unshift(data);
+					
+					var inviteeItems = [];
+						_.each(pageData.allInvitees[pageData.selectedProjectId], function(inviteeDetails, index, list){
+							inviteeItems.push(tmpl.inviteeLI(inviteeDetails));
+						});
+						
+						$('.invitee-list').html(inviteeItems.join(''));
+						
+				});
+				
+				$this.parents('.modal').find('.close').trigger('click');
+				$this.parents('.modal').find('.invitee-email').val('');
 			
 		});
 		
